@@ -15,7 +15,7 @@ class CreateStatsMatchsTable extends Migration
     {
         Schema::create('stats_matchs', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
-            $table->dateTime('match_date')->unique();
+            $table->dateTime('match_date');
             $table->integer('goals');
             $table->integer('assists');
             $table->integer('rating'); // note du joueur

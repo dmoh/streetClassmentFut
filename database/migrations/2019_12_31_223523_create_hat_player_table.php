@@ -13,7 +13,7 @@ class CreateHatPlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('hat_player', function (Blueprint $table) {
+        Schema::create('hat_players', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('hat_id');
@@ -30,6 +30,6 @@ class CreateHatPlayerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hat_player');
+        Schema::dropIfExists('hat_players');
     }
 }

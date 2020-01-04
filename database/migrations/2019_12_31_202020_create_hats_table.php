@@ -17,6 +17,8 @@ class CreateHatsTable extends Migration
             $table->bigIncrements('id')->autoIncrement();
             $table->string('name_hat')->nullable();
             $table->integer('hat_number');
+            $table->unsignedBigInteger('hat_id')->default(0);
+            $table->foreign('hat_id')->references('hat_id')->on('hat_player');
             $table->timestamps();
         });
     }

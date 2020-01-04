@@ -34,8 +34,10 @@ Route::middleware ('auth')->group(function (){
       Route::get('profil/{id}', 'FrontEnd\FrontEndController@showProfile')->where('id', '[0-9]+')->name('consultation.showProfile');
    });
 
-
 });
+
+
+Route::get('/vote', 'BackEnd\BackEndController@showVote')->name('backend.showVote');
 
 
 // Route::get('/front/index', 'FrontEnd\FrontEndController@index')->middleware(['auth', 'auth.access'])->name('front_index');

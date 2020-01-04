@@ -9,6 +9,6 @@ class StatsMatchs extends Model
     //
 
     public function statPlayer(){
-        return $this->belongsTo('App\StatsPlayer');
+        return $this->belongsTo('App\StatsPlayer', 'player_id');
     }
 }

@@ -13058,7 +13058,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .marg-top-fut-bg{
-  margin-top: 8rem;
+  margin-top: 5rem;
   color: #fff;
   font-size: large;
 }
@@ -13089,6 +13089,7 @@ body.sidebar-toggled footer.sticky-footer {
   color: #ffffff;
   text-align: center;
   margin-bottom: 0 !important;
+  border-bottom: 1px solid #e3e6f0;
 }
 
 span i.fa{
@@ -13150,3 +13151,15 @@ span i.fa{
   text-align: left;
   border-top: 1px solid #e3e6f0;
 }
+
+
+.title-table h6{
+  font-size: 2rem;
+}
+
+.margin-b-2 {
+  margin-bottom:  2rem;
+}
+
+
+

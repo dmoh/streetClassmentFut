@@ -16,7 +16,7 @@ class CreateMatchsTable extends Migration
         Schema::create('matchs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('score')->nullable();
-            $table->dateTime('match_date');
+            $table->dateTime('match_date')->default(now());
             $table->string('team_name_home')->default('Rouge');
             $table->string('team_name_visitor')->default('Bleu');
             $table->timestamps();

@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 /tests
+/migrations
+/seeds
 .env
 .env.backup
 .phpunit.result.cache

@@ -15,14 +15,16 @@ class StatsPlayersTableSeeder extends Seeder
         StatsPlayer::truncate();
 
 
-        for($i = 1; $i < 10; ++$i){
+        for($i = 1; $i < 15; ++$i){
             StatsPlayer::create([
-                'user_id' => $i,
+                'id' => $i,
                 'rating_before_update' => rand(1, 14),
                 'overall_average' => rand(1,10),
                 'goals' => rand(1, 134),
                 'assists' => rand(2,173),
-                'created_at' => now()
+                'created_at' => now(),
+                'user_id' => $i,
+                'player_id' => $i
             ]);
         }
 

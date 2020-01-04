@@ -13,7 +13,7 @@ class CreateMatchPlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('match_player', function (Blueprint $table) {
+        Schema::create('match_players', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('match_id');
             $table->unsignedBigInteger('player_id');
@@ -30,6 +30,6 @@ class CreateMatchPlayerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('match_player');
+        Schema::dropIfExists('match_players');
     }
 }

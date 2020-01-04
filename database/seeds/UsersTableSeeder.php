@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'locked' => '0'
         ]);
 
-        for($i = 4; $i < 10; ++$i)
+        for($i = 4; $i < 18; ++$i)
         {
             $users = User::create([
                 'name' => 'Nom' . $i,
@@ -56,6 +56,8 @@ class UsersTableSeeder extends Seeder
                 'can_vote' => '1',
                 'locked' => '0'
             ]);
+
+            $users->roles()->attach($playerRole);
 
         }
         $admin->roles()->attach($adminRole);

@@ -13,7 +13,7 @@ class StatsPlayer extends Model
     }
 
     public function statsMatchs(){
-        return $this->hasMany('App\StatsMatchs', 'user_id');
+        return $this->hasMany('App\StatsMatchs', 'player_id');
     }
 
     public function matchs(){

@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-6 marg-top-fut-bg">
                     <div class="title-table">
-                        <!--<h6 class="text-center">CHAPEAU 1</h6>-->
+                      <h6 class="text-center">STATISTIQUES</h6>
                         <table class="table">
                             <tbody>
                                 <tr>
@@ -90,6 +90,13 @@
                     <div class="man-of-match">
                         <h5>Homme du match </h5>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <a style="margin-bottom: 2rem" href="{{ route('backend.showVote') }}" class="btn btn-block btn-success">Voter</a>
                 </div>
             </div>
             <div class="row">

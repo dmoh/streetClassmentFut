@@ -12,6 +12,4 @@ class Hats extends Model
         return $this->hasMany('App\StatsPlayer');
     }
 
-
-
 }
