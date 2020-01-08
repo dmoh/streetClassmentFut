@@ -20,8 +20,12 @@ class CreateVotesTable extends Migration
             $table->unsignedBigInteger('vote_by_user_id');
             $table->unsignedBigInteger('vote_to_player_id');
             $table->longText('comment_by_voter')->nullable();
+            $table->unsignedBigInteger('match_id');
+
+            $table->foreign('match_id')->references('id')->on('matchs');
             $table->foreign('vote_by_user_id')->references('id')->on('users');
             $table->foreign('vote_to_player_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

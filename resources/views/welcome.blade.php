@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Street Classment Fut
+                    Stats City Fut
                 </div>
 
             </div>

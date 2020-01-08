@@ -22,6 +22,11 @@ class FrontEndController extends Controller
 
     public function showProfile($id) {
         $user = User::findOrFail($id);
+
+        if(Auth::id() == $id) {
+            //todo recherché si des votes en attentes
+
+        }
         return view('FrontEnd/profile')->with('player', $user);
     }
 }

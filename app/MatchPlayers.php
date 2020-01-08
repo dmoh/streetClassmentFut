@@ -14,6 +14,6 @@ class MatchPlayers extends Model
 
 
     public function players(){
-        return $this->belongsToMany('App\StatsPlayer');
+        return $this->belongsToMany('App\StatsPlayer', 'match_players', 'player_id');
     }
 }

@@ -4,6 +4,8 @@
 @section('content')
     <div class="container-fluid bg-list-players">
         <div class="container">
+            <h2 class="text-center color-white font-xx-large marg-top">LISTE DES JOUEURS</h2>
+            <div class="divider"></div>
             <div class="row">
                 @foreach($players as $player)
                     <div class="col-md-3 col-sm-6">

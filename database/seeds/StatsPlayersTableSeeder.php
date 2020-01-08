@@ -24,7 +24,8 @@ class StatsPlayersTableSeeder extends Seeder
                 'assists' => rand(2,173),
                 'created_at' => now(),
                 'user_id' => $i,
-                'player_id' => $i
+                'player_id' => $i,
+                'stats_player_id' => $i
             ]);
         }
 

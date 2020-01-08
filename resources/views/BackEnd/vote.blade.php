@@ -6,7 +6,6 @@
             <div class="col-md-12">
 
             @foreach($matchs as $match)
-
                 @foreach($match->statsMatchs()->get()->toArray() as $stat)
                         <div class="container">
                             <div class="row">

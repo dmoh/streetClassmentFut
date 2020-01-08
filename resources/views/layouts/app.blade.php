@@ -18,7 +18,10 @@
 
     <!-- Styles -->
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link href="{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/examples.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bars-square.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -76,8 +79,19 @@
         </main>
     </div>
     <!-- Scripts -->
+
     <script src="{{ asset('js/sb-admin-2.js') }}"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('select[id^="note_vote"]').barrating({
+                theme: 'bars-square',
+                showValues: true,
+                showSelectedRating: false
+            });
+        });
+    </script>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();

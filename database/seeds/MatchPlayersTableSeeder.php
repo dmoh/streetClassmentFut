@@ -18,7 +18,7 @@ class MatchPlayersTableSeeder extends Seeder
         for($i = 1; $i < 9; ++$i) {
             MatchPlayers::create([
                 'match_id' => $i,
-                'player_id' => rand(1, 13)
+                'stats_player_id' => rand(1, 13)
             ]);
         }
     }

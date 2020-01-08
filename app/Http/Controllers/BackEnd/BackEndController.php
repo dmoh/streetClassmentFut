@@ -16,8 +16,8 @@ class BackEndController extends Controller
     public function showVote(){
         $id = Auth::id();
         if($id != null){
-            $matchsByPlayer = StatsPlayer::with('statsMatchs')->where('player_id', 1)->get();
-            return view('BackEnd/vote')->with('matchs', $matchsByPlayer);
+            $matchs = StatsPlayer::with('statsMatchs')->where('player_id', 7)->get();
+            return view('BackEnd/vote', compact('matchs'));
         }
 
         return route('home');

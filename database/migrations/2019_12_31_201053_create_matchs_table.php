@@ -19,6 +19,9 @@ class CreateMatchsTable extends Migration
             $table->dateTime('match_date')->default(now());
             $table->string('team_name_home')->default('Rouge');
             $table->string('team_name_visitor')->default('Bleu');
+
+            $table->foreign('id')->references('match_id')->on('match_players')->onDelete('restrict')->onUpdate('restrict');
+
             $table->timestamps();
         });
     }

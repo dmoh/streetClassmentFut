@@ -16,9 +16,11 @@ class CreateMatchPlayerTable extends Migration
         Schema::create('match_players', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('match_id');
-            $table->unsignedBigInteger('player_id');
+            $table->unsignedBigInteger('stats_player_id');
+            $table->boolean('voted')->default(false);
+
             $table->foreign('match_id')->references('id')->on('matchs');
-            $table->foreign('player_id')->references('id')->on('stats_players');
+            $table->foreign('stats_player_id')->references('id')->on('stats_players');
             $table->timestamps();
         });
     }

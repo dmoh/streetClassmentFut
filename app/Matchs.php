@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Matchs extends Model
 {
     //
-    public function statsPlayers(){
-        return $this->belongsToMany('App\StatsPlayer');
+    public function statsPlayer(){
+        return $this->belongsToMany('App\StatsPlayer', 'match_players', 'match_id');
     }
 
     public function votes(){

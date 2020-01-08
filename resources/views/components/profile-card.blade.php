@@ -18,4 +18,5 @@
         <span>PUI 76</span>
         <span>DRI 74</span>
     </div>
+    <!--<div class="divider-blue"></div>-->
 </div>

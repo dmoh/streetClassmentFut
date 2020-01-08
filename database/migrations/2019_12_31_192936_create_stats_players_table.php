@@ -22,10 +22,12 @@ class CreateStatsPlayersTable extends Migration
             $table->integer('assists')->nullable(); //Passe décisive
             $table->unsignedBigInteger('user_id'); //foreign key
             $table->unsignedBigInteger('player_id'); //foreign key
+            $table->unsignedBigInteger('stats_player_id'); //foreign key
 
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('player_id')->references('player_id')->on('stats_matchs');
+            $table->foreign('stats_player_id')->references('player_id')->on('match_players');
 
             $table->timestamps();
         });
