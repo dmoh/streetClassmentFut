@@ -13225,6 +13225,10 @@ table[id^="listPlayer_"] {
     vertical-align: center;
 }
 
+.border-left-primary {
+  margin-top: 15px;
+}
+
 @media (max-width: 1600px) {
   .bg-list-players{
     background-position-y: -83rem;

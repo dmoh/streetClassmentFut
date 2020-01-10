@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class VoteController extends Controller
@@ -22,7 +24,7 @@ class VoteController extends Controller
                     ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
                     ->join('users', 'users.id', '=', 'stats_players.player_id')
                     ->select('users.name',  'matchs.id', 'matchs.score', 'matchs.match_date')
-                    ->where('users.id', '=', 7)
+                    ->where('users.id', '=', Auth::id())
                     ->where('match_players.voted', false)
                     ->orderBy('matchs.id', 'desc')
                     ->get();
@@ -33,8 +35,8 @@ class VoteController extends Controller
             ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
             ->join('users', 'users.id', '=', 'stats_players.user_id')
             ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
-            ->whereNotIn('stats_players.player_id', [7])
-            ->select('users.*', 'stats_players.*', 'matchs.score')
+            ->whereNotIn('stats_players.player_id', [Auth::id()])
+            ->select('users.*', 'stats_players.*', 'matchs.score', 'matchs.match_date', 'match_players.match_id')
             ->orderBy('matchs.id', 'desc')
             ->get();
 
@@ -42,13 +44,12 @@ class VoteController extends Controller
         $votes = DB::table('votes')
             ->join('matchs', 'matchs.id', '=', 'votes.match_id')
             ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
-            ->where('votes.vote_to_player_id', 7)
+            ->where('votes.vote_to_player_id', Auth::id())
             ->select('votes.*', 'matchs.*')
             ->orderBy('matchs.id', 'desc')
             ->get();
 
         // getAllplayersWhichPlayWithMe
-
 
         return view('FrontEnd/vote', compact('matchs', 'playersMatch', 'votes' ));
 
@@ -63,6 +64,54 @@ class VoteController extends Controller
     public function create()
     {
         //
+    }
+
+    public function saveVote(Request $request){
+
+        if($request->ajax()){
+            $notes = $request->get('notes');
+            $matchId = (int) $request->get('matchId');
+            /*array:4 [
+                  0 => array:2 [
+                    "voteToPlayerId" => "6"
+                    "scoreAwarded" => "5"
+                  ]
+                  1 => array:2 [
+                    "voteToPlayerId" => "2"
+                    "scoreAwarded" => "8"
+                  ]
+                  2 => array:2 [
+                    "voteToPlayerId" => "3"
+                    "scoreAwarded" => "5"
+                  ]
+                  3 => array:2 [
+                    "voteToPlayerId" => "8"
+                    "scoreAwarded" => "9"
+                  ]
+                ]*/
+
+
+            //insert
+            foreach ($notes as $note) {
+                DB::table('votes')
+                    ->updateOrInsert([
+                        'date_of_vote' => now(),
+                        'assigned_rating' => $note['scoreAwarded'],
+                        'vote_by_user_id' => Auth::id(), //todo check if is user current
+                        'vote_to_player_id' => $note['voteToPlayerId'],
+                        'match_id' => $matchId,
+                    ])
+                ;
+                DB::table('match_players')
+                    ->where(['stats_player_id' => Auth::id()])
+                    ->update(['voted' => true])
+                ;
+
+            }
+            response()->json(['success' => 'success message']);
+
+        }
+        abort(404);
     }
 
     /**
@@ -110,6 +159,8 @@ class VoteController extends Controller
     {
         //
     }
+
+
 
     /**
      * Remove the specified resource from storage.

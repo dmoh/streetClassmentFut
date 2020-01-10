@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container-fluid bg-list-players">
-        <h2 class="text-center"> Liste des matchs joué </h2>
-            <ul></ul>
+        <h2 class="text-center text-uppercase"> Liste des matchs</h2>
         @foreach($matchs as $match)
             <table style="background: #ffffffe3;" class="table ">
                 <tbody>
@@ -17,7 +16,7 @@
                     </tr>
                     <table class="collapse table" id="listPlayer_{{ $match->id }}">
                         <tbody>
-                            @foreach($playersMatch as $player)
+                        @foreach($playersMatch as $player)
                                 @if($player->id === $match->id)
                                     <tr>
                                         <td>{{ $player->name }}</td>

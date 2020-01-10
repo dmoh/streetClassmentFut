@@ -17,7 +17,8 @@ class AccessControl
     public function handle($request, Closure $next)
     {
 
-        if(Auth::user()->hasAnyRole('admin', 'manager_content')){
+
+        if(Auth::user()->hasAnyRoles(['admin', 'manager_content'])){
             return $next($request);
         }
 

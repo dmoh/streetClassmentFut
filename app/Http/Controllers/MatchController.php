@@ -29,7 +29,6 @@ class MatchController extends Controller
                 ->where('users.id', '=', 7)
                 ->orderBy('matchs.id')
                 ->get();
-
             $playersMatch = DB::table('matchs')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
                 ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
@@ -51,7 +50,12 @@ class MatchController extends Controller
      */
     public function create()
     {
-        //
+        $players = DB::table('stats_players')
+            ->join('users', 'users.id', '=', 'stats_players.user_id')
+            ->select('users.*', 'stats_players.*')
+            ->orderBy('stats_players.user_id', 'desc')
+            ->get();
+        return view('BackEnd/create-match', compact('players'));
     }
 
     /**
@@ -63,6 +67,7 @@ class MatchController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -108,5 +113,26 @@ class MatchController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function matchsList(){
+        if(Auth::id()){
+            $matchs = DB::table('matchs')
+                ->select( 'matchs.id', 'matchs.score', 'matchs.match_date')
+                ->distinct()
+                ->orderBy('matchs.id', 'desc')
+                ->get();
+
+            $playersMatch = DB::table('matchs')
+                ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
+                ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
+                ->join('users', 'users.id', '=', 'stats_players.user_id')
+                ->select('users.*', 'stats_players.*', 'matchs.*')
+                ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
+                ->orderBy('matchs.id', 'desc')
+                ->get();
+            return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch'));
+
+        }
     }
 }

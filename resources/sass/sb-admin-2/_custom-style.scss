@@ -1,4 +1,3 @@
-
 .bg-list-players {
   background: url('../images/bg_complete.png') top left no-repeat #0b0956;
   background-size: cover;
@@ -178,3 +177,70 @@ span i.fa{
 
 
 
+.border-bottom-table {
+  border-bottom: 1px solid #3e4e9a;
+}
+.border-left-table {
+  border-left: 1px solid #3e4e9a;
+}
+.border-right-table {
+  border-right: 1px solid #3e4e9a;
+}
+
+.divider-blue {
+  width: 99%;
+  height: 6px;
+  background: url(../images/divider-blue.png) top left no-repeat;
+  background-position-x: -86px;
+  margin-top: 6rem;
+}
+
+.divider {
+  width: 100%;
+  height: 9px;
+  background: url(../images/divider.png) top left no-repeat;
+  background-position-x: center;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.font-xx-large {
+  font-size: xx-large;
+}
+.marg-top {
+  margin-top: 2rem;
+}
+
+main.py-4 {
+  padding-top: 0 !important;
+}
+
+table[id^="listPlayer_"] {
+  text-align: center;
+}
+
+.box-example-square .br-wrapper {
+  width: 190px;
+  position: absolute;
+  margin: 0px 0 0 -95px;
+  left: 50%;
+}
+
+.box select {
+  width: 120px;
+  margin: 10px auto 0 auto;
+  display: block;
+  font-size: 16px;
+}
+
+.table-vote td {
+  vertical-align: center;
+}
+
+@media (max-width: 1600px) {
+  .bg-list-players{
+    background-position-y: -83rem;
+  }
+}

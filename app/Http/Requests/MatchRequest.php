@@ -25,6 +25,9 @@ class MatchRequest extends FormRequest
     {
         return [
             //
+            'match_date' => 'required',
+            'team_name_home' => 'nullabe',
+            'team_name_visitor' => 'nullable'
         ];
     }
 }

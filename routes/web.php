@@ -33,11 +33,22 @@ Route::middleware ('auth')->group(function (){
       Route::get('profil/{id}', 'FrontEnd\FrontEndController@showProfile')->where('id', '[0-9]+')->name('consultation.showProfile');
    });
    Route::get('/vote', 'VoteController@index')->name('vote.index');
+   Route::post('/my-vote', 'VoteController@saveVote')->name('vote.save');
 
    Route::get('/matchs', 'MatchController@index')->name('matchs.list');
 
 });
 
+
+Route::middleware(['auth', 'auth.access'])->group(function (){
+   Route::prefix('matchs-management')->group(function(){
+      Route::get('/', 'MatchController@matchsList')->name('matchslist');
+      Route::post('/store', 'MatchController@store')->name('store.match');
+      Route::get('/create', 'MatchController@create')->name('create.match');
+   });
+
+
+});
 
 
 
