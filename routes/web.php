@@ -45,6 +45,7 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
       Route::get('/', 'MatchController@matchsList')->name('matchslist');
       Route::post('/store', 'MatchController@store')->name('store.match');
       Route::get('/create', 'MatchController@create')->name('create.match');
+      Route::get('/show/{id}', 'MatchController@show')->where('id', '[0-9]+')->name('show.match');
    });
 
 

@@ -6,6 +6,7 @@ use App\Matchs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 
 class MatchController extends Controller
@@ -68,6 +69,33 @@ class MatchController extends Controller
     {
         //
 
+        if($request->ajax()){
+            $players = $request->get('players');
+             $newMatchId = DB::table('matchs')
+               ->insertGetId(['match_date'=> now()]);
+
+             $allPlayers = [];
+            foreach ($players as $teams) {
+                foreach ($teams as $player) {
+                    $allPlayers[] = [
+                        'match_id' => $newMatchId,
+                        'stats_player_id' => $player['playerid'],
+                        'voted' => false,
+                        'created_at' => now()
+                    ];
+
+
+                }
+            }
+
+            DB::table('match_players')
+                ->insert($allPlayers);
+
+            return redirect()->route('show.match', ['id' => $newMatchId]);
+
+
+        }
+
     }
 
     /**
@@ -78,7 +106,21 @@ class MatchController extends Controller
      */
     public function show($id)
     {
-        //
+        $match = DB::table('matchs')
+                    ->select("matchs.*")
+                    ->where('id', '=', $id)
+                    ->get()
+                ;
+        $players = DB::table('match_players')
+                ->join('matchs', 'matchs.id', '=', 'match_players.match_id')
+                ->join('stats_players', 'stats_players.id', '=', 'stats_players.stats_player_id')
+                ->join('users', 'users.id', '=', 'stats_players.id')
+                ->select('users.*', 'stats_players.*', 'matchs.*')
+                ->where('matchs.id', '=', $id)
+                ->get();
+
+
+        return view('BackEnd/edit-match', compact('match', 'players'));
     }
 
     /**

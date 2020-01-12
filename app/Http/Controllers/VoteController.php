@@ -17,6 +17,7 @@ class VoteController extends Controller
      */
     public function index()
     {
+        $id = 9; // Auth::id();
         //getAllMatchPlayedWhereNOVote
         $matchs = DB::table('matchs')
                     ->limit(1)
@@ -24,7 +25,7 @@ class VoteController extends Controller
                     ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
                     ->join('users', 'users.id', '=', 'stats_players.player_id')
                     ->select('users.name',  'matchs.id', 'matchs.score', 'matchs.match_date')
-                    ->where('users.id', '=', Auth::id())
+                    ->where('users.id', '=', $id)
                     ->where('match_players.voted', false)
                     ->orderBy('matchs.id', 'desc')
                     ->get();
@@ -35,7 +36,7 @@ class VoteController extends Controller
             ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
             ->join('users', 'users.id', '=', 'stats_players.user_id')
             ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
-            ->whereNotIn('stats_players.player_id', [Auth::id()])
+            ->whereNotIn('stats_players.player_id', [$id])
             ->select('users.*', 'stats_players.*', 'matchs.score', 'matchs.match_date', 'match_players.match_id')
             ->orderBy('matchs.id', 'desc')
             ->get();
@@ -44,7 +45,7 @@ class VoteController extends Controller
         $votes = DB::table('votes')
             ->join('matchs', 'matchs.id', '=', 'votes.match_id')
             ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
-            ->where('votes.vote_to_player_id', Auth::id())
+            ->where('votes.vote_to_player_id', $id)
             ->select('votes.*', 'matchs.*')
             ->orderBy('matchs.id', 'desc')
             ->get();
