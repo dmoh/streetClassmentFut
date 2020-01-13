@@ -41,14 +41,24 @@ Route::middleware ('auth')->group(function (){
 
 
 Route::middleware(['auth', 'auth.access'])->group(function (){
+    Route::prefix('users-management')->group(function (){
+       Route::get('/', 'UserController@index')->name('index.users');
+       Route::get('/add-user', 'UserController@create')->name('create.user');
+       Route::post('/store-user', 'UserController@store')->name('store.user');
+    });
    Route::prefix('matchs-management')->group(function(){
       Route::get('/', 'MatchController@matchsList')->name('matchslist');
       Route::post('/store', 'MatchController@store')->name('store.match');
       Route::get('/create', 'MatchController@create')->name('create.match');
       Route::get('/show/{id}', 'MatchController@show')->where('id', '[0-9]+')->name('show.match');
    });
+});
 
 
+Route::middleware('ajax')->group(function () {
+    Route::post('images-save', 'UploadImagesController@store')->name('save-images');
+    Route::delete('images-delete', 'UploadImagesController@destroy')->name('destroy-images');
+    Route::get('images-server','UploadImagesController@getServerImages')->name('server-images');
 });
 
 

@@ -204,6 +204,17 @@ span i.fa{
   background-position-x: center;
 }
 
+
+.divider-yellow {
+  position: absolute;
+  margin-top: 15.7rem;
+  width: 140px;
+  height: 9px;
+  background: url(../images/divider-yellow.png) top left no-repeat;
+  background-size: 154%;
+  background-position-x: -2.2rem;
+}
+
 .color-white {
   color: #fff;
 }
@@ -257,6 +268,7 @@ table[id^="listPlayer_"] {
 .display-players {
   display: inline-flex;
   margin-right: 7px;
+  margin-bottom: 5rem;
   width: 140px;
   height: 208px;
   position: relative;
@@ -295,6 +307,80 @@ div.infos-position-player {
   color: black;
   font-weight: bolder;
 }
+
+.tab-team-switch {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tab-team-switch .first-select, .tab-team-switch .second-select{
+  margin: 20px;
+}
+
+.first-select, .second-select {
+  padding: 20px;
+  background: #cccccc;
+  cursor: pointer;
+  color: white;
+}
+
+.active-section {
+  background: #ccb359;
+}
+
+#note-player{
+  margin-top: 2.9rem;
+  margin-left: 0.7rem;
+  padding-left: 0.25rem;
+  position: absolute;
+  font-size: 1.4rem;
+  width: 34px;
+  color: black;
+  height: 34px;
+  background: #ffca04;
+  border-radius: 20px;
+}
+
+div[id^='delete-team_'] {
+  position: absolute;
+  margin-top: 13.4rem;
+  font-size: larger;
+  font-weight: 900;
+  text-align: center;
+  margin-left: 3.6rem;
+  color: red;
+  border: 1px solid red;
+  border-radius: 22px;
+  cursor: pointer;
+  width: 26px;
+  height: 27px;
+  line-height: 21px;
+  /* margin-top: 3px; */
+  padding-top: -4px;
+}
+
+
+
+#my-dropzone {
+  border: 2px dashed #0087F7;
+  border-radius: 5px;
+  .message {
+    font-family: "Segoe UI Light", "Arial", serif;
+    font-weight: 600;
+    color: #0087F7;
+    @include font-size(1.5em);
+    letter-spacing: 0.05em;
+  }
+}
+a.dz-remove {
+  text-decoration: none !important;
+  &:hover {
+    color: red;
+    font-size: 1rem !important;
+  }
+}
+
+
 
 @media (max-width: 1600px) {
   .bg-list-players{

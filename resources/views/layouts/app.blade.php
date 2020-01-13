@@ -23,6 +23,7 @@
     <link href="{{ asset('css/examples.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bars-square.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -53,6 +54,9 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('consultation.index' ) }}">Liste des joueurs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('create.user' ) }}">Ajouter un joueur</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('consultation.showProfile', Auth::user()->id ) }}">Mon profil</a>

@@ -19,7 +19,16 @@ class CreateStatsPlayersTable extends Migration
             $table->integer('rating_before_update')->nullable();
             $table->integer('overall_average')->nullable(); //moyenne générale
             $table->integer('goals')->nullable();
-            $table->integer('assists')->nullable(); //Passe décisive
+            $table->integer('position')->nullable(); //Passe décisive
+            $table->integer('pace')->nullable(); //Vitesse
+            $table->integer('shoot')->nullable(); //Passe décisive
+            $table->integer('passe')->nullable(); //Passe décisive
+            $table->integer('dribble')->nullable(); //Passe décisive
+            $table->integer('defense')->nullable(); //Passe décisive
+            $table->integer('physique')->nullable(); //Passe décisive
+            $table->enum('strong_foot', ['left', 'right'])->default('right'); //Passe décisive
+
+
             $table->unsignedBigInteger('user_id'); //foreign key
             $table->unsignedBigInteger('player_id'); //foreign key
             $table->unsignedBigInteger('stats_player_id'); //foreign key

@@ -56,7 +56,15 @@ class User extends Authenticatable
     }
 
     public function photo(){
-        return $this->hasOne('App\Photo');
+        return $this->hasOne(Upload::class);
+    }
+
+    /**
+     * Get the photos for the ad.
+     */
+    public function photos()
+    {
+        return $this->hasMany(Upload::class);
     }
 
 }

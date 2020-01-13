@@ -113,14 +113,22 @@ class MatchController extends Controller
                 ;
         $players = DB::table('match_players')
                 ->join('matchs', 'matchs.id', '=', 'match_players.match_id')
-                ->join('stats_players', 'stats_players.id', '=', 'stats_players.stats_player_id')
-                ->join('users', 'users.id', '=', 'stats_players.id')
-                ->select('users.*', 'stats_players.*', 'matchs.*')
-                ->where('matchs.id', '=', $id)
+                ->join('stats_players', 'stats_players.user_id', '=', 'match_players.stats_player_id')
+                ->join('users', 'users.id', '=', 'stats_players.stats_player_id')
+                ->where('match_players.match_id', '=', $id)
+                ->orderBy('stats_players.stats_player_id', 'DESC')
+                // ->select('users.name', '')// todo get note globale player
                 ->get();
 
+        dd($players);
 
-        return view('BackEnd/edit-match', compact('match', 'players'));
+        $allPlayers = DB::table('users')
+            ->whereIn('users.id', $players->pluck('stats_player_id')->toArray())
+            ->orderBy('users.id', 'DESC')
+            ->select('users.name', 'users.id') //Todo rajouter age
+            ->get();
+
+        return view('BackEnd/edit-match', compact('match', 'players', 'allPlayers'));
     }
 
     /**

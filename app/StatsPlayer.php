@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class StatsPlayer extends Model
 {
     //
+    protected $fillable = [
+
+    ];
 
     public function user(){
         return $this->belongsTo('App\User', 'player_stat_id');

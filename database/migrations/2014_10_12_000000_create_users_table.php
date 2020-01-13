@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('adress')->nullable();
+            $table->integer('age')->nullable();
+            $table->integer('enabled')->default(false);
             $table->string('url_img')->nullable();
             $table->boolean('can_vote')->default('0');
             $table->boolean('locked')->default('0');
