@@ -51,7 +51,7 @@
                         @include('partials.form-group', [
                         'title' => 'Nom de l\'utilisateur',
                         'type' => 'text',
-                        'name' => 'title',
+                        'name' => 'name',
                         'required' => true,
                     ])
                     </div>
@@ -61,7 +61,7 @@
                         @include('partials.form-group', [
                         'title' => 'Mail',
                         'type' => 'email',
-                        'name' => 'title',
+                        'name' => 'emailUser',
                         'required' => true,
                     ])
                     </div>
@@ -109,7 +109,7 @@
                         @include('partials.form-group', [
                         'title' => 'DEFENSE',
                         'type' => 'text',
-                        'name' => 'défense',
+                        'name' => 'defense',
                         'required' => true,
                     ])
                     </div>

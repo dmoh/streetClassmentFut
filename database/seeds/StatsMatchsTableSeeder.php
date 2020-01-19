@@ -14,7 +14,7 @@ class StatsMatchsTableSeeder extends Seeder
         //[
 
         StatsMatchs::truncate();
-        for($i = 1; $i < 8; ++$i) {
+        for($i = 1; $i < 12; ++$i) {
             StatsMatchs::create([
                'id' => $i+1,
                 'player_id' => $i,
@@ -22,7 +22,8 @@ class StatsMatchsTableSeeder extends Seeder
                 'manager_user_id' => 4,
                 'rating' => rand(2, 9),
                 'assists' => rand(3, 23),
-                'goals' => rand(0, 13)
+                'goals' => rand(0, 13),
+                'match_id' => $i,
             ]);
         }
     }

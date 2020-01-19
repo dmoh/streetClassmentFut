@@ -17,6 +17,7 @@ class CreateMatchsTable extends Migration
             $table->bigIncrements('id');
             $table->string('score')->nullable();
             $table->dateTime('match_date')->default(now());
+            $table->boolean('resume_closed')->default(false);
             $table->string('team_name_home')->default('Rouge');
             $table->string('team_name_visitor')->default('Bleu');
 

@@ -41,16 +41,20 @@ class UploadImagesController extends Controller
             $name = str_random(30);
             $save_name = $name . '.' . $photo->getClientOriginalExtension();
             Image::make($photo)
-                ->resize(150, null, function ($constraints) {
+               // ->crop(125, 130, 0, 0)
+                /**/->resize(120, 130, function ($constraints) {
                     $constraints->aspectRatio();
                 })
                 ->save($this->thumbs_path . '/' . $save_name);
             $photo->move($this->photos_path, $save_name);
             $upload = new Upload();
             $upload->filename = $save_name;
+            $upload->index = $request->session()->get('index');
             $upload->original_name = basename($photo->getClientOriginalName());
-            $upload->user_id = User::max('id') + 1;
+            $upload->user_id = 0;
             $upload->save();
+
+
         }
     }
 

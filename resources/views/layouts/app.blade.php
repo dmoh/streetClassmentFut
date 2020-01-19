@@ -15,12 +15,15 @@
 <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt|Shadows+Into+Light&display=swap" rel="stylesheet">
 
     <!-- Styles -->
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link href="{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('fontawesome-free/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/examples.css') }}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/bars-square.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,7 +33,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'StreetClassmentFut') }}
+                    {{-- config('app.name', 'StreetClassmentFut') --}}
+                    STAT FUT CITY
+                   {{-- <img src="{{ asset('images/stats-fut-cityLogo2.png') }}" alt="stats fut city logo">--}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -46,17 +51,37 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
+                            {{--@if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('consultation.index' ) }}">Liste des joueurs</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownMatch" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    MATCHS <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMatch">
+                                    <a class="dropdown-item" href="{{ route('matchs.list') }}" >
+                                        Liste des matchs
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('create.match') }}" >
+                                        Organiser un match
+                                    </a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('create.user' ) }}">Ajouter un joueur</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownPlayer" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    JOUEURS<span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPlayer">
+                                    <a class="dropdown-item" href="{{ route('consultation.index' ) }}">
+                                        Liste des joueurs
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('create.user' ) }}">
+                                        Ajouter un joueur
+                                    </a>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('consultation.showProfile', Auth::user()->id ) }}">Mon profil</a>

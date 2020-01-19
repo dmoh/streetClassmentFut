@@ -19,10 +19,15 @@ class CreateStatsMatchsTable extends Migration
             $table->integer('goals');
             $table->integer('assists');
             $table->integer('rating'); // note du joueur
+            $table->boolean('man_of_match')->default(false); // note du joueur
+
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('manager_user_id');
+            $table->unsignedBigInteger('match_id');
+
 
             $table->foreign('player_id')->references('user_id')->on('stats_players')->onDelete('restrict');
+            $table->foreign('match_id')->references('id')->on('matchs')->onDelete('restrict');
             $table->foreign('manager_user_id')->references('id')->on('users');
 
             $table->timestamps();

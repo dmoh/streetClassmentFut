@@ -83,15 +83,13 @@ class MatchController extends Controller
                         'voted' => false,
                         'created_at' => now()
                     ];
-
-
                 }
             }
 
             DB::table('match_players')
                 ->insert($allPlayers);
 
-            return redirect()->route('show.match', ['id' => $newMatchId]);
+            return response()->json(['idMatch' => $newMatchId]);
 
 
         }
@@ -116,11 +114,10 @@ class MatchController extends Controller
                 ->join('stats_players', 'stats_players.user_id', '=', 'match_players.stats_player_id')
                 ->join('users', 'users.id', '=', 'stats_players.stats_player_id')
                 ->where('match_players.match_id', '=', $id)
-                ->orderBy('stats_players.stats_player_id', 'DESC')
+                ->orderBy('users.id', 'DESC')
                 // ->select('users.name', '')// todo get note globale player
                 ->get();
 
-        dd($players);
 
         $allPlayers = DB::table('users')
             ->whereIn('users.id', $players->pluck('stats_player_id')->toArray())
@@ -163,6 +160,74 @@ class MatchController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function resumeMatch(Request $request){
+        $matchId = $request->matchId;
+        $resumeMatch = $request->resumeMatch;
+
+        $score = $resumeMatch[0]['scoreTeam1'].' - '.$resumeMatch[0]['scoreTeam2'];
+        unset($resumeMatch[0]);
+        $arrPlayersId = [];
+        foreach ($resumeMatch as $dataPlayer) {
+            $playerId = $dataPlayer['userId'];
+            $arrPlayersId[] = $playerId;
+            $hdm = $dataPlayer['hdm']; //todo add var man of the match
+
+        }
+
+
+        $dataPlayerDb = DB::table('stats_players')
+            ->select('goals', 'assists', 'player_id')
+            ->whereIn('player_id', $arrPlayersId)
+            ->orderBy('player_id', 'DESC')
+            ->get();
+        foreach ($dataPlayerDb as $playerDb) {
+            foreach ($resumeMatch as $player) {
+                if((int) $playerDb->player_id == (int) $player['userId']){
+                    $sumGoals = $playerDb->goals + $player['goals'];
+                    $sumAssists = $playerDb->assists + $player['assists'];
+                    DB::table('stats_players')
+                        ->where('player_id', (int) $playerDb->player_id)
+                        ->update(
+                            [
+                            'assists' => $sumAssists,
+                            'goals' => $sumGoals
+                            ]
+                        )
+                    ;
+                    DB::table('stats_matchs')
+                        ->insert(
+                            [
+                                'assists' => $player['assists'],
+                                'goals' => $player['goals'],
+                                'match_date' => now(),
+                                'rating' => rand(1,10), // todo check pour la note
+                                'manager_user_id' => Auth::id(),
+                                'player_id' => $player['userId'],
+                                    //todo date du match,
+                            ]
+                        )
+                    ;
+
+                }
+            }
+        }
+
+        DB::table('matchs')
+            ->where('id', $matchId)
+            ->update(
+                [
+                    'score' => $score,
+                    'updated_at' => now()
+                    //todo date du match,
+                ]
+            )
+        ;
+
+        // todo
+
+        return response()->json(['ok' => 'match closed']);
     }
 
     public function matchsList(){

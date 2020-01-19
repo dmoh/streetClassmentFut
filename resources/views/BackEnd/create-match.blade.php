@@ -14,18 +14,26 @@
                     <div class="form-group">
                         <input type="text" id="find-player" class="form-control" placeholder="chercher ">
                     </div>
-                    <ul style="list-style: none">
+                    <ul style="padding: 0; list-style: none">
                         @if(!$players->isEmpty())
                             @foreach($players as $player)
                                 <li style="cursor: pointer" class="idPlayer_{{$player->id}}">
-                                    <div class="card border-left-primary shadow h-100 py-2">
+                                    <div style="border-left: 0.25rem solid #f28701" class="card border-left-primary shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div id="player-name_{{$player->id}}" class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ $player->name }}</div>
+                                                    <div style="color: #eb5a09; font-size: x-large" id="player-name_{{$player->id}}" class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ $player->name }}</div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $player->surname }}</div>
                                                     <input type="hidden" id="playerId" value="{{ $player->id }}" >
                                                     <input type="hidden" id="note_{{ $player->id }}" value="{{ $player->rating_before_update }}" >
+                                                </div>
+                                                <div class="col">
+                                                    <div>
+                                                        NOTE GLOBALE  80
+                                                    </div>
+                                                    <div>
+                                                        POSTE  MIL
+                                                    </div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -39,19 +47,23 @@
                     </ul>
                 </div>
                 <div class="col-md-8">
-                    <h5 style="text-transform: uppercase;" class="text-center"><button  id="validate-teams" class="btn btn-success">VALIDER LES TEAM</button></h5>
+                    <h5 style="text-transform: uppercase;" class="text-center"><button   id="validate-teams" class="btn btn-success">VALIDER LES TEAM</button></h5>
                     <div class="tab-team-switch">
-                        <div class="first-select"><h6>FIRST TEAM</h6></div>
-                        <div class="second-select"><h6>SECOND TEAM</h6></div>
+                        <div style="font-family: 'Anton', sans-serif; letter-spacing: 3px; margin-top: 8px;" class="first-select">
+                            <h6 style="margin-block-start: 0; margin-block-end: 0;">FIRST TEAM</h6>
+                        </div>
+                        <div style="font-family: 'Anton', sans-serif; letter-spacing: 3px; margin-top: 8px;" class="second-select">
+                            <h6 style="margin-block-start: 0; margin-block-end: 0;">SECOND TEAM</h6>
+                        </div>
                     </div>
                     <div id="first-team">
-                        <div id="first-team-place" class="display-players-selected">
-                            <h4 class="text-center">FIRST TEAM</h4>
+                        <div id="first-team-place" style=" padding: 2rem; background: #46464673;" class="display-players-selected">
+                            <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">FIRST TEAM</h4>
                         </div>
                     </div>
                     <div id="second-team">
-                        <div id="second-team-place" class="display-players-selected_2">
-                            <h4 class="text-center">SECOND TEAM</h4>
+                        <div id="second-team-place"  style=" padding: 2rem; background: #46464673;" class="display-players-selected_2">
+                            <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">SECOND TEAM</h4>
                         </div>
                     </div>
                 </div>
@@ -168,7 +180,9 @@
                         dataType: 'json'
                     })
                     .done( (data) => {
-                        window.location.href = "{{ route('matchs.list')  }}"
+                        let url = "{{ route('show.match', ":id")  }}";
+                        url = url.replace(':id', data.idMatch);
+                        window.location.assign(url);
                     });
                 }
             });

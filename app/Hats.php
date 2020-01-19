@@ -9,7 +9,7 @@ class Hats extends Model
     //
 
     public function statsPlayer(){
-        return $this->hasMany('App\StatsPlayer');
+        return $this->hasMany('App\StatsPlayer', 'player_id');
     }
 
 }

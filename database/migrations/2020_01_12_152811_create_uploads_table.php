@@ -17,7 +17,7 @@ class CreateUploadsTable extends Migration
             $table->bigIncrements('id');
             $table->string('filename');
             $table->string('original_name');
-            $table->string('index')->nullable();
+            $table->string('index')->nllable();
             $table->unsignedBigInteger('user_id');
 
             $table->foreign('user_id')->references('id')->on('users');

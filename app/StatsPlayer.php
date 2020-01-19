@@ -24,6 +24,6 @@ class StatsPlayer extends Model
     }
 
     public function hat(){
-        return $this->hasOne('App\Hats');
+        return $this->hasOne('App\Hats', 'hat_id');
     }
 }

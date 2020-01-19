@@ -13,7 +13,7 @@ class MatchsTableSeeder extends Seeder
     {
         //
         Matchs::truncate();
-        for($i = 1; $i < 9; ++$i) {
+        for($i = 1; $i < 12; ++$i) {
 
             Matchs::create([
                 'id' => $i,

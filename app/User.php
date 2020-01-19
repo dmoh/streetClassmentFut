@@ -51,6 +51,11 @@ class User extends Authenticatable
         return null !== $this->roles()->where('name', $role)->first();
     }
 
+    public function getUserCurrentRole($idUserCurrent){
+        return null !== $this->roles()->user()->get()
+            ;
+    }
+
     public function statPlayer(){
         return $this->hasOne('App\StatsPlayer');
     }

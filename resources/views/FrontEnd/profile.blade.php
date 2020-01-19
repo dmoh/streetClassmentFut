@@ -17,7 +17,7 @@
                             <tbody>
                                 <tr>
                                     <td><span>NOTE GLOBALE</span></td>
-                                    <td><span>85</span></td>
+                                    <td><span>{{implode(',',$player->statPlayer()->get()->pluck('current_rating')->toArray())}}</span></td>
                                     <td><span>Forme Actuelle</span></td>
                                     <td style="text-align: center"><span><i class="fa fa-caret-up"></i></span></td>
                                 </tr>
@@ -37,27 +37,49 @@
                                 </tr>
                             <tr>
                                 <td>
-                                    AVERAGE
+                                    NOTE MOYENNE
                                 </td>
-                                <td>8,5 / 10</td>
+                                <td>{{implode(',',$player->statPlayer()->get()->pluck('overall_average')->toArray())}} / 10</td>
                             </tr>
                             <tr>
                                 <td>
-                                    POSITION
+                                    POSTE
                                 </td>
-                                <td>Milieu défensif</td>
+                                <td>{{implode(',',$player->statPlayer()->get()->pluck('position')->toArray()) == null ? 'N/A' : implode(',',$player->statPlayer()->get()->pluck('position')->toArray()) }}</td>
                             </tr>
                             <tr>
                                 <td>
                                     BUTS
                                 </td>
-                                <td>123</td>
+                                <td>{{implode(',',$player->statPlayer()->get()->pluck('goals')->toArray())}}</td>
                             </tr>
                             <tr>
                                 <td>
                                     Passes décisives
                                 </td>
-                                <td>342</td>
+                                <td>
+                                    {{implode(',',$player->statPlayer()->get()->pluck('assists')->toArray())}}
+                                </td>
+                            </tr>
+                                <tr>
+                                <td>
+                                    Pieds fort
+                                </td>
+                                <td>
+                                    @if(implode(',',$player->statPlayer()->get()->pluck('strong_foot')->toArray()) == 'right')
+                                        DROIT
+                                    @else
+                                        GAUCHE
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   POINT FORT
+                                </td>
+                                <td>
+                                    {{implode(',',$player->statPlayer()->get()->pluck('skill')->toArray())}}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -71,7 +93,7 @@
                             <h6>CHAPEAU</h6>
                         </div>
                         <div class="num-hat">
-                            <h6>1</h6>
+                            <h6>{{ $hat }}</h6>
                         </div>
                     </div>
                     <div class="rest-infos">
@@ -93,25 +115,42 @@
                 </div>
             </div>
             <div class="row">
+
+                    <div style="text-align:  center" class="col-md-12">
+                        <a href="{{ route('edit-player', implode(',',$player->statPlayer()->get()->pluck('player_id')->toArray())) }}" class="btn btn-primary">EDITER CE PROFIL</a>
+                    </div>
+
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <div style="margin-top: 2rem; margin-bottom: 2rem" class="divider"></div>
                     <div  class="infos-player">
                         <h6 style="font-size: x-large; color: #fff; text-transform: uppercase" class="text-center ">Mes stats du dernier match</h6>
-                        <table class="table last-game">
-                            <tbody>
-                            <tr class="border-bottom-table">
-                                <td class="text-center border-left-table border-right-table"><span class="text-success">Victoire</span></td>
-                                <td class="border-right-table text-center border-left-table">Date</td>
-                                <td class="text-center border-right-table">04/12/2019</td>
-                                <td class="text-center">Note moyenne reçue </td>
-                                <td class="border-right-table text-center border-left-table">8,4</td>
-                                <td class="text-center">BUTS Marqué(s)</td>
-                                <td class="border-right-table text-center border-left-table">6</td>
-                                <td class="text-center">Homme du match</td>
-                                <td class="border-right-table border-left-table text-center">Non</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <input type="hidden" id="arrLabelCharJs" value="{{ implode(',', array_reverse($getLastRating->pluck('name')->toArray())) }}">
+                        <input type="hidden" id="labelCharJs" value="{{ implode(',', array_reverse($getLastRating->pluck('assigned_rating')->toArray())) }}">
+                        <div class="table-responsive">
+                            <table class="table last-game">
+                                <tbody>
+                                <tr class="border-bottom-table">
+                                    <!--<td class="text-center border-left-table border-right-table"><span class="text-success">Victoire</span></td>-->
+                                    <td class="border-right-table text-center border-left-table">Date</td>
+                                    @if($matchDateFormated == null )
+                                        <td class="text-center border-right-table">
+                                            PAS DE MATCH
+                                        </td>
+                                    @else
+                                        <td class="text-center border-right-table">{{ $matchDateFormated }}</td>
+                                    @endif
+                                    <td class="text-center">Note moyenne reçue </td>
+                                    <td class="border-right-table text-center border-left-table">{{ $lastRating[0] ?? 'N/N' }}</td>
+                                    <td class="text-center">BUT(S) Marqué(s)</td>
+                                    <td class="border-right-table text-center border-left-table">{{ $statsLastMatch[0]->goals ?? 'N/N' }}</td>
+                                    <td class="text-center">Homme du match</td>
+                                    <td class="border-right-table border-left-table text-center">Non</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,7 +188,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -161,17 +199,25 @@
     <script src="{{ asset('js/Chart/chart-area.js') }}"></script>
     <script type="text/javascript">
         // Area Chart Example
+
+        const arr = $('#arrLabelCharJs').val();
+        const numChar = $('#labelCharJs').val();
+        const arrChar = numChar.split(',');
+        const label = arr.split(',');
+
+
         var ctx = document.getElementById("myAreaChart");
         //ctx.style.backgroundColor = "rgba(0,0,0, 0.3)";
         var myLineChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // todo mettre les dates des matchs
+                 labels: label, // todo mettre les dates des matchs
+                // labels: '', // todo mettre les dates des matchs
                 datasets: [{
                     label: "Note du match",
                     lineTension: 0.3,
-                    backgroundColor: "rgba(0, 0, 0, 0.05)",
-                    borderColor: "rgba(78, 115, 223, 1)",
+                    backgroundColor: "rgba(52, 144, 220, 1)",
+                    borderColor: "rgba(52, 144, 220, 1)",
                     pointRadius: 3,
                     pointBackgroundColor: "rgba(78, 115, 223, 1)",
                     pointBorderColor: "rgba(78, 115, 223, 1)",
@@ -180,7 +226,8 @@
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: [0, 1, 4, 8, 4.6, 6.9, 8.9, 5, 3, 5, 7, 8.5], // todo mettre les notes dernières
+                    //data: [0, 1, 4, 8, 4.6, 6.9, 8.9, 5, 3, 5, 7, 8.5], // todo mettre les notes dernières
+                    data: arrChar, // todo mettre les notes dernières
                 }],
             },
             options: {
@@ -255,5 +302,6 @@
                 }
             }
         });
+
     </script>
 @endsection

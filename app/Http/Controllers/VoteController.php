@@ -17,7 +17,7 @@ class VoteController extends Controller
      */
     public function index()
     {
-        $id = 9; // Auth::id();
+        $id =  Auth::id();
         //getAllMatchPlayedWhereNOVote
         $matchs = DB::table('matchs')
                     ->limit(1)
@@ -72,25 +72,6 @@ class VoteController extends Controller
         if($request->ajax()){
             $notes = $request->get('notes');
             $matchId = (int) $request->get('matchId');
-            /*array:4 [
-                  0 => array:2 [
-                    "voteToPlayerId" => "6"
-                    "scoreAwarded" => "5"
-                  ]
-                  1 => array:2 [
-                    "voteToPlayerId" => "2"
-                    "scoreAwarded" => "8"
-                  ]
-                  2 => array:2 [
-                    "voteToPlayerId" => "3"
-                    "scoreAwarded" => "5"
-                  ]
-                  3 => array:2 [
-                    "voteToPlayerId" => "8"
-                    "scoreAwarded" => "9"
-                  ]
-                ]*/
-
 
             //insert
             foreach ($notes as $note) {
@@ -103,13 +84,15 @@ class VoteController extends Controller
                         'match_id' => $matchId,
                     ])
                 ;
-                DB::table('match_players')
-                    ->where(['stats_player_id' => Auth::id()])
-                    ->update(['voted' => true])
-                ;
-
             }
-            response()->json(['success' => 'success message']);
+
+            DB::table('match_players')
+                ->where(['match_players.stats_player_id' => Auth::id()])
+                ->where('match_players.match_id' , $matchId )
+                ->update(['voted' => true])
+            ;
+
+            return response()->json(['success' => 'success message']);
 
         }
         abort(404);

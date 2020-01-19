@@ -15,17 +15,19 @@ class CreateStatsPlayersTable extends Migration
     {
         Schema::create('stats_players', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
-            $table->integer('current_rating')->default(0);
+            $table->integer('current_rating')->default(75);
             $table->integer('rating_before_update')->nullable();
+            $table->integer('assists')->nullable(); //moyenne générale
             $table->integer('overall_average')->nullable(); //moyenne générale
             $table->integer('goals')->nullable();
-            $table->integer('position')->nullable(); //Passe décisive
-            $table->integer('pace')->nullable(); //Vitesse
-            $table->integer('shoot')->nullable(); //Passe décisive
-            $table->integer('passe')->nullable(); //Passe décisive
-            $table->integer('dribble')->nullable(); //Passe décisive
-            $table->integer('defense')->nullable(); //Passe décisive
-            $table->integer('physique')->nullable(); //Passe décisive
+            $table->string('position')->nullable();
+            $table->integer('pace')->nullable(); //vitesse
+            $table->integer('shoot')->nullable();
+            $table->integer('passe')->nullable();
+            $table->integer('dribble')->nullable();
+            $table->integer('defense')->nullable();
+            $table->integer('physique')->nullable();
+            $table->string('skill')->nullable(); //point fort
             $table->enum('strong_foot', ['left', 'right'])->default('right'); //Passe décisive
 
 

@@ -11144,7 +11144,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #4e73df !important;
+  color: #4e73df;
 }
 
 a.text-primary:hover,
@@ -11643,7 +11643,7 @@ a:focus {
 }
 
 .border-left-primary {
-  border-left: 0.25rem solid #4e73df !important;
+  border-left: 0.25rem solid #4e73df ;
 }
 
 .border-bottom-primary {
@@ -12995,16 +12995,17 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .wrapper-card-fut {
-  background: url(/images/bg-fut-ldc-new.png?5caaa51bb7d5ee99e3490014cfb53ccc) top left no-repeat;
+  background: url(/images/bg-fut-ldc-2.png) top left no-repeat;
   background-size: cover;
   position: relative;
-  width: 260px;
+  width: 255px;
   height: 386px;
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 5rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
 .name-fut h5 {
@@ -13017,16 +13018,20 @@ body.sidebar-toggled footer.sticky-footer {
   padding-top: 7px;
   margin: 9rem auto;
   margin-left: 2rem;
-  padding-bottom: 7px;
+  padding-bottom: 6px;
+  font-family: Oswald, sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
 }
 
 .infos-left-fut {
   position: absolute;
   color: #a7ffee;
   font-weight: 600;
-  left: 3.2rem;
-  font-size: 2.3rem;
+  left: 3.3rem;
+  font-size: 2.6rem;
   top: 5rem;
+  font-family: Oswald, sans-serif;
 }
 
 .infos-capacities-left,
@@ -13038,42 +13043,156 @@ body.sidebar-toggled footer.sticky-footer {
   line-height: 0;
   padding: 0;
   margin-bottom: 0;
-  text-align: center;
 }
 
 .infos-capacities-left {
-  width: 57%;
 }
 
 .infos-capacities-left span,
 .infos-capacities-right span {
   display: block;
-  line-height: 1.5rem;
+  line-height: 1.3rem;
+}
+
+.img-small-left {
+  background: url('../images/small-match-display-bg.png') top left no-repeat;
+  background-size: contain;
+  height: 149px;
+  display: inline-block;
+  width: 129px;
+}
+
+.alignement-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
+}
+.info-note-player {
+    margin-top: 2.5rem;
+    font-size: x-large;
+    color: white;
+    margin-bottom: -9px;
+    margin-left: .7rem;
+}
+
+.info-poste-player {
+    color: white;
+    font-size: larger;
+    margin-left: .7rem;
+    text-transform: uppercase;
 }
 
 .img-user-fut {
   position: absolute;
 }
-
+.margin-right-6 {
+    margin-right: 6px;
+}
+.no-player{
+  font-size: 3rem;
+  font-family: Oswald, sans-serif;
+  color: white;
+  margin-top: 7rem;
+  margin-bottom: 8rem;
+}
 .img-user-fut img {
   top: 7px;
-  margin-top: 0.5rem;
+  margin-top: 0rem;
   margin-left: 4.7rem;
   width: 149px;
 }
-
+.couple-stat-note > div:last-child{
+    font-size: larger;
+    margin-top: -9px;
+}
+div > i.fa-trophy {
+    font-size: 60px;
+    margin-top: -17px;
+    margin-left: 6px;
+    z-index: 10;
+}
 .marg-top-fut-bg {
-  margin-top: 5rem;
+  margin-top: 3rem;
   color: #fff;
   font-size: large;
 }
+#table-of-vote {
+    margin-top: 2rem;
+}
+#nav-hats {
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: xx-large;
+
+  font-family: 'Anton', sans-serif;
+}
+
+.active-hat {
+  background: #b60fcb;
+  color: white;
+}
+
+#nav-hats > div {
+  padding: 2rem;
+  cursor: pointer;
+}
+#title-top-match {
+    padding: 1rem;
+    background: #587eee;
+    margin-top: 1rem;
+    border-radius: 5px;
+    color: #fff;
+  font-size: xx-large;
+    font-weight: 700;
+    letter-spacing: 2px;
+  font-family: 'Oswald', sans-serif;
+}
+#score-match{
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+}
+#versus-team{
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 5rem;
+}
+#validate-teams{
+  font-family: 'Shadows Into Light', cursive;
+  color: #fff;
+  background-color: #bd4e4e;
+  border-color: #ffffff6e;
+  font-size: xx-large;
+}
+.wrapper-score{
+  border-radius: 5px;
+  background: #2c2cba;
+  color: #fff;
+  padding: 0.5rem 2rem;
+}
+
+ul.navbar-nav > li a {
+  font-size: large;
+  color: rgb(11, 14, 90);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: italic;
+  font-family: 'Anton', sans-serif;
+}
+.navbar-light.navbar-nav.nav-link{
+  color: rgb(11, 14, 90);
+
+}
+
 
 .infos-player .table {
   width: 100%;
   margin-bottom: 1rem;
   color: #ffffff;
 }
-
+div[id^="player-name_"] {
+  font-family: 'Oswald', sans-serif;
+}
 .infos-player .table td {
   padding: 0.75rem;
   vertical-align: top;
@@ -13110,14 +13229,17 @@ span i.fa {
   background-position-y: 7px;
   width: 90px;
   height: 150px;
-  margin: 5rem auto;
+  margin: 6rem auto;
   margin-bottom: 1rem;
 }
 
 .position-num-hat h6 {
   line-height: 6rem;
-  font-size: 1rem;
-  padding-left: 5px;
+  font-size: 1.4rem;
+  /* padding-left: 14px; */
+  text-align: center;
+  font-family: Anton, sans-serif;
+
 }
 
 .num-hat h6 {
@@ -13125,6 +13247,8 @@ span i.fa {
   text-align: center;
   /* top: -7px; */
   line-height: 1px;
+  font-family: Anton, sans-serif;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
 }
 
 .rest-infos {
@@ -13375,9 +13499,84 @@ a.dz-remove:hover {
   font-size: 1rem !important;
 }
 
+
+#display-player-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 @media (max-width: 1600px) {
   .bg-list-players {
     background-position-y: -83rem;
   }
 }
 
+@media (max-width: 839px) {
+  #nav-hats {
+    font-size: larger;
+  }
+}
+@media (min-width: 767px) and (max-width: 991px) {
+  #nav-hats {
+    font-size: larger;
+  }
+
+  #nav-hats > div {
+     padding: 0.6rem;
+     cursor: pointer;
+     font-size: 0.9rem;
+  }
+
+  .wrapper-card-fut {
+    background-size: contain;
+    width: 218px;
+    height: 382px;
+    padding-top: 0rem;
+    padding-bottom: 3rem;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+
+  .infos-left-fut {
+    font-weight: 600;
+    left: 2.5rem;
+    font-size: 2.6rem;
+    top: 5rem;
+    font-family: Oswald, sans-serif;
+  }
+
+  .img-user-fut img {
+    top: 7px;
+    margin-top: 2rem;
+    margin-left: 4.7rem;
+    width: 126px;
+  }
+
+
+  .name-fut h5 {
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    width: 77%;
+    background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%);
+    padding-top: 18px;
+    margin: 9rem auto;
+    margin-left: 2rem;
+    padding-bottom: 6px;
+    font-family: Oswald, sans-serif;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+  }
+
+}
+
+
+@media (max-width: 766px) {
+    #nav-hats > div {
+        padding: 0.6rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+}

@@ -9,12 +9,12 @@
                 </div>
             </div>
         @else
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 style="margin-top: 3rem; color: #0b0956" class="text-center">Voter pour les derniers matchs joués! Sois réglo :)</h4>
-                </div>
-            </div>
             <div id="table-of-vote">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 3rem; color: #0b0956" class="text-center">Voter pour les derniers matchs joués! Sois réglo :)</h4>
+                    </div>
+                </div>
                 @foreach($playersMatch as $player)
                     <table class="table table-vote">
                         <tbody>
@@ -71,7 +71,10 @@
                        type: "POST",
                        data: {matchId: matchId, notes: notes},
                        success: function(data){
-                           $('#table-of-vote').hide();
+                           $('#table-of-vote').empty().append(
+                               '<div class="alert alert-success" role="alert">\n' +
+                               '  Vote enregistré ! GOOD JOB \n' +
+                               '</div>');
                        }
                    });
                }

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\StatsPlayer;
 use Illuminate\Http\Request;
+use App\Upload;
 use App\User;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use App\Role;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -24,8 +29,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if(!$request->session()->has('index')) {
+            $request->session()->put('index',  Str::random(30));
+        }
+
         return view('BackEnd/create-user', compact('userMax'));
     }
 
@@ -38,9 +47,38 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        
+        $playerRole = Role::where('name', 'player')->first();
+        $statPlayer = new StatsPlayer();
+        $user->name = $request->name;
+        $user->email = $request->emailUser;
+        $user->password = bcrypt('testtest1');// todo generate password and send by mail
+        $user->save();
 
-        dd($request);
+        $user->roles()->attach($playerRole);
+        $statPlayer->current_rating       = 85;
+        $statPlayer->rating_before_update = 5;
+        $statPlayer->overall_average      = 0;
+        $statPlayer->goals                = 0;
+        $statPlayer->position             = $request->poste_player;
+        $statPlayer->pace                 = $request->vitesse;
+        $statPlayer->shoot                = $request->tir;
+        $statPlayer->passe                = $request->passe;
+        $statPlayer->dribble              = $request->dribble;
+        $statPlayer->defense              = $request->defense;
+        $statPlayer->physique             = $request->physique;
+        $statPlayer->user_id              = $user->id;
+        $statPlayer->player_id            = $user->id;
+        $statPlayer->stats_player_id      = $user->id;
+
+        $statPlayer->save();
+
+
+        if($request->session()->has('index')) {
+            $index = $request->session()->get('index');
+            Upload::whereIndex($index)->update(['user_id' => $user->id, 'index' => 0]);
+        }
+
+        return redirect()->route('consultation.index');
     }
 
     /**

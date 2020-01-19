@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid bg-list-players">
-        <h2 class="text-center text-uppercase"> Liste des matchs</h2>
+        <h2 style="    padding: 2rem;background: #cccccc63;color: #fff;font-family: Oswald, sans-serif;font-size: xx-large;" class="text-center text-uppercase"> Liste des matchs</h2>
         @foreach($matchs as $match)
             <table style="background: #ffffffe3;" class="table ">
                 <tbody>

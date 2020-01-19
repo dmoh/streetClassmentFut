@@ -45,6 +45,11 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
        Route::get('/', 'UserController@index')->name('index.users');
        Route::get('/add-user', 'UserController@create')->name('create.user');
        Route::post('/store-user', 'UserController@store')->name('store.user');
+        Route::get('/edit-player/{id}', 'UserController@edit')->where('id', '[0-9]+')->name('edit-player');
+
+    });
+    Route::middleware('ajax')->group(function (){
+       Route::post('save-resume-match', 'MatchController@resumeMatch')->name('resume.match');
     });
    Route::prefix('matchs-management')->group(function(){
       Route::get('/', 'MatchController@matchsList')->name('matchslist');
@@ -59,6 +64,7 @@ Route::middleware('ajax')->group(function () {
     Route::post('images-save', 'UploadImagesController@store')->name('save-images');
     Route::delete('images-delete', 'UploadImagesController@destroy')->name('destroy-images');
     Route::get('images-server','UploadImagesController@getServerImages')->name('server-images');
+    Route::post('show-player-hat', 'FrontEnd\FrontEndController@showPlayerByHat')->name('show-hat-player');
 });
 
 

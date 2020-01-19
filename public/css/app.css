@@ -5136,7 +5136,7 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(11, 14, 90);
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -11142,7 +11142,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #3490dc !important;
+  color: #3490dc ;
 }
 
 a.text-primary:hover,
