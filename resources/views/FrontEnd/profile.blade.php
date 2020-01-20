@@ -115,11 +115,11 @@
                 </div>
             </div>
             <div class="row">
-
+                @hasrole('admin')
                     <div style="text-align:  center" class="col-md-12">
                         <a href="{{ route('edit-player', implode(',',$player->statPlayer()->get()->pluck('player_id')->toArray())) }}" class="btn btn-primary">EDITER CE PROFIL</a>
                     </div>
-
+                @endhasrole
             </div>
             <div class="row">
                 <div class="col-md-12">

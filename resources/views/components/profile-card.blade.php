@@ -1,6 +1,7 @@
 <div id="{{ implode(', ', $player->statPlayer()->get()->pluck('user_id')->toArray()) }}" class="wrapper-card-fut">
     <div class="infos-left-fut">
         <p>{{ implode(', ', $player->statPlayer()->get()->pluck('current_rating')->toArray()) }}</p>
+        <p style="font-size: 1.1rem;   margin-top: -1rem;   text-align-last: center;   padding-top: .1rem;   border-top: 1px solid #a3e2d057"; >{{ implode(', ', $player->statPlayer()->get()->pluck('position')->toArray()) }}</p>
     </div>
     <div class="img-user-fut">
         @if(isset($photo))

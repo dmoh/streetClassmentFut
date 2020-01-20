@@ -89,7 +89,6 @@ class FrontEndController extends Controller
             ->get()
         ;
 
-        dd(Auth::user()->getUserCurrentRole(Auth::id()));
         //get last info game
         $lastRating = $getLastRating->pluck('assigned_rating')->toArray();
         $matchDateFormated = null;

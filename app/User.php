@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'surname', 'age'
     ];
 
     /**
@@ -51,10 +51,7 @@ class User extends Authenticatable
         return null !== $this->roles()->where('name', $role)->first();
     }
 
-    public function getUserCurrentRole($idUserCurrent){
-        return null !== $this->roles()->user()->get()
-            ;
-    }
+
 
     public function statPlayer(){
         return $this->hasOne('App\StatsPlayer');

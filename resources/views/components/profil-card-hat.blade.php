@@ -1,6 +1,7 @@
 <div id="{{ $player->stats_player_id }}" class="wrapper-card-fut">
     <div class="infos-left-fut">
         <p>{{ $player->current_rating  }}</p>
+        <p style="font-size: 1.1rem;   margin-top: -1rem;   text-align-last: center;   padding-top: .1rem;   border-top: 1px solid #a3e2d057"; >{{ $player->position }}</p>
     </div>
     <div class="img-user-fut">
         @if( $player->filename !== null )

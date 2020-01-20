@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StatsPlayerUpdateRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\StatsPlayerRepository;
 use App\StatsPlayer;
 use Illuminate\Http\Request;
 use App\Upload;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use App\Role;
 use Illuminate\Support\Str;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
@@ -18,6 +24,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    protected $userRepository;
+
+
+    public function __construct(UserRepository $userRepository)
+    {
+
+        $this->userRepository = $userRepository;
+    }
+
     public function index()
     {
         //
@@ -101,6 +118,13 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = DB::table('users')->where('id', $id)->first();
+        $statsPlayer = DB::table('stats_players')->where('user_id', $id)->first();
+
+        $postes=collect(['ATT', 'BU', 'DEF', 'MDC', 'MOC', 'MG', 'MD']);
+        $skills= collect(['VITESSE', 'BUTEUR', 'PASSEUR', 'DRIBBLEUR', 'TECHNIQUE', 'COSTAUD', 'AGRESSIF']);
+        $feet = collect(['LEFT', 'RIGHT']);
+        return view('FrontEnd/edit-user', compact('user', 'statsPlayer', 'postes', 'skills', 'feet' ));
     }
 
     /**
@@ -110,9 +134,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request)
     {
-        //
+       $this->userRepository->update($request);
+       return redirect()->route('consultation.showProfile', ['id' => $request->idUserUpdate]);
+    }
+
+    public function updateStats(StatsPlayerUpdateRequest $request, StatsPlayerRepository $statsPlayerRepository){
+
+        $statsPlayerRepository->update($request);
+        return redirect()->route('consultation.showProfile', ['id' => $request->idStatsPlayer]);
     }
 
     /**

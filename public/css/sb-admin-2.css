@@ -13027,10 +13027,12 @@ body.sidebar-toggled footer.sticky-footer {
 .infos-left-fut {
   position: absolute;
   color: #a7ffee;
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
-  left: 3.3rem;
+  left: 3.6rem;
   font-size: 2.6rem;
-  top: 5rem;
+  top: 4rem;
   font-family: Oswald, sans-serif;
 }
 
@@ -13477,6 +13479,10 @@ div[id^=delete-team_] {
   padding-top: -4px;
 }
 
+.form-group {
+  color: #fff;
+}
+
 #my-dropzone {
   border: 2px dashed #0087F7;
   border-radius: 5px;
@@ -13570,6 +13576,14 @@ a.dz-remove:hover {
     font-size: 1.2rem;
   }
 
+  .br-theme-bars-square .br-widget a {
+    display: block;
+    width: 23px;
+    height: 23px;
+    margin: 1px;
+    line-height: 1.5;
+  }
+
 }
 
 
@@ -13579,4 +13593,12 @@ a.dz-remove:hover {
         cursor: pointer;
         font-size: 0.9rem;
     }
+
+  .br-theme-bars-square .br-widget a {
+    display: block;
+    width: 23px;
+    height: 23px;
+    margin: 1px;
+    line-height: 1.5;
+  }
 }

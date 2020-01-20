@@ -45,8 +45,9 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
        Route::get('/', 'UserController@index')->name('index.users');
        Route::get('/add-user', 'UserController@create')->name('create.user');
        Route::post('/store-user', 'UserController@store')->name('store.user');
-        Route::get('/edit-player/{id}', 'UserController@edit')->where('id', '[0-9]+')->name('edit-player');
-
+       Route::post('/update-user', 'UserController@update')->name('update.user');
+       Route::post('/update-stats', 'UserController@updateStats')->name('update.stats');
+       Route::get('/edit-player/{id}', 'UserController@edit')->where('id', '[0-9]+')->name('edit-player');
     });
     Route::middleware('ajax')->group(function (){
        Route::post('save-resume-match', 'MatchController@resumeMatch')->name('resume.match');

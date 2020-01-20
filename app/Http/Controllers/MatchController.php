@@ -27,7 +27,7 @@ class MatchController extends Controller
                 ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
                 ->join('users', 'users.id', '=', 'stats_players.player_id')
                 ->select('users.name',  'matchs.id', 'matchs.score', 'matchs.match_date')
-                ->where('users.id', '=', 7)
+                ->where('users.id', '=', Auth::id())
                 ->orderBy('matchs.id')
                 ->get();
             $playersMatch = DB::table('matchs')
@@ -38,6 +38,8 @@ class MatchController extends Controller
                 ->select('users.*', 'stats_players.*', 'matchs.*')
                 ->orderBy('matchs.id', 'desc')
                 ->get();
+
+            //dd($playersMatch);
 
             return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch'));
         }

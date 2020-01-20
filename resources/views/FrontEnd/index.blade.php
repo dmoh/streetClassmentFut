@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="nav-hats">
+                    <div id="hats_">LEGENDE</div>
                     <div id="hats_1 " class="active-hat">CHAPEAU 1</div>
                     <div id="hats_2">CHAPEAU 2</div>
                     <div id="hats_3">CHAPEAU 3</div>
@@ -70,6 +71,9 @@
                                <div id="${ data[i].user_id }" class="wrapper-card-fut">
                                     <div class="infos-left-fut">
                                     <p>${ data[i].current_rating }</p>
+                                    <p style="font-size: 1.1rem;   margin-top: -1rem;   text-align-last: center;   padding-top: .1rem;   border-top: 1px solid #a3e2d057"; >
+                                        ${ data[i].position }
+                                    </p>
                                     </div>
                                     <div class="img-user-fut">
                                    <img src="{{ asset('images/silhouette-ldc.png') }}" alt="${ data[i].name }">
@@ -106,9 +110,6 @@
                     console.log('je passe ma ');
                     $('div[class^="row "]').each(function (elem) {
                         const idSection= parseInt($(this).attr('class').split('_')[1]);
-                        console.log($(this));
-                        console.log(idSection);
-                        console.log(hatId);
                         if(parseInt(idSection) !== parseInt(hatId)){
                             $(this).hide(1000);
                         }else{
