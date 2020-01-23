@@ -17,7 +17,7 @@
                             <tbody>
                                 <tr>
                                     <td><span>NOTE GLOBALE</span></td>
-                                    <td><span>{{implode(',',$player->statPlayer()->get()->pluck('current_rating')->toArray())}}</span></td>
+                                    <td><span>{{$player->current_rating}}</span></td>
                                     <td><span>Forme Actuelle</span></td>
                                     <td style="text-align: center"><span><i class="fa fa-caret-up"></i></span></td>
                                 </tr>
@@ -33,32 +33,33 @@
                                     <td>
                                         @lang('Classement')
                                     </td>
-                                    <td>1</td>
+                                    <td>{{ $rankingPosition ?? 'NON CLASSé' }}</td>
                                 </tr>
                             <tr>
                                 <td>
                                     NOTE MOYENNE
                                 </td>
-                                <td>{{implode(',',$player->statPlayer()->get()->pluck('overall_average')->toArray())}} / 10</td>
+                               {{-- <td>{{$player->overall_average')->toArray())}} / 10</td>--}}
+                                <td>{{ $overallAverage ? $overallAverage.' / 10'  : 'N/N' }}</td>
                             </tr>
                             <tr>
                                 <td>
                                     POSTE
                                 </td>
-                                <td>{{implode(',',$player->statPlayer()->get()->pluck('position')->toArray()) == null ? 'N/A' : implode(',',$player->statPlayer()->get()->pluck('position')->toArray()) }}</td>
+                                <td>{{$player->position == null ? 'N/A' : $player->position }}</td>
                             </tr>
                             <tr>
                                 <td>
                                     BUTS
                                 </td>
-                                <td>{{implode(',',$player->statPlayer()->get()->pluck('goals')->toArray())}}</td>
+                                <td>{{$player->goals}}</td>
                             </tr>
                             <tr>
                                 <td>
                                     Passes décisives
                                 </td>
                                 <td>
-                                    {{implode(',',$player->statPlayer()->get()->pluck('assists')->toArray())}}
+                                    {{$player->assists}}
                                 </td>
                             </tr>
                                 <tr>
@@ -66,7 +67,7 @@
                                     Pieds fort
                                 </td>
                                 <td>
-                                    @if(implode(',',$player->statPlayer()->get()->pluck('strong_foot')->toArray()) == 'right')
+                                    @if($player->strong_foot == 'right')
                                         DROIT
                                     @else
                                         GAUCHE
@@ -78,7 +79,7 @@
                                    POINT FORT
                                 </td>
                                 <td>
-                                    {{implode(',',$player->statPlayer()->get()->pluck('skill')->toArray())}}
+                                    {{$player->skill}}
                                 </td>
                             </tr>
                             </tbody>
@@ -117,7 +118,7 @@
             <div class="row">
                 @hasrole('admin')
                     <div style="text-align:  center" class="col-md-12">
-                        <a href="{{ route('edit-player', implode(',',$player->statPlayer()->get()->pluck('player_id')->toArray())) }}" class="btn btn-primary">EDITER CE PROFIL</a>
+                        <a href="{{ route('edit-player', $player->player_id) }}" class="btn btn-primary">EDITER CE PROFIL</a>
                     </div>
                 @endhasrole
             </div>
@@ -142,7 +143,7 @@
                                         <td class="text-center border-right-table">{{ $matchDateFormated }}</td>
                                     @endif
                                     <td class="text-center">Note moyenne reçue </td>
-                                    <td class="border-right-table text-center border-left-table">{{ $lastRating[0] ?? 'N/N' }}</td>
+                                    <td class="border-right-table text-center border-left-table">{{ $overallAverage ?? 'N/N' }}</td>
                                     <td class="text-center">BUT(S) Marqué(s)</td>
                                     <td class="border-right-table text-center border-left-table">{{ $statsLastMatch[0]->goals ?? 'N/N' }}</td>
                                     <td class="text-center">Homme du match</td>

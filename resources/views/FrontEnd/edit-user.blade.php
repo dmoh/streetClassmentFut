@@ -62,9 +62,11 @@
                     <h4 style="color: #fff;padding: 1rem;font-family: Oswald, sans-serif;font-size: xx-large;text-transform: uppercase;" class="text-center"> CAPACITéS DU JOUEUR</h4>
                 </div>
             </div>
+            @include('BackEnd.dropzone')
+
             <form action="{{ route('update.stats') }}" id="formStatsPlayer" method="POST">
                 @csrf
-                <input type="hidden" name="idStatsPlayer" value="{{$statsPlayer->id}}">
+                <input type="hidden" name="idStatsPlayer" value="{{$statsPlayer->user_id}}">
 
                 <div class="row">
                     <div class="col">

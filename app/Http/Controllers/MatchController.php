@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VoteOpen;
 use App\Matchs;
+use App\Notifications\VoteOpenMessage;
+use App\Votes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 
 
@@ -16,6 +20,12 @@ class MatchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $vote;
+    public function __construct(Votes $vote)
+    {
+        $this->vote = $vote;
+    }
+
     public function index()
     {
         if(Auth::id()){
@@ -28,7 +38,7 @@ class MatchController extends Controller
                 ->join('users', 'users.id', '=', 'stats_players.player_id')
                 ->select('users.name',  'matchs.id', 'matchs.score', 'matchs.match_date')
                 ->where('users.id', '=', Auth::id())
-                ->orderBy('matchs.id')
+                ->orderBy('matchs.id', 'desc')
                 ->get();
             $playersMatch = DB::table('matchs')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
@@ -175,15 +185,19 @@ class MatchController extends Controller
             $playerId = $dataPlayer['userId'];
             $arrPlayersId[] = $playerId;
             $hdm = $dataPlayer['hdm']; //todo add var man of the match
-
         }
 
 
+
+
         $dataPlayerDb = DB::table('stats_players')
-            ->select('goals', 'assists', 'player_id')
+            ->select('stats_players.goals', 'stats_players.assists', 'stats_players.player_id', 'users.email', 'users.name')
+            ->join('users', 'users.id', '=', 'stats_players.user_id')
             ->whereIn('player_id', $arrPlayersId)
             ->orderBy('player_id', 'DESC')
             ->get();
+
+
         foreach ($dataPlayerDb as $playerDb) {
             foreach ($resumeMatch as $player) {
                 if((int) $playerDb->player_id == (int) $player['userId']){
@@ -207,6 +221,7 @@ class MatchController extends Controller
                                 'rating' => rand(1,10), // todo check pour la note
                                 'manager_user_id' => Auth::id(),
                                 'player_id' => $player['userId'],
+                                'match_id' => $matchId,
                                     //todo date du match,
                             ]
                         )
@@ -229,6 +244,13 @@ class MatchController extends Controller
 
         // todo
 
+
+
+        //Send mail to players
+       // Mail::to(collect($dataPlayerDb))->send(new VoteOpen());
+
+        //todo generate template mail vote
+        Votes::sendMailToVoters('mkanoute74@gmail.com');
         return response()->json(['ok' => 'match closed']);
     }
 

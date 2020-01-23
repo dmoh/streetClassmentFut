@@ -13100,7 +13100,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .img-user-fut img {
   top: 7px;
-  margin-top: 0rem;
+  margin-top: 0.5rem;
   margin-left: 4.7rem;
   width: 149px;
 }
@@ -13511,94 +13511,112 @@ a.dz-remove:hover {
   justify-content: space-evenly;
 }
 
+div#accordion div.card {
+  font-size: larger;
+  font-family: 'Oswald', sans-serif;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: none;
+  margin: .2rem;
+border-radius: 0;
+}
+
 @media (max-width: 1600px) {
-  .bg-list-players {
-    background-position-y: -83rem;
-  }
+.bg-list-players {
+background-position-y: -83rem;
+}
 }
 
 @media (max-width: 839px) {
-  #nav-hats {
-    font-size: larger;
-  }
+#nav-hats {
+font-size: larger;
+}
 }
 @media (min-width: 767px) and (max-width: 991px) {
-  #nav-hats {
-    font-size: larger;
-  }
+#nav-hats {
+font-size: larger;
+}
 
-  #nav-hats > div {
-     padding: 0.6rem;
-     cursor: pointer;
-     font-size: 0.9rem;
-  }
+#nav-hats > div {
+ padding: 0.6rem;
+ cursor: pointer;
+ font-size: 0.9rem;
+}
 
-  .wrapper-card-fut {
-    background-size: contain;
-    width: 218px;
-    height: 382px;
-    padding-top: 0rem;
-    padding-bottom: 3rem;
-    margin: 0 auto;
-    margin-top: 5rem;
-    margin-bottom: 2rem;
-    cursor: pointer;
-  }
+.wrapper-card-fut {
+background-size: contain;
+width: 218px;
+height: 382px;
+padding-top: 0rem;
+padding-bottom: 3rem;
+margin: 0 auto;
+margin-top: 5rem;
+margin-bottom: 2rem;
+cursor: pointer;
+}
 
-  .infos-left-fut {
-    font-weight: 600;
-    left: 2.5rem;
-    font-size: 2.6rem;
-    top: 5rem;
-    font-family: Oswald, sans-serif;
-  }
+.infos-left-fut {
+font-weight: 600;
+left: 2.5rem;
+font-size: 2.6rem;
+top: 5rem;
+font-family: Oswald, sans-serif;
+}
 
-  .img-user-fut img {
-    top: 7px;
-    margin-top: 2rem;
-    margin-left: 4.7rem;
-    width: 126px;
-  }
+.img-user-fut img {
+top: 7px;
+margin-top: 2rem;
+margin-left: 4.7rem;
+width: 126px;
+}
 
 
-  .name-fut h5 {
-    text-align: center;
-    text-transform: uppercase;
-    position: absolute;
-    width: 77%;
-    background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%);
-    padding-top: 18px;
-    margin: 9rem auto;
-    margin-left: 2rem;
-    padding-bottom: 6px;
-    font-family: Oswald, sans-serif;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-  }
+.name-fut h5 {
+text-align: center;
+text-transform: uppercase;
+position: absolute;
+width: 77%;
+background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%);
+padding-top: 18px;
+margin: 9rem auto;
+margin-left: 2rem;
+padding-bottom: 6px;
+font-family: Oswald, sans-serif;
+letter-spacing: 2px;
+font-size: 1.2rem;
+}
 
-  .br-theme-bars-square .br-widget a {
-    display: block;
-    width: 23px;
-    height: 23px;
-    margin: 1px;
-    line-height: 1.5;
-  }
+.br-theme-bars-square .br-widget a {
+display: block;
+width: 23px;
+height: 23px;
+margin: 1px;
+line-height: 1.5;
+}
 
 }
 
 
 @media (max-width: 766px) {
-    #nav-hats > div {
-        padding: 0.6rem;
-        cursor: pointer;
-        font-size: 0.9rem;
-    }
+#nav-hats > div {
+    padding: 0.6rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
 
-  .br-theme-bars-square .br-widget a {
-    display: block;
-    width: 23px;
-    height: 23px;
-    margin: 1px;
-    line-height: 1.5;
-  }
+.br-theme-bars-square .br-widget a {
+display: block;
+width: 23px;
+height: 23px;
+margin: 1px;
+line-height: 1.5;
+}
 }

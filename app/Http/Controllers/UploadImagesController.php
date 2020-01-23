@@ -59,6 +59,11 @@ class UploadImagesController extends Controller
     }
 
 
+    public function edit(Request $request){
+        dd($request);
+    }
+
+
     public function getServerImages(Request $request)
     {
         if($request->session()->has('index')) {

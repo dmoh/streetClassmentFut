@@ -67,8 +67,17 @@
                         success: function (data) {
                             if(data.length > 0){
                                 for (let i = 0; i < data.length ; i++) {
+                                    let filename = null;
+                                    if(data[i].filename !== null){
+                                     filename = data[i].filename;
+                                    }else{
+                                        filename = 'silhouette-ldc.png';
+                                    }
+
+                                    let pathImage = "{{ asset('images/:filename')  }}";
+                                    pathImage = pathImage.replace(':filename', filename);
                                     addPlayerCardHtml += `
-                               <div id="${ data[i].user_id }" class="wrapper-card-fut">
+                               <div id="${ data[i].stats_player_id }" class="wrapper-card-fut">
                                     <div class="infos-left-fut">
                                     <p>${ data[i].current_rating }</p>
                                     <p style="font-size: 1.1rem;   margin-top: -1rem;   text-align-last: center;   padding-top: .1rem;   border-top: 1px solid #a3e2d057"; >
@@ -76,7 +85,7 @@
                                     </p>
                                     </div>
                                     <div class="img-user-fut">
-                                   <img src="{{ asset('images/silhouette-ldc.png') }}" alt="${ data[i].name }">
+                                   <img src="${pathImage}" alt="${ data[i].name }">
                                    </div>
                                    <div class="name-fut">
                                        <h5 style="font-weight: bold"> ${ data[i].name }</h5>
@@ -107,7 +116,6 @@
                         }
                     });
                 }else {
-                    console.log('je passe ma ');
                     $('div[class^="row "]').each(function (elem) {
                         const idSection= parseInt($(this).attr('class').split('_')[1]);
                         if(parseInt(idSection) !== parseInt(hatId)){

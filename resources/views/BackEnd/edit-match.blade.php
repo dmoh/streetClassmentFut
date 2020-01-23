@@ -8,7 +8,7 @@
                     <h2 id="title-top-match" class="text-center ">
                         MATCH DU {{  date('d/m/Y', strtotime(implode(',', $match->pluck('match_date')->toArray())))}}
                     </h2>
-                    <input type="hidden" id="matchId" value="{{implode(',',$match->pluck('id')->toArray())}}">
+                    <input type="hidden" id="matchId" value="{{$match[0]->id}}">
                 </div>
             </div>
             <div class="wrapper-score">

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class StatsPlayer extends Model
 {
     //
+    protected $primaryKey = 'player_id';
+
     protected $fillable = [
 
     ];
@@ -26,4 +28,8 @@ class StatsPlayer extends Model
     public function hat(){
         return $this->hasOne('App\Hats', 'hat_id');
     }
+
+
+
+
 }

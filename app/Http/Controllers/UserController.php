@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\HatPlayer;
 use App\Http\Requests\StatsPlayerUpdateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -71,6 +72,8 @@ class UserController extends Controller
         $user->password = bcrypt('testtest1');// todo generate password and send by mail
         $user->save();
 
+        //todo send by mail
+
         $user->roles()->attach($playerRole);
         $statPlayer->current_rating       = 85;
         $statPlayer->rating_before_update = 5;
@@ -86,6 +89,14 @@ class UserController extends Controller
         $statPlayer->user_id              = $user->id;
         $statPlayer->player_id            = $user->id;
         $statPlayer->stats_player_id      = $user->id;
+
+        $hatPlayerId = HatPlayer::changePlayerHat($statPlayer->current_rating);
+
+        HatPlayer::create([
+            'hat_id' => $hatPlayerId,
+            'player_id' => $user->id
+        ]);
+
 
         $statPlayer->save();
 
@@ -115,16 +126,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
-        $user = DB::table('users')->where('id', $id)->first();
-        $statsPlayer = DB::table('stats_players')->where('user_id', $id)->first();
+        $user = User::findOrFail($id);
+        $statsPlayer = DB::table('stats_players')->where('user_id', implode(',', $user->statPlayer()->get()->pluck('user_id')->toArray()))->first();
+        $photo = DB::table('uploads')->where('user_id', $id)->first();
+
+        if($request->session()->has('index')) {
+            $request->session()->put('index',  Str::random(30));
+        }
 
         $postes=collect(['ATT', 'BU', 'DEF', 'MDC', 'MOC', 'MG', 'MD']);
         $skills= collect(['VITESSE', 'BUTEUR', 'PASSEUR', 'DRIBBLEUR', 'TECHNIQUE', 'COSTAUD', 'AGRESSIF']);
         $feet = collect(['LEFT', 'RIGHT']);
-        return view('FrontEnd/edit-user', compact('user', 'statsPlayer', 'postes', 'skills', 'feet' ));
+        return view('FrontEnd/edit-user', compact('user', 'statsPlayer', 'postes', 'skills', 'feet', 'photo' ));
     }
 
     /**
@@ -141,6 +157,18 @@ class UserController extends Controller
     }
 
     public function updateStats(StatsPlayerUpdateRequest $request, StatsPlayerRepository $statsPlayerRepository){
+
+        if($request->session()->has('index')) {
+            $index = $request->session()->get('index');
+            $userId = (int)$request->request->get('idStatsPlayer');
+           $infoPhotoDb =  DB::table('uploads')->where('user_id', $userId )
+                ->first();
+
+           if($infoPhotoDb !== null){
+               Upload::where('user_id', $userId)->delete();
+           }
+            Upload::whereIndex($index)->update(['user_id' => $userId, 'index' => 0]);
+        }
 
         $statsPlayerRepository->update($request);
         return redirect()->route('consultation.showProfile', ['id' => $request->idStatsPlayer]);

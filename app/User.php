@@ -54,7 +54,7 @@ class User extends Authenticatable
 
 
     public function statPlayer(){
-        return $this->hasOne('App\StatsPlayer');
+        return $this->hasOne('App\StatsPlayer', 'user_id');
     }
 
     public function photo(){

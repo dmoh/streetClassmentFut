@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Repositories\StatsPlayerRepository;
 use App\StatsPlayer;
 use App\Upload;
 use App\Hats;
@@ -29,6 +30,7 @@ class FrontEndController extends Controller
                         ->get();
 
 
+
             return view('FrontEnd/index', compact('players'));
         }
 
@@ -40,16 +42,23 @@ class FrontEndController extends Controller
                 ->join('hat_players', 'hat_players.hat_id', '=', 'hats.id')
                 ->join('stats_players', 'stats_players.stats_player_id', '=', 'hat_players.player_id')
                 ->join('users', 'users.id', '=', 'stats_players.user_id')
+                ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
                 ->where('hats.id', '=', $playersHatId)
                 ->get();
             ;
+
             return response()->json($players);
         }
     }
 
     public function showProfile($id) {
         $player = User::findOrFail($id);
-
+        $player = DB::table('users')
+            ->join('stats_players', 'stats_players.user_id', '=', 'users.id')
+            ->leftJoin('uploads', 'uploads.user_id', '=', 'users.id')
+            ->where('stats_players.user_id', $id)
+            ->first()
+        ;
         $hatNumber = DB::table('hats')
             ->join('hat_players', 'hat_players.hat_id', '=', 'hats.hat_number')
             ->join('stats_players', 'stats_players.player_id', '=', 'hat_players.player_id')
@@ -57,6 +66,9 @@ class FrontEndController extends Controller
             ->where('stats_players.player_id', $id)
             ->first();
         $hat = $hatNumber->hat_number;
+
+        $overallAverage = StatsPlayerRepository::getOverallAverageCurrent($id);
+        $rankingPosition = StatsPlayerRepository::rankingPlayer($id);
 
         // get last five match maybe todo null
        $lastmatchs =  DB::table('matchs')
@@ -107,6 +119,15 @@ class FrontEndController extends Controller
             //todo recherché si des votes en attentes
 
         }
-        return view('FrontEnd/profile', compact('player', 'hat', 'lastRating', 'lastmatchs', 'matchDateFormated', 'getLastRating', 'statsLastMatch'));
+        return view(
+            'FrontEnd/profile',
+            compact('player',
+                'hat', 'lastRating',
+                'lastmatchs',
+                'matchDateFormated',
+                'getLastRating',
+                'statsLastMatch',
+                'rankingPosition',
+                'overallAverage'));
     }
 }
