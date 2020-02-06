@@ -8,6 +8,11 @@ class HatPlayer extends Model
 {
     //
 
+
+    protected $fillable = [
+        'hat_id', 'player_id'
+    ];
+
     public function hats(){
         return $this->belongsToMany('App\Hats');
     }
@@ -30,6 +35,8 @@ class HatPlayer extends Model
         }elseif ((int)$current_rating <= 75){
             return 4;
         }
+
+
     }
 
 
@@ -46,5 +53,39 @@ class HatPlayer extends Model
         }elseif ((int)$current_rating <= 75){
             return 4;
         }
+    }
+
+    // players, note du match obtenue, note globale joueur, hat_player
+    final static function movePlayerHatByCurrentRating($overallAverage, $currentRating){
+        $playerHat = HatPlayer::changePlayerHat($currentRating);
+        switch ($playerHat){
+            case 4:
+                if($overallAverage > 6){
+                    $currentRating += 2;
+                }
+                break;
+            case 3:
+                if($overallAverage > 7){
+                    $currentRating += 1;
+                }
+                break;
+
+            case 2:
+                if($overallAverage > 8){
+                    $currentRating += 1;
+                }
+                break;
+            case 1:
+                if($overallAverage > 8.5){
+                    $currentRating += 1;
+                }
+                break;
+        }
+
+
+        $playerHat = HatPlayer::changePlayerHat($currentRating);
+
+
+        return ['playerHat' => $playerHat, 'currentRating' => $currentRating];
     }
 }

@@ -20,6 +20,7 @@ class CreateMatchsTable extends Migration
             $table->boolean('resume_closed')->default(false);
             $table->string('team_name_home')->default('Rouge');
             $table->string('team_name_visitor')->default('Bleu');
+            $table->boolean('vote_closed')->default(false);
 
             $table->foreign('id')->references('match_id')->on('match_players')->onDelete('restrict')->onUpdate('restrict');
 

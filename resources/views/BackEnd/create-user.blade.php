@@ -144,15 +144,35 @@
                     ])
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <select class="form-control" name="poste_player" id="poste_player">
-                            <option value="MIL">Milieu</option>
-                            <option value="DEF">Défenseur</option>
-                            <option value="ATT">Attaquant</option>
-                            <option value="BU">Buteur</option>
+                <div class="row" style="color: white;">
+                    <div class="col">
+                        <label for="position">POSTE</label>
+                        <select class="form-control" name="position" id="position">
+                            @foreach($postes->toArray() as $poste)
+                                <option value="{{ $poste }}" >{{ $poste }}</option>
+                            @endforeach
                         </select>
                     </div>
+                    <div class="col">
+                        <label for="skill">POINT FORT</label>
+                        <select name="skill" class="form-control" id="skill" >
+                            @foreach($skills->toArray() as $skill)
+                                <option  value="{{ $skill }}">{{ $skill }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="strong_foot">PIEDS FORT</label>
+                        <select name="strong_foot" class="form-control" id="strong_foot" >
+                            @foreach($feet->toArray() as $foot)
+                                <option  value="{{ strtolower($foot) }}" >{{ $foot }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div style="margin: 1rem" class="custom-control custom-checkbox my-1 mr-sm-2">
+                    <input type="checkbox" name="legend" class="custom-control-input" id="customControlInline">
+                    <label style="color: white" class="custom-control-label" for="customControlInline">C'est une légende ?</label>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

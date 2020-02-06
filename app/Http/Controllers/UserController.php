@@ -53,7 +53,11 @@ class UserController extends Controller
             $request->session()->put('index',  Str::random(30));
         }
 
-        return view('BackEnd/create-user', compact('userMax'));
+        $postes= StatsPlayer::getArrayOfPosition();
+        $skills= StatsPlayer::getArrayOfSkill();
+
+        $feet = collect(['LEFT', 'RIGHT']);
+        return view('BackEnd/create-user', compact('postes', 'skills', 'feet'));
     }
 
     /**
@@ -75,17 +79,19 @@ class UserController extends Controller
         //todo send by mail
 
         $user->roles()->attach($playerRole);
-        $statPlayer->current_rating       = 85;
+        $statPlayer->current_rating       = $request->note_globale;
         $statPlayer->rating_before_update = 5;
         $statPlayer->overall_average      = 0;
         $statPlayer->goals                = 0;
-        $statPlayer->position             = $request->poste_player;
+        $statPlayer->position             = $request->position;
         $statPlayer->pace                 = $request->vitesse;
         $statPlayer->shoot                = $request->tir;
         $statPlayer->passe                = $request->passe;
         $statPlayer->dribble              = $request->dribble;
         $statPlayer->defense              = $request->defense;
         $statPlayer->physique             = $request->physique;
+        $statPlayer->skill                = $request->skill;
+        $statPlayer->strong_foot          = $request->strong_foot;
         $statPlayer->user_id              = $user->id;
         $statPlayer->player_id            = $user->id;
         $statPlayer->stats_player_id      = $user->id;
@@ -97,7 +103,12 @@ class UserController extends Controller
             'player_id' => $user->id
         ]);
 
-
+        if($request->legend === "on"){
+            HatPlayer::create([
+                'hat_id' => 100,
+                'player_id' => $user->id
+            ]);
+        }
         $statPlayer->save();
 
 
@@ -133,12 +144,9 @@ class UserController extends Controller
         $statsPlayer = DB::table('stats_players')->where('user_id', implode(',', $user->statPlayer()->get()->pluck('user_id')->toArray()))->first();
         $photo = DB::table('uploads')->where('user_id', $id)->first();
 
-        if($request->session()->has('index')) {
-            $request->session()->put('index',  Str::random(30));
-        }
-
-        $postes=collect(['ATT', 'BU', 'DEF', 'MDC', 'MOC', 'MG', 'MD']);
-        $skills= collect(['VITESSE', 'BUTEUR', 'PASSEUR', 'DRIBBLEUR', 'TECHNIQUE', 'COSTAUD', 'AGRESSIF']);
+        $request->session()->put('index',  Str::random(30));
+        $postes= StatsPlayer::getArrayOfPosition();
+        $skills= StatsPlayer::getArrayOfSkill();
         $feet = collect(['LEFT', 'RIGHT']);
         return view('FrontEnd/edit-user', compact('user', 'statsPlayer', 'postes', 'skills', 'feet', 'photo' ));
     }
@@ -158,11 +166,12 @@ class UserController extends Controller
 
     public function updateStats(StatsPlayerUpdateRequest $request, StatsPlayerRepository $statsPlayerRepository){
 
+
         if($request->session()->has('index')) {
-            $index = $request->session()->get('index');
-            $userId = (int)$request->request->get('idStatsPlayer');
-           $infoPhotoDb =  DB::table('uploads')->where('user_id', $userId )
-                ->first();
+           $index = $request->session()->get('index');
+           $userId = (int)$request->request->get('idStatsPlayer');
+           $infoPhotoDb =  DB::table('uploads')->where('user_id', $userId)
+                            ->first();
 
            if($infoPhotoDb !== null){
                Upload::where('user_id', $userId)->delete();

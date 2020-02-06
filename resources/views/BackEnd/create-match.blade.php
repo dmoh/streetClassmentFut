@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid bg-dark-fut">
-    <h2 class="text-center">Organisé un match</h2>
+    <h2 style="color: white; font-family: 'oswald', sans-serif"; class="text-center">ORGANISER UN MATCH</h2>
     <div class="row">
         <div class="col-md-12">
         </div>
@@ -26,17 +26,22 @@
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $player->surname }}</div>
                                                     <input type="hidden" id="playerId" value="{{ $player->id }}" >
                                                     <input type="hidden" id="note_{{ $player->id }}" value="{{ $player->rating_before_update }}" >
+                                                    <input type="hidden" id="photo_{{ $player->id }}" value="{{ $player->filename }}" >
                                                 </div>
                                                 <div class="col">
                                                     <div>
-                                                        NOTE GLOBALE  80
+                                                        NOTE GLOBALE  <b id="note_player_{{$player->id}}">{{ $player->current_rating }}</b>
                                                     </div>
                                                     <div>
-                                                        POSTE  MIL
+                                                        POSTE  <b id="poste_player_{{ $player->id }}">{{ $player->position }}</b>
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                    @if((int) $player->overall_average >= 5)
+                                                        <i style="font-size: xx-large; color: green" class="fas fa-battery-three-quarters"></i>
+                                                    @else
+                                                        <i style="font-size: xx-large; color: red" class="fas fa-battery-quarter"></i>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -57,12 +62,12 @@
                         </div>
                     </div>
                     <div id="first-team">
-                        <div id="first-team-place" style=" padding: 2rem; background: #46464673;" class="display-players-selected">
+                        <div id="first-team-place" class="display-players-selected">
                             <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">FIRST TEAM</h4>
                         </div>
                     </div>
                     <div id="second-team">
-                        <div id="second-team-place"  style=" padding: 2rem; background: #46464673;" class="display-players-selected_2">
+                        <div id="second-team-place"  class="display-players-selected_2">
                             <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">SECOND TEAM</h4>
                         </div>
                     </div>
@@ -92,25 +97,33 @@
             $(document).on('click', 'li[class^="idPlayer_"]', function () {
                 const id = $(this).attr('class').split('_')[1];
                 let playerName = $(`#player-name_${id}`).text().trim();
-                if(playerName.length > 5){
-                    playerName = playerName.substring(0, 5);
+                if(playerName.length > 3){
+                    playerName = playerName.substring(0, 3);
                 }
+
+                const postePlayer = $(`#poste_player_${id}`).text().trim();
                 console.log(playersTeam);
-                const notePlayer = $(`#note_${id}`).val();
+                const notePlayer =  $(`#note_player_${id}`).text().trim();
                 const displayerPlayer = $('.display-players-selected');
                 const displayerPlayerTeam2 = $('.display-players-selected_2');
+                let photo = $(`#photo_${id}`).val().trim();
+                let renderPhoto = "{{ asset('images/:image') }}";
+                if(photo === ''){
+                    photo = 'silhouette-ldc-yellow.png';
+                }
+                renderPhoto = renderPhoto.replace(':image', photo);
+
+
                 const cardHtml =
                     '<div class="display-players">' +
-                      '<div id="note-player">92</div>'+
+                      '<div id="note-player">'+ notePlayer +'</div>'+
                         '<div id="delete-team_' + id + '">x</div>' +
-                    '<img src="{{ asset('images/halifa-2.png') }}" alt="' + playerName + '">' +
-                    '<div style="margin-top: 9.2rem;' +
-                    'text-transform: uppercase;' +
-                    'color: black;' +
-                    'margin-left: .5rem;' +
-                    'font-weight: bold;" class="infos-players-card-fut">'+ playerName +'</div>'+
+                        '<div class="wrapper-img-player">'+
+                            '<img src="' + renderPhoto + '" alt="' + playerName + '">' +
+                        '</div>'+
+                    '<div class="infos-players-card-fut">'+ playerName +'</div>'+
                     '<div  class="infos-position-player">' +
-                    '<span>MILIEU</span>' +
+                    '<span>'+ postePlayer +'</span>' +
                     /* '<span>'+notePlayer+' DEF</span>' +
                      '<span>'+notePlayer+' DEF</span>' + */
                     '</div>' +

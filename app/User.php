@@ -69,4 +69,8 @@ class User extends Authenticatable
         return $this->hasMany(Upload::class);
     }
 
+
+    public function palmares(){
+        return $this->hasMany(Palmares::class);
+    }
 }

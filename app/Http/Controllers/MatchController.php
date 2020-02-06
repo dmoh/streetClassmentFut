@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 
 class MatchController extends Controller
@@ -33,24 +34,25 @@ class MatchController extends Controller
 
             //todo ranger dans un repository
             $matchs = DB::table('matchs')
+                ->join('group_match', 'group_match.match_id', '=', 'matchs.id')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
-                ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
-                ->join('users', 'users.id', '=', 'stats_players.player_id')
-                ->select('users.name',  'matchs.id', 'matchs.score', 'matchs.match_date')
-                ->where('users.id', '=', Auth::id())
+                ->join('stats_players', 'stats_players.player_id', '=', 'match_players.stats_player_id')
+                ->select(  'matchs.id', 'matchs.score', 'matchs.match_date')
+                ->where('stats_players.player_id', '=', Auth::id())
                 ->orderBy('matchs.id', 'desc')
+                ->limit(5)
                 ->get();
-            $playersMatch = DB::table('matchs')
-                ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
-                ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
+
+
+
+            $playersMatch = DB::table('stats_matchs')
+                ->join('stats_players', 'stats_players.player_id', '=', 'stats_matchs.player_id')
                 ->join('users', 'users.id', '=', 'stats_players.user_id')
-                ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
-                ->select('users.*', 'stats_players.*', 'matchs.*')
-                ->orderBy('matchs.id', 'desc')
-                ->get();
-
-            //dd($playersMatch);
-
+                ->whereIn('stats_matchs.match_id', $matchs->pluck('id')->toArray())
+                ->select('users.name','users.surname', 'stats_matchs.*', 'stats_players.overall_average')
+                ->orderBy('stats_matchs.match_id', 'desc')
+                ->get()
+            ;
             return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch'));
         }
         abort(503);
@@ -65,9 +67,11 @@ class MatchController extends Controller
     {
         $players = DB::table('stats_players')
             ->join('users', 'users.id', '=', 'stats_players.user_id')
-            ->select('users.*', 'stats_players.*')
+            ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
+            ->select('users.*', 'stats_players.*', 'uploads.filename', 'uploads.original_name')
             ->orderBy('stats_players.user_id', 'desc')
             ->get();
+
         return view('BackEnd/create-match', compact('players'));
     }
 
@@ -108,6 +112,8 @@ class MatchController extends Controller
 
     }
 
+
+
     /**
      * Display the specified resource.
      *
@@ -119,8 +125,15 @@ class MatchController extends Controller
         $match = DB::table('matchs')
                     ->select("matchs.*")
                     ->where('id', '=', $id)
+                    ->where('resume_closed', '=', false)
                     ->get()
-                ;
+        ;
+
+        if(empty($match->toArray())){
+            Session::flash('message', 'Ce match est clos !');
+            Session::flash('alert-class', 'alert-danger');
+            return redirect()->route('matchs.list');
+        }
         $players = DB::table('match_players')
                 ->join('matchs', 'matchs.id', '=', 'match_players.match_id')
                 ->join('stats_players', 'stats_players.user_id', '=', 'match_players.stats_player_id')
@@ -187,15 +200,13 @@ class MatchController extends Controller
             $hdm = $dataPlayer['hdm']; //todo add var man of the match
         }
 
-
-
-
         $dataPlayerDb = DB::table('stats_players')
             ->select('stats_players.goals', 'stats_players.assists', 'stats_players.player_id', 'users.email', 'users.name')
             ->join('users', 'users.id', '=', 'stats_players.user_id')
             ->whereIn('player_id', $arrPlayersId)
             ->orderBy('player_id', 'DESC')
-            ->get();
+            ->get()
+        ;
 
 
         foreach ($dataPlayerDb as $playerDb) {
@@ -203,29 +214,45 @@ class MatchController extends Controller
                 if((int) $playerDb->player_id == (int) $player['userId']){
                     $sumGoals = $playerDb->goals + $player['goals'];
                     $sumAssists = $playerDb->assists + $player['assists'];
+                    if($player['hdm'] == "true") {
+                        $player['hdm'] = '1';
+                    }else{
+                        $player['hdm'] = '0';
+                    }
+                    DB::table('stats_players')
+                        ->where('man_of_match', '!=', '0')
+                        ->update(['man_of_match' => '0']);
+
                     DB::table('stats_players')
                         ->where('player_id', (int) $playerDb->player_id)
                         ->update(
                             [
                             'assists' => $sumAssists,
-                            'goals' => $sumGoals
+                            'goals' => $sumGoals,
+                            'man_of_match' => $player['hdm']
                             ]
                         )
                     ;
+
+
+
                     DB::table('stats_matchs')
                         ->insert(
                             [
                                 'assists' => $player['assists'],
                                 'goals' => $player['goals'],
+                                'man_of_match' => $player['hdm'],
                                 'match_date' => now(),
-                                'rating' => rand(1,10), // todo check pour la note
+                                'rating' => 0, // todo check pour la note
                                 'manager_user_id' => Auth::id(),
                                 'player_id' => $player['userId'],
                                 'match_id' => $matchId,
-                                    //todo date du match,
+                                //todo date du match,
                             ]
                         )
                     ;
+
+
 
                 }
             }
@@ -236,7 +263,8 @@ class MatchController extends Controller
             ->update(
                 [
                     'score' => $score,
-                    'updated_at' => now()
+                    'updated_at' => now(),
+                    'resume_closed' => true
                     //todo date du match,
                 ]
             )
@@ -264,9 +292,10 @@ class MatchController extends Controller
 
             $playersMatch = DB::table('matchs')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
+                ->join('stats_matchs', 'stats_matchs.match_id', '=', 'matchs.id')
                 ->join('stats_players', 'match_players.stats_player_id', '=', 'stats_players.player_id')
                 ->join('users', 'users.id', '=', 'stats_players.user_id')
-                ->select('users.*', 'stats_players.*', 'matchs.*')
+                ->select('users.*', 'stats_players.overall_average', 'matchs.match_date', 'matchs.score', 'matchs.vote_closed')
                 ->whereIn('matchs.id', $matchs->pluck('id')->toArray())
                 ->orderBy('matchs.id', 'desc')
                 ->get();

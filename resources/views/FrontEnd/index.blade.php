@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="nav-hats">
-                    <div id="hats_">LEGENDE</div>
+                    <div style="text-transform: uppercase" id="hats_100">légende</div>
                     <div id="hats_1 " class="active-hat">CHAPEAU 1</div>
                     <div id="hats_2">CHAPEAU 2</div>
                     <div id="hats_3">CHAPEAU 3</div>
@@ -74,6 +74,14 @@
                                         filename = 'silhouette-ldc.png';
                                     }
 
+                                    let currentForm = ''
+                                    if(data[i].overall_average >= 5){
+                                        currentForm = '<i style="font-size: x-large; color: #76fd76; position: absolute; margin-left: 3.9rem; margin-top: 7.3rem;" class="fas fa-battery-three-quarters"></i>'
+                                    }else {
+                                        currentForm = '<i style="font-size: x-large; position: absolute; margin-left: 3.9rem; margin-top: 7.3rem; color: #f52d00" class="fas fa-battery-quarter"></i>'
+                                    }
+
+
                                     let pathImage = "{{ asset('images/:filename')  }}";
                                     pathImage = pathImage.replace(':filename', filename);
                                     addPlayerCardHtml += `
@@ -83,6 +91,9 @@
                                     <p style="font-size: 1.1rem;   margin-top: -1rem;   text-align-last: center;   padding-top: .1rem;   border-top: 1px solid #a3e2d057"; >
                                         ${ data[i].position }
                                     </p>
+                                    </div>
+                                    <div class="current_form">
+                                        ${currentForm}
                                     </div>
                                     <div class="img-user-fut">
                                    <img src="${pathImage}" alt="${ data[i].name }">

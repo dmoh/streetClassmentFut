@@ -1,5 +1,6 @@
 <div class="br-wrapper br-theme-bars-square">
     <select id="note_vote_{{ $playerId }}" name="rating" autocomplete="off" style="display: none;">
+        <option value="no_rating">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\MatchPlayerRating;
+use App\Matchs;
+use App\Repositories\MatchPlayerRatingRepository;
+use App\StatsPlayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +54,9 @@ class VoteController extends Controller
             ->orderBy('matchs.id', 'desc')
             ->get();
 
-        // getAllplayersWhichPlayWithMe
+        $mentions = StatsPlayer::getArrayOfSpecialMention();
 
-        return view('FrontEnd/vote', compact('matchs', 'playersMatch', 'votes' ));
+        return view('FrontEnd/vote', compact('matchs', 'playersMatch', 'votes', 'mentions' ));
 
 
     }
@@ -72,18 +76,72 @@ class VoteController extends Controller
         if($request->ajax()){
             $notes = $request->get('notes');
             $matchId = (int) $request->get('matchId');
+            $match = Matchs::where('id', $matchId)->first();
+            if($match->vote_closed == true){
+                return response()->json(['error' => 'Les votes sont clos']);
+            }
+
+            $playersRatingByMatch = DB::table('match_player_rating')
+                ->where('match_id', '=', $matchId)
+                ->get()
+            ;
+
+
+            $matchPlayerRating = array();
+            $statPlayerOverallAverage = array();
+            $matchPlayerRating = array();
+            $votes = array();
+
+
 
             //insert
             foreach ($notes as $note) {
+                $rating  = $note['scoreAwarded'];
+                $playerId = $note['voteToPlayerId'];
+
+                //
+                $ratingPlayer = MatchPlayerRatingRepository::getRatingPlayerCurrent($matchId, $playerId, $rating);
+
+                /*$matchPlayerRating[] = [
+                    'match_id' => $matchId,
+                    'player_id' => $playerId,
+                    'rating' => $ratingPlayer
+                ];*/
+                //save into statsplayer
+                //insert into
+                DB::table('match_player_rating')
+                    ->updateOrInsert([
+                        'match_id' => $matchId,
+                        'player_id' => $playerId,
+                        'rating' => $ratingPlayer
+                    ])
+                ;
+
+                DB::table('stats_players')
+                    ->updateOrInsert([
+                        'overall_average' => $ratingPlayer,
+                        'player_id' => $playerId,
+                    ])
+                ;
+
+               /* $votes[] =[
+                    'date_of_vote' => now(),
+                    'assigned_rating' => $rating,
+                    'vote_by_user_id' => Auth::id(), //todo check if is user current
+                    'vote_to_player_id' => $playerId,
+                    'match_id' => $matchId,
+                ];*/
+
+                // insert into votes table
                 DB::table('votes')
                     ->updateOrInsert([
                         'date_of_vote' => now(),
-                        'assigned_rating' => $note['scoreAwarded'],
+                        'assigned_rating' => $rating,
                         'vote_by_user_id' => Auth::id(), //todo check if is user current
-                        'vote_to_player_id' => $note['voteToPlayerId'],
+                        'vote_to_player_id' => $playerId,
                         'match_id' => $matchId,
                     ])
-                ;
+                ;/**/
             }
 
             DB::table('match_players')
@@ -91,7 +149,6 @@ class VoteController extends Controller
                 ->where('match_players.match_id' , $matchId )
                 ->update(['voted' => true])
             ;
-
             return response()->json(['success' => 'success message']);
 
         }
@@ -142,6 +199,18 @@ class VoteController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+
+    public function closeVote(Request $request, $matchId){
+        if($request->ajax()){
+            //cloturer les votes pour ce match
+            DB::table('matchs')
+                ->where('id', $matchId)
+                ->update('vote_closed', true)
+            ;
+            return response()->json(['ok' => 'votes clos']);
+        }
     }
 
 

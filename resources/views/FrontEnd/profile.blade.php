@@ -8,7 +8,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-6 ">
-                    @include('components.profile-card')
+                    @include('components.profil-card-hat')
                 </div>
                 <div class="col-md-6 marg-top-fut-bg">
                     <div class="title-table">
@@ -19,7 +19,15 @@
                                     <td><span>NOTE GLOBALE</span></td>
                                     <td><span>{{$player->current_rating}}</span></td>
                                     <td><span>Forme Actuelle</span></td>
-                                    <td style="text-align: center"><span><i class="fa fa-caret-up"></i></span></td>
+                                    <td style="text-align: center">
+                                        <span>
+                                            @if($player->overall_average >= 5)
+                                                <i class="fa fa-caret-up"></i>
+                                            @else
+                                                <i style="color: #d92424" class="fa fa-caret-down"></i>
+                                            @endif
+                                        </span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -147,7 +155,7 @@
                                     <td class="text-center">BUT(S) Marqué(s)</td>
                                     <td class="border-right-table text-center border-left-table">{{ $statsLastMatch[0]->goals ?? 'N/N' }}</td>
                                     <td class="text-center">Homme du match</td>
-                                    <td class="border-right-table border-left-table text-center">Non</td>
+                                    <td class="border-right-table border-left-table text-center">@if($player->man_of_match == 1) <i style="color: gold" class="fas fa-medal"></i> @else NON @endif</td>
                                 </tr>
                                 </tbody>
                             </table>

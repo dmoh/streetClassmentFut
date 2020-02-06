@@ -27,6 +27,7 @@ class CreateStatsPlayersTable extends Migration
             $table->integer('dribble')->nullable();
             $table->integer('defense')->nullable();
             $table->integer('physique')->nullable();
+            $table->boolean('legend')->default(false);
             $table->string('skill')->nullable(); //point fort
             $table->enum('strong_foot', ['left', 'right'])->default('right'); //Passe décisive
 

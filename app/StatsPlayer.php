@@ -29,6 +29,33 @@ class StatsPlayer extends Model
         return $this->hasOne('App\Hats', 'hat_id');
     }
 
+    public function specialCapacities(){
+        return $this->hasMany(SpecialCapacities::class);
+    }
+
+    public function group(){
+        return $this->hasMany(Groups::class);
+    }
+
+    public static function  getArrayOfPosition(){
+      return  collect(['ATT', 'BU', 'DEF', 'MDC', 'MOC', 'MG', 'MD']);
+    }
+
+    public static function getArrayOfSkill(){
+        return  collect(['VITESSE', 'BUTEUR', 'PASSEUR', 'DRIBBLEUR', 'TECHNIQUE', 'COSTAUD', 'AGRESSIF', 'LEADER', 'MENEUR DE JEU']);
+    }
+
+    public static function getArrayOfSpecialMention(){
+        return collect([
+            'CHEF',
+            'DANS UN GRAND SOIR',
+            'PLUS BEAU BUT',
+            'TOP PERFORMANCE',
+            'GRAND LEADER',
+            'GRAND ARTISTE',
+        ]);
+    }
+
 
 
 

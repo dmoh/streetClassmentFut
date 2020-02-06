@@ -16,7 +16,7 @@ class HatPlayerTableSeeder extends Seeder
 
         sleep(2);
         $players = DB::table('stats_players')
-            ->select('stats_players.player_id', 'stats_players.current_rating')
+            ->select('stats_players.player_id', 'stats_players.current_rating', 'stats_players.legend')
             ->orderBy('stats_players.current_rating', 'desc')
             ->get();
         $players->toArray();
@@ -54,6 +54,21 @@ class HatPlayerTableSeeder extends Seeder
                     'hat_id' => 4
                 ]);
 
+            }
+
+
+            if($player->player_id == 8){
+                HatPlayer::create([
+                    'player_id' => $player->player_id ,
+                    'hat_id' => 100
+                ]);
+            }
+
+            if( $player->legend == 1){
+                HatPlayer::create([
+                    'player_id' => $player->player_id ,
+                    'hat_id' => 100
+                ]);
             }
         }
 

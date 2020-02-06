@@ -32,20 +32,8 @@ class Votes extends Model
         $headers .= 'From: StatFutCity' . "\r\n";
         $subject = "VOTE: STATFUTCITY";
 
-        $messageToSend = '<!DOCTYPE html>
-                            <html lang="fr">
-                            <head>
-                                <meta charset="utf-8">
-                            </head>
-                            <body>
-                            <h2>VOTE</h2>
-                            <p>Note tes collègues, sois réglo :) </p>
-                            <ul>
-                                <li><a href="'.route('vote.index').'" class="btn btn-primary">VOTER</a></li>
-                            </ul>
-                            </body>
-                        </html>  
-        ';
+
+        $messageToSend = view('emails.invite-to-vote')->render();
 
         \mail($mailUser, $subject, $messageToSend, $headers);
         return true;

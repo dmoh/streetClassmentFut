@@ -26,7 +26,7 @@ class FrontEndController extends Controller
                         ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
                         ->where('hats.id', '=', 1)
                         ->distinct()
-            ->orderBy('stats_players.current_rating', 'desc')
+                        ->orderBy('stats_players.current_rating', 'desc')
                         ->get();
 
 
@@ -45,14 +45,11 @@ class FrontEndController extends Controller
                 ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
                 ->where('hats.id', '=', $playersHatId)
                 ->get();
-            ;
-
             return response()->json($players);
         }
     }
 
     public function showProfile($id) {
-        $player = User::findOrFail($id);
         $player = DB::table('users')
             ->join('stats_players', 'stats_players.user_id', '=', 'users.id')
             ->leftJoin('uploads', 'uploads.user_id', '=', 'users.id')
@@ -68,6 +65,10 @@ class FrontEndController extends Controller
         $hat = $hatNumber->hat_number;
 
         $overallAverage = StatsPlayerRepository::getOverallAverageCurrent($id);
+        $updatePlayer = StatsPlayer::findOrFail($id);
+        $updatePlayer->overall_average = $overallAverage;
+        $updatePlayer->save();
+
         $rankingPosition = StatsPlayerRepository::rankingPlayer($id);
 
         // get last five match maybe todo null

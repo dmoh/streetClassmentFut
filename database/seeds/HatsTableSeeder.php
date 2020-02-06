@@ -21,5 +21,12 @@ class HatsTableSeeder extends Seeder
                 'hat_number' => $i
             ]);
         }
+
+
+        Hats::create([
+            'id' => 100,
+            'name_hat' => 'Legend_100',
+            'hat_number'=> 100
+        ]);
     }
 }

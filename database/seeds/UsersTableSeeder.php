@@ -131,6 +131,16 @@ class UsersTableSeeder extends Seeder
             'locked' => '0'
         ]);
 
+        $playerLegend = User::create([
+            'name' => 'Bruno',
+            'email' => 'bruno.boumeriche@yahoo.com ',
+            'password' => bcrypt('testtest1'),
+            'surname' => '',//todo changer mail
+            'can_vote' => '1',
+            'age' => 45,
+            'locked' => '0'
+        ]);
+
         /*for($i = 4; $i < 18; ++$i)
         {
             $users = User::create([
@@ -156,6 +166,7 @@ class UsersTableSeeder extends Seeder
         $player6->roles()->attach($playerRole);
         $managerContent->roles()->attach($managerRole);
         $managerContent1->roles()->attach($managerRole);
+        $playerLegend->roles()->attach($playerRole);
 
     }
 }

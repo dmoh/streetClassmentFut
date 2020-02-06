@@ -80,6 +80,7 @@
                     </div>
                 </div>
                 <div class="row">
+
                     <div class="col">
                         @include('partials.form-group', [
                                 'title' => 'Passes Décisives',
@@ -101,6 +102,9 @@
                 </div>
                 <div class="row">
                     <div class="col">
+                        @if($photo !== null)
+                            <input type="hidden" id="photoExist" name="photoExist" value="1">
+                        @endif
                         @include('partials.form-group', [
                                 'title' => 'VITESSE',
                                 'type' => 'number',
@@ -182,6 +186,10 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div style="margin: 1rem" class="custom-control custom-checkbox my-1 mr-sm-2">
+                    <input type="checkbox" name="legend" @if($statsPlayer->legend == '1') checked @endif  class="custom-control-input" id="customControlInline">
+                    <label style="color: white" class="custom-control-label" for="customControlInline">C'est une légende ?</label>
                 </div>
                 <div class="row">
                     <div class="col">

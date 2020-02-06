@@ -13008,6 +13008,88 @@ body.sidebar-toggled footer.sticky-footer {
   cursor: pointer;
 }
 
+
+.wrapper-card-fut-gold {
+  background: url(/images/bg-card-gold.png) top left no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 255px;
+  height: 386px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.infos-left-fut-gold {
+  position: absolute;
+  color: #8b7114;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  left: 3.6rem;
+  font-size: 2.2rem;
+  top: 4rem;
+  font-family: Oswald, sans-serif;
+}
+
+.img-user-fut-gold {
+  position: absolute;
+  /* max-width: 140px; */
+  overflow: hidden;
+  max-height: 160px;
+}
+
+.name-fut-gold h5 {
+  text-align: center;
+  color: #8b7113;
+  text-transform: uppercase;
+  position: absolute;
+  width: 77%;
+  /* background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%); */
+  padding-top: 16px;
+  margin: 9rem auto;
+  margin-left: 2rem;
+  padding-bottom: 6px;
+  font-family: Oswald, sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+}
+
+
+.infos-capacities-left-gold, .infos-capacities-right-gold {
+  display: inline-block;
+  margin-top: 12.3rem;
+  color: #6c580e;
+  font-size: 1.1rem;
+  line-height: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.infos-capacities-left-gold span,
+.infos-capacities-right-gold span {
+  display: block;
+  line-height: 1.3rem;
+}
+
+
+
+.wrapper-card-fut-legend {
+  background: url(/images/bg-legend.png) top left no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 255px;
+  height: 386px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
 .name-fut h5 {
   text-align: center;
   color: #b2fff0;
@@ -13036,11 +13118,47 @@ body.sidebar-toggled footer.sticky-footer {
   font-family: Oswald, sans-serif;
 }
 
+
+.infos-left-fut-legend {
+  position: absolute;
+  color: #d69d12;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  left: 3rem;
+  font-size: 2.6rem;
+  top: 4rem;
+  font-family: Oswald, sans-serif;
+}
+
+.infos-left-fut-legend p:last-child {
+  font-size: 1.4rem;
+  margin-top: -2rem;
+  text-align-last: center;
+}
+
+
+
+
 .infos-capacities-left,
 .infos-capacities-right {
   display: inline-block;
   margin-top: 12.3rem;
   color: #a7ffee;
+  font-size: 1.1rem;
+  line-height: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+
+
+.infos-capacities-left-legend, .infos-capacities-right-legend {
+  display: inline-block;
+  margin-top: 12.3rem;
+  font-family: 'Oswald' sans-serif;
+  font-weight: 300;
+  color: #b78813;
   font-size: 1.1rem;
   line-height: 0;
   padding: 0;
@@ -13086,7 +13204,10 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .img-user-fut {
-  position: absolute;
+    position: absolute;
+    /* max-width: 140px; */
+    overflow: hidden;
+    max-height: 148px;
 }
 .margin-right-6 {
     margin-right: 6px;
@@ -13104,6 +13225,19 @@ body.sidebar-toggled footer.sticky-footer {
   margin-left: 4.7rem;
   width: 149px;
 }
+
+.img-user-fut-gold img{
+  /*top: 7px;
+  margin-top: 0.5rem;
+  margin-left: 4.7rem;
+  width: 149px;*/
+
+  top: 7px;
+  margin-top: 0.8rem;
+  margin-left: 5.2rem;
+  width: 141px;
+}
+
 .couple-stat-note > div:last-child{
     font-size: larger;
     margin-top: -9px;
@@ -13378,6 +13512,11 @@ table[id^=listPlayer_] {
   bottom: 0;
   padding-bottom: 3rem;
 }
+#first-team-place, #second-team-place {
+  padding: 2rem;
+  background: #46464673;
+}
+
 
 .display-players {
   display: -webkit-inline-box;
@@ -13609,14 +13748,121 @@ line-height: 1.5;
 #nav-hats > div {
     padding: 0.6rem;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.5rem;
 }
 
-.br-theme-bars-square .br-widget a {
-display: block;
-width: 23px;
-height: 23px;
-margin: 1px;
-line-height: 1.5;
-}
+    .display-players {
+        display: -webkit-inline-box;
+        display: inline-flex;
+        margin-right: 5px;
+        margin-bottom: 5rem;
+        width: 80px;
+        height: 100px;
+        position: relative;
+        background: url(/images/bg-gold_mini.png) top left no-repeat;
+        background-size: cover;
+    }
+    .wrapper-img-player {
+      width: 64px;
+      height: 59px;
+      position: absolute;
+      overflow: hidden;
+      top: 1rem;
+      left: 0.9rem;
+    }
+
+  .display-players img {
+    position: absolute;
+    top: -0rem;
+    left: 0.09rem;
+    max-width: 65px;
+  }
+
+
+    .infos-players-card-fut {
+        margin-top: 4.7rem;
+        position: absolute;
+        text-transform: uppercase;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        font-size: .7rem;
+        margin-left: 2.2rem;
+        font-weight: bold;
+
+    }
+
+    div.infos-position-player {
+        position: absolute;
+        margin-top: 2.2rem;
+        margin-left: .25rem;
+        font-family: Oswald, sans-serif;
+    }
+
+
+  #first-team-place, #second-team-place {
+    padding: .1rem;
+    background: #46464673;
+  }
+
+  div[id^=delete-team_] {
+        position: absolute;
+        margin-top: 6.8rem;
+        font-size: larger;
+        font-weight: 900;
+        text-align: center;
+        margin-left: 1.7rem;
+        color: red;
+        border: 1px solid red;
+        border-radius: 22px;
+        cursor: pointer;
+        width: 22px;
+        height: 22px;
+        line-height: 16px;
+        /* margin-top: 3px; */
+        padding-top: -4px;
+    }
+
+
+  .bg-hat {
+      margin: 1rem auto;
+  }
+
+
+  .divider-yellow {
+    position: absolute;
+    margin-top: 8.7rem;
+    width: 96px;
+    height: 9px;
+    background: url(/images/divider-yellow.png?41c8740…) top left no-repeat;
+    background-size: 154%;
+    background-position-x: -2.2rem;
+  }
+    #note-player {
+        margin-top: 1.1rem;
+        margin-left: 0rem;
+        padding-left: 0.25rem;
+        position: absolute;
+        font-size: 1rem;
+        width: auto;
+        color: black;
+        height: 34px;
+        background: none;
+        border-radius: 0;
+    }
+
+    .table-responsive {
+      font-size: smaller;
+    }
+
+    h6{
+      font-size: .8rem;
+    }
+  .br-theme-bars-square .br-widget a {
+    display: block;
+    width: 19px;
+    height: 19px;
+    margin: .1rem;
+    line-height: 1rem;
+    font-size: xx-small !important;
+  }
 }

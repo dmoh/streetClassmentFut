@@ -35,12 +35,8 @@ class StatsPlayerRepository
         $lastMatch = DB::table('votes')
             ->select('votes.assigned_rating')
             ->where('votes.match_id', DB::raw("(select max(`match_id`) from votes)"))
-            ->where('votes.vote_to_player_id', $playerId)
+            ->where('votes.vote_to_player_id', $playerId)//todo where match not closed
             ->get();
-
-
-
-
         $arr = $lastMatch->pluck('assigned_rating')->toArray();
         if(empty($arr)){
             return null;
@@ -69,6 +65,27 @@ class StatsPlayerRepository
         $statsPlayer = StatsPlayer::find($request->idStatsPlayer);
         $hat = HatPlayer::where('player_id', $request->idStatsPlayer)->first()
         ;
+
+        $hatLegend = HatPlayer::where('player_id', $request->idStatsPlayer)->get();
+
+        if($request->legend != null){
+            $statsPlayer->legend = '1';
+            if(!in_array( 100,  $hatLegend->pluck('hat_id')->toArray())){
+               HatPlayer::create([
+                   'hat_id' => 100,
+                   'player_id' => $request->idStatsPlayer
+               ]);
+            }
+        }else{
+            if(in_array( 100,  $hatLegend->pluck('hat_id')->toArray())){
+                HatPlayer::where([
+                    'hat_id' => 100,
+                    'player_id' => $request->idStatsPlayer
+                ])->delete();
+            }
+        }
+
+
         $statsPlayer->current_rating = $request->current_rating;
         $statsPlayer->assists = $request->assists;
         $statsPlayer->goals = $request->goals;
