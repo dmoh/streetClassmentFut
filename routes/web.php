@@ -57,7 +57,7 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
       Route::post('/store', 'MatchController@store')->name('store.match');
       Route::get('/create', 'MatchController@create')->name('create.match');
       Route::get('/show/{id}', 'MatchController@show')->where('id', '[0-9]+')->name('show.match');
-      Route::post('/close-vote/{id}', 'VoteController@closeVote')->where('id', '[0-9]+')->name('close.match.vote');
+      Route::post('/close-vote', 'VoteController@closeVote')->name('close.match.vote');
    });
 
 

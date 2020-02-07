@@ -34,21 +34,23 @@ class MatchController extends Controller
 
             //todo ranger dans un repository
             $matchs = DB::table('matchs')
-                ->join('group_match', 'group_match.match_id', '=', 'matchs.id')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
                 ->join('stats_players', 'stats_players.player_id', '=', 'match_players.stats_player_id')
-                ->select(  'matchs.id', 'matchs.score', 'matchs.match_date')
+                ->select(  'matchs.id', 'matchs.score', 'matchs.match_date', 'matchs.vote_closed')
                 ->where('stats_players.player_id', '=', Auth::id())
                 ->orderBy('matchs.id', 'desc')
                 ->limit(5)
-                ->get();
+                ->get()
+            ;
+
 
 
 
             $playersMatch = DB::table('stats_matchs')
-                ->join('stats_players', 'stats_players.player_id', '=', 'stats_matchs.player_id')
+                ->leftJoin('match_players', 'match_players.match_id', '=','stats_matchs.match_id')
+                ->join('stats_players', 'stats_players.player_id', '=', 'match_players.stats_player_id')
                 ->join('users', 'users.id', '=', 'stats_players.user_id')
-                ->whereIn('stats_matchs.match_id', $matchs->pluck('id')->toArray())
+                ->whereIn('match_players.match_id', $matchs->pluck('id')->toArray())
                 ->select('users.name','users.surname', 'stats_matchs.*', 'stats_players.overall_average')
                 ->orderBy('stats_matchs.match_id', 'desc')
                 ->get()

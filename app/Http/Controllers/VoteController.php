@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\MatchPlayerRating;
 use App\Matchs;
 use App\Repositories\MatchPlayerRatingRepository;
+use App\StatsMatchs;
 use App\StatsPlayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -202,13 +203,37 @@ class VoteController extends Controller
     }
 
 
-    public function closeVote(Request $request, $matchId){
+    public function closeVote(Request $request){
         if($request->ajax()){
+            $matchId = (int) $request->get('closeVoteMatchId');
+
+
+            //désigner hdm
+            $statsMatchAllplayers = DB::table('stats_matchs')
+                                        ->where('match_id', $matchId)
+                                        ->get();
+
+            $playersVote = DB::table('votes')
+                ->where('match_id', $matchId)
+                ->get()
+            ;
+            dd($playersVote);
+
+
             //cloturer les votes pour ce match
             DB::table('matchs')
                 ->where('id', $matchId)
-                ->update('vote_closed', true)
+                ->update(['vote_closed', true])
             ;
+
+
+            //mettre a jour les notes
+
+            //mentions spéciales
+
+            //mettre a jour palmares
+
+
             return response()->json(['ok' => 'votes clos']);
         }
     }

@@ -72,6 +72,25 @@
             $(document).on('click', '#showListPlayers', function () {
 
             });
+
+
+            $(document).on('click', 'button[id^=closed_vote_matchId_]', function () {
+                if(confirm('Cloturer les votes ?')){
+                    const matchId = $(this).attr('id').split('matchId_')[1];
+                    $.ajax({
+                        url: '{{ route('close.match.vote') }}',
+                        type: 'POST',
+                        data: { closeVoteMatchId: matchId},
+                        dataType: 'json',
+                        success: function (data) {
+                            $(this).fadeOut();
+                        }
+                    });
+                }
+
+            });
+
+
         });
     </script>
 @endsection
