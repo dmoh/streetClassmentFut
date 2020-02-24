@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\HatPlayer;
 use App\MatchPlayerRating;
 use App\Matchs;
 use App\Repositories\MatchPlayerRatingRepository;
+use App\Repositories\StatsPlayerRepository;
 use App\StatsMatchs;
 use App\StatsPlayer;
 use Illuminate\Http\Request;
@@ -78,7 +80,7 @@ class VoteController extends Controller
             $notes = $request->get('notes');
             $matchId = (int) $request->get('matchId');
             $match = Matchs::where('id', $matchId)->first();
-            if($match->vote_closed == true){
+            if($match->vote_closed == '1'){
                 return response()->json(['error' => 'Les votes sont clos']);
             }
 
@@ -206,24 +208,105 @@ class VoteController extends Controller
     public function closeVote(Request $request){
         if($request->ajax()){
             $matchId = (int) $request->get('closeVoteMatchId');
+            $dataMatch = Matchs::find($matchId);
 
 
-            //désigner hdm
             $statsMatchAllplayers = DB::table('stats_matchs')
                                         ->where('match_id', $matchId)
-                                        ->get();
+                                        ->get()
+            ;
 
+            //désigner hdm
             $playersVote = DB::table('votes')
                 ->where('match_id', $matchId)
+                ->orderBy('votes.vote_to_player_id', 'DESC')
                 ->get()
             ;
-            dd($playersVote);
 
+            $arrayManOfMatch = [];
+            $arrayRatingPlayer = [];
+            $mom = 0;
+            $momFirst = [];
+
+            //calculate rating average
+            foreach ($playersVote as $key => $player) {
+                $arrayRatingPlayer[] = $player->assigned_rating;
+                if($player->man_of_match == '1'){
+                    if(isset($momFirst[$player->vote_to_player_id])){
+                        $momFirst[$player->vote_to_player_id] +=  1;
+                    }else{
+                        $momFirst[$player->vote_to_player_id] = $mom + 1;
+                    }
+                }
+
+                //vote_to_player_id
+                if(isset($playersVote[$key + 1])){
+                    if($playersVote[$key + 1]->vote_to_player_id != $player->vote_to_player_id){
+                        //note moyenne
+                        $ratingPlayer = array_sum($arrayRatingPlayer) / count($arrayRatingPlayer);
+                        $statPlayer = StatsPlayer::find($player->vote_to_player_id);
+                        $statPlayer->overall_average = $ratingPlayer;
+                        $statPlayer->save();
+                        $hatPlayer = HatPlayer::movePlayerHatByCurrentRating($ratingPlayer, $statPlayer->current_rating);
+                        DB::beginTransaction();
+                            DB::table('hat_players')
+                                ->where('player_id', $player->vote_to_player_id)
+                                ->update(['hat_id' => $hatPlayer['playerHat'],
+                                ])
+                            ;
+                             DB::table('match_player_rating')
+                                 ->updateOrInsert([
+                                     'match_id' => $matchId,
+                                     'player_id' => $player->vote_to_player_id,
+                                     'rating' => round($ratingPlayer, 2)
+                                     ])
+                             ;
+                         DB::commit();
+                        $arrayRatingPlayer = [];
+                        $mom = 0;
+
+                    }
+                }
+
+                //TODO MENTION SPECIALE !!!!!
+
+
+                //vote_by_user_id
+                //man_of_match
+                //assigned_rating
+
+            }
+            //idManOfMatch
+            if(!empty($momFirst)){
+                arsort($momFirst);
+                $idMoM = array_key_first($momFirst);
+                DB::beginTransaction();
+                    DB::table('palmares_player')
+                        ->updateOrInsert([
+                           'date_palmares' => $dataMatch->match_date,
+                            'palmares_name' => 'man_of_match',
+                            'player_id' => $idMoM,
+                            'created_at' => now(),
+                            'url_video' => ''
+                        ]);
+                    DB::table('stats_matchs')
+                        ->where('man_of_match', '!=', '0')
+                        ->update(['man_of_match' => '0']);
+                    DB::table('stats_matchs')
+                        ->where('player_id', $idMoM)
+                        ->update(['man_of_match' => '1']);
+                DB::commit();
+            }else{
+                DB::table('stats_matchs')
+                    ->where('man_of_match', '!=', '0')
+                    ->update(['man_of_match' => '0'])
+                ;
+            }
 
             //cloturer les votes pour ce match
             DB::table('matchs')
                 ->where('id', $matchId)
-                ->update(['vote_closed', true])
+                ->update(['vote_closed' => '1'])
             ;
 
 

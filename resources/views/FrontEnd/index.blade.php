@@ -74,7 +74,7 @@
                                         filename = 'silhouette-ldc.png';
                                     }
 
-                                    let currentForm = ''
+                                    let currentForm = '';
                                     if(data[i].overall_average >= 5){
                                         currentForm = '<i style="font-size: x-large; color: #76fd76; position: absolute; margin-left: 3.9rem; margin-top: 7.3rem;" class="fas fa-battery-three-quarters"></i>'
                                     }else {

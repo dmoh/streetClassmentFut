@@ -23,8 +23,10 @@ class FrontEndController extends Controller
                         ->join('hat_players', 'hat_players.hat_id', '=', 'hats.id')
                         ->join('stats_players', 'stats_players.stats_player_id', '=', 'hat_players.player_id')
                         ->join('users', 'users.id', '=', 'stats_players.user_id')
+                        ->join('group_player', 'group_player.player_id', '=', 'stats_players.id')
                         ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
                         ->where('hats.id', '=', 1)
+                        ->where('group_player.group_id', (int) session('groupId'))
                         ->distinct()
                         ->orderBy('stats_players.current_rating', 'desc')
                         ->get();
@@ -43,7 +45,9 @@ class FrontEndController extends Controller
                 ->join('stats_players', 'stats_players.stats_player_id', '=', 'hat_players.player_id')
                 ->join('users', 'users.id', '=', 'stats_players.user_id')
                 ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
+                ->join('group_player', 'group_player.player_id', '=', 'stats_players.id')
                 ->where('hats.id', '=', $playersHatId)
+                ->where('group_player.group_id', (int) session('groupId'))
                 ->get();
             return response()->json($players);
         }

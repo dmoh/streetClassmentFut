@@ -51,6 +51,7 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
     });
     Route::middleware('ajax')->group(function (){
        Route::post('save-resume-match', 'MatchController@resumeMatch')->name('resume.match');
+       Route::post('group-choice', 'GroupPlayerController@setGroupChoice')->name('group.choice');
     });
    Route::prefix('matchs-management')->group(function(){
       Route::get('/', 'MatchController@matchsList')->name('matchslist');
@@ -59,6 +60,8 @@ Route::middleware(['auth', 'auth.access'])->group(function (){
       Route::get('/show/{id}', 'MatchController@show')->where('id', '[0-9]+')->name('show.match');
       Route::post('/close-vote', 'VoteController@closeVote')->name('close.match.vote');
    });
+
+
 
 
    Route::prefix('group')->group(function(){

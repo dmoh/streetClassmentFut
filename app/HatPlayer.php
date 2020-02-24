@@ -77,7 +77,9 @@ class HatPlayer extends Model
                 break;
             case 1:
                 if($overallAverage > 8.5){
-                    $currentRating += 1;
+                    if($currentRating < 97){
+                        $currentRating += 1;
+                    }
                 }
                 break;
         }

@@ -82,4 +82,13 @@ class GroupPlayerController extends Controller
     {
         //
     }
+
+
+    public function setGroupChoice(Request $request){
+        if($request->ajax()){
+            $request->session()->put('groupId', $request->request->get('groupId'));
+            $request->session()->put('groupName', $request->request->get('groupName'));
+            return response()->json(['ok' => 'session']);
+        }
+    }
 }

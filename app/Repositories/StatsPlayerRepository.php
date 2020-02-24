@@ -15,7 +15,7 @@ class StatsPlayerRepository
 {
 
     protected $statsPlayer;
-    protected  $hatPlayer;
+    protected $hatPlayer;
 
     public function __construct(StatsPlayer $statsPlayer, HatPlayer $hatPlayer)
     {
@@ -41,7 +41,6 @@ class StatsPlayerRepository
         if(empty($arr)){
             return null;
         }
-
         return array_sum($arr)/count($arr);
     }
 
@@ -103,6 +102,15 @@ class StatsPlayerRepository
         $hat->player_id = $request->idStatsPlayer;
         $hat->save();
         $statsPlayer->save();
+
+    }
+
+
+    public static function getStatPlayerById($idPlayer){
+        return DB::table('stats_players')
+            ->where('player_id', $idPlayer)
+            ->first()
+            ;
 
     }
 

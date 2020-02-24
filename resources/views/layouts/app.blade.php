@@ -57,6 +57,9 @@
                                 </li>
                             @endif --}}
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Accueil</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownMatch" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     MATCHS <span class="caret"></span>

@@ -13513,8 +13513,10 @@ table[id^=listPlayer_] {
   padding-bottom: 3rem;
 }
 #first-team-place, #second-team-place {
-  padding: 2rem;
-  background: #46464673;
+  padding: 1rem;
+  background: url(../images/bg_stade.jpg) top no-repeat #46464673;
+  background-size: cover;
+  background-blend-mode: difference;
 }
 
 

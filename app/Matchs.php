@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matchs extends Model
 {
+    protected $primaryKey = 'id';
     //
     public function statsPlayer(){
         return $this->belongsToMany('App\StatsPlayer', 'match_players', 'match_id');

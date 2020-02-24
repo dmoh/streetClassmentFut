@@ -2,33 +2,47 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div style="margin-top: 1rem" class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
+                <div class="card-header">Tableau de bord</div>
                 <div class="card-body">
-
+                    <label for="groupChoice">Choisissez un groupe</label>
+                    <select name="groupChoice" id="groupChoice" class="form-control">
+                        @if(session('groupName'))
+                            <option value="{{ session('groupId') }}">{{ session('groupName') }}</option>
+                        @else
+                            <option value="null">-Sélectionnez un groupe-</option>
+                        @endif
+                        @foreach($groups as $group)
+                            @if(session('groupId') != $group->id)
+                                <option value="{{$group->id}}">{{$group->group_name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
-                <!--<select class="form-control" name="displayed-events" id="displayed-events" >
-
-                </select>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="choice_mode_display_events" >Mode d'affichage des événements</label>
-                            <select class="form-control col-sm-8" style="width: auto;margin: 0;" name="choice_mode_display_events" id="choice_mode_display_events">
-                                <option value="see_all_events">Voir tous les évènements</option>
-                                <option value="see_only_my_events">Ne voir que ses propres évènements</option>
-                                <option value="see_only_partners_events">Ne voir que les évènements des partenaires</option>
-                                <option value="see_no_event">Ne voir aucun évènement</option>
-                            </select>
-                            <a href="#" title="Valider" class="btn btn-success-alt">Valider</a>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        $(function () {
+           $(document).on('change', '#groupChoice', function () {
+               if($(this).val() !== 'null'){
+                   const group = {groupId: $(this).val(), groupName: $(this)[0].selectedOptions[0].label};
+                   $.ajax({
+                      url: "{{ route('group.choice') }}",
+                      type: 'POST',
+                      data: group,
+                      dataType: 'json',
+                      success: function (data) {
+                          console.log(data);
+                      }
+                   });
+               }
+           });
+        });
+    </script>
 @endsection
