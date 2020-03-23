@@ -94,8 +94,7 @@
                    const mentionSpec = $(`#mentionSpecial`).val();
                    const playerMentionSpec = $(`#playerMentionSpecial`).val();
                    const manOfMatch = $(`#manOfMatch`).val();
-                   console.log(mentionSpec);
-                   console.log(manOfMatch);
+
                    selectId.each(function (item) {
                        const idPlayer = parseInt($(this)[0].id.split('note_vote_')[1]);
                        const note = $(this)[0].value.trim() === 'no_rating' ? 'no_rating' : parseInt($(this)[0].value);

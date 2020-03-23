@@ -19,6 +19,7 @@ class CreateStatsPlayersTable extends Migration
             $table->integer('rating_before_update')->nullable();
             $table->integer('assists')->nullable(); //moyenne générale
             $table->float('overall_average')->nullable(); //moyenne générale
+            $table->boolean('man_of_match')->default(false);
             $table->integer('goals')->nullable();
             $table->string('position')->nullable();
             $table->integer('pace')->nullable(); //vitesse

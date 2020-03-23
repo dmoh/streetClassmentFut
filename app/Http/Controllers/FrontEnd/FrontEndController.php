@@ -22,7 +22,7 @@ class FrontEndController extends Controller
             $players = DB::table('hats')
                         ->join('hat_players', 'hat_players.hat_id', '=', 'hats.id')
                         ->join('stats_players', 'stats_players.stats_player_id', '=', 'hat_players.player_id')
-                        ->join('users', 'users.id', '=', 'stats_players.user_id')
+                        ->join('users', 'users.id', '=', 'stats_players.player_id')
                         ->join('group_player', 'group_player.player_id', '=', 'stats_players.id')
                         ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
                         ->where('hats.id', '=', 1)

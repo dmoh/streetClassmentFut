@@ -27,7 +27,7 @@ class MatchController extends Controller
         $this->vote = $vote;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::id()){
             // $matchs = Matchs::with('statsPlayer')->get();
@@ -35,9 +35,12 @@ class MatchController extends Controller
             //todo ranger dans un repository
             $matchs = DB::table('matchs')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
+                ->join('group_match', 'group_match.match_id', '=', 'matchs.id')
                 ->join('stats_players', 'stats_players.player_id', '=', 'match_players.stats_player_id')
                 ->select(  'matchs.id', 'matchs.score', 'matchs.match_date', 'matchs.vote_closed')
+                ->distinct()
                 ->where('stats_players.player_id', '=', Auth::id())
+                ->where('group_match.group_id', '=', $request->session()->get('groupId'))
                 ->orderBy('matchs.id', 'desc')
                 ->limit(5)
                 ->get()
@@ -45,17 +48,39 @@ class MatchController extends Controller
 
 
 
-
-            $playersMatch = DB::table('stats_matchs')
-                ->leftJoin('match_players', 'match_players.match_id', '=','stats_matchs.match_id')
-                ->join('stats_players', 'stats_players.player_id', '=', 'match_players.stats_player_id')
-                ->join('users', 'users.id', '=', 'stats_players.user_id')
-                ->whereIn('match_players.match_id', $matchs->pluck('id')->toArray())
-                ->select('users.name','users.surname', 'stats_matchs.*', 'stats_players.overall_average')
+            $playersMatchWithStats = DB::table('stats_matchs')
+                ->join('match_players', 'match_players.match_id', '=','stats_matchs.match_id')
+                ->join('match_player_rating', 'match_player_rating.match_id', '=','stats_matchs.match_id')
+                ->join('stats_players', 'stats_players.id', '=', 'stats_matchs.player_id')
+                ->join('users', 'users.id', '=', 'stats_matchs.player_id')
+                ->whereIn('stats_matchs.match_id', $matchs->pluck('id')->toArray())
+                ->select(
+                    'stats_matchs.match_id as match_id',
+                    'users.name',
+                    'users.surname',
+                    'stats_players.id as player_id',
+                    'stats_players.man_of_match',
+                    'stats_matchs.goals',
+                    'stats_matchs.assists',
+                    'stats_matchs.player_id',
+                    'match_player_rating.rating'
+                )
+                ->distinct()
+                // ->groupBy('stats_players.id')
                 ->orderBy('stats_matchs.match_id', 'desc')
                 ->get()
             ;
-            return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch'));
+
+
+            $playerRating = DB::table('match_player_rating')
+                ->whereIn('match_id', $matchs->pluck('id')->toArray())
+                ->orderByDesc('match_id')
+                ->get();
+
+
+
+
+            return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch', 'playerRating'));
         }
         abort(503);
     }
@@ -65,14 +90,18 @@ class MatchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $players = DB::table('stats_players')
             ->join('users', 'users.id', '=', 'stats_players.user_id')
+            ->join('group_player', 'group_player.player_id', '=', 'stats_players.user_id')
             ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
+            ->where('group_player.group_id', '=', session('groupId'))
             ->select('users.*', 'stats_players.*', 'uploads.filename', 'uploads.original_name')
             ->orderBy('stats_players.user_id', 'desc')
-            ->get();
+            ->get()
+        ;
+
 
         return view('BackEnd/create-match', compact('players'));
     }

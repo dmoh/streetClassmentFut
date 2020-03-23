@@ -36,21 +36,25 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach($playersMatch as $player)
-                                                        @if($player->match_id === $match->id)
-                                                            <tr @if($player->man_of_match == '1') style="background-color: #d7c025" @endif>
-                                                                <td>{{ $player->name }}, {{ $player->surname }}</td>
-                                                                <td>{{ $player->goals }}</td>
-                                                                @if($player->man_of_match == true)
-                                                                    <td style="text-align: center">
-                                                                        <i style="font-size: large; color: yellow" class="far fa-star"></i>
-                                                                    </td>
-                                                                @else
-                                                                    <td style="text-align: center">NON</td>
+                                                        @foreach($playerRating as $pRating)
+                                                            @if($player->match_id === $match->id)
+                                                                @if($pRating->match_id === $match->id && $pRating->player_id === $player->player_id)
+                                                                    <tr @if($player->man_of_match == '1') style="background-color: #d7c025" @endif>
+                                                                        <td>{{ $player->name }}, {{ $player->surname }}</td>
+                                                                        <td>{{ $player->goals }}</td>
+                                                                        @if($player->man_of_match == true)
+                                                                            <td style="text-align: center">
+                                                                                <i style="font-size: large; color: yellow" class="far fa-star"></i>
+                                                                            </td>
+                                                                        @else
+                                                                            <td style="text-align: center">NON</td>
+                                                                        @endif
+                                                                        <td>{{ $player->assists }}</td>
+                                                                        <td>{{ $pRating->rating }}</td>
+                                                                    </tr>
                                                                 @endif
-                                                                <td>{{ $player->assists }}</td>
-                                                                <td>{{ $player->overall_average }}</td>
-                                                            </tr>
-                                                        @endif
+                                                            @endif
+                                                        @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>

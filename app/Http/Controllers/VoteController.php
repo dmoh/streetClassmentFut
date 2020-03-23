@@ -101,8 +101,6 @@ class VoteController extends Controller
             foreach ($notes as $note) {
                 $rating  = $note['scoreAwarded'];
                 $playerId = $note['voteToPlayerId'];
-
-                //
                 $ratingPlayer = MatchPlayerRatingRepository::getRatingPlayerCurrent($matchId, $playerId, $rating);
 
                 /*$matchPlayerRating[] = [

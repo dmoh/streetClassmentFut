@@ -1,20 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid bg-dark-fut">
-    <h2 style="color: white; font-family: 'oswald', sans-serif"; class="text-center">ORGANISER UN MATCH</h2>
+<div id="choice-player-team" class="container-fluid bg-dark-fut">
+    <h2 style="color: white; font-family: 'oswald', sans-serif" class="text-center">ORGANISER UN MATCH</h2>
     <div class="row">
         <div class="col-md-12">
         </div>
     </div>
     <div class="tab-content" id="pills-tabContent">
-            <div class="row">
+        <div class="row">
                 <div class="col-md-4">
                     <h4 class="text-center"></h4>
-                    <div class="form-group">
-                        <input type="text" id="find-player" class="form-control" placeholder="chercher ">
+                    <div>
+                        <input type="text" id="find-player" class="form-control" >
                     </div>
-                    <ul style="padding: 0; list-style: none">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="toggleShowListPlayer">
+                            <label class="custom-control-label" for="toggleShowListPlayer">Afficher la liste complète des joueurs</label>
+                        </div>
+                        <input type="text" id="find-player" class="form-control" placeholder="TROUVER UN JOUEUR ">
+                    </div>
+                    <ul id="list-player-group" style="padding: 0; list-style: none">
                         @if(!$players->isEmpty())
                             @foreach($players as $player)
                                 <li style="cursor: pointer" class="idPlayer_{{$player->id}}">
@@ -73,18 +80,46 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-
-                </div>
+    </div>
+</div>
+<div id="wrapper-composition" class="container-fluid">
+    <div class="stade">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>tzerfdsfsd</h5>
+            </div>
+        </div>
+        <div id="container-bottom" style="display: flex; justify-content: space-between">
+            <div style="" id="bottom-bar-display-team-left">
+                <h4>dfgdg</h4>
+            </div>
+            <div style="" id="bottom-bar-display-team-right">
+                <h4>dfgdg</h4>
             </div>
         </div>
     </div>
+</div>
+<div id="bottom-bar">
+    <div style="border-right: 1px solid #ccc"><i class="fa fa-copy"></i></div>
+    <div style="border-right: 1px solid #ccc"><i class="fa fa-copy"></i></div>
+    <div style="border-right: 1px solid #ccc"><i class="fa fa-copy"></i></div>
+    <div><i class="fa fa-copy"></i></div>
+</div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 
 @section('script')
     <script type="text/javascript">
         $(function () {
+
+            const validateTeam = $('#validate-teams');
+            const isMobile =  (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
+            if(isMobile) {
+
+            }
+
+            const group = {groupId: "{{ session('groupId') }}", groupName: "{{ session('groupName') }}"};
             const secondPlaceTeam = $('#second-team');
             secondPlaceTeam.hide();
             let playersTeam= {
@@ -94,6 +129,36 @@
             const firstSelect = $('.first-select');
             const secondSelect = $('.second-select');
             const firstPlaceTeam = $('#first-team');
+
+
+
+            $(document).on('click', '#toggleShowListPlayer', function () {
+                if($(this).is(':checked')){
+                    $('li[class^="idPlayer_"]').fadeIn();
+                } else {
+                    $('li[class^="idPlayer_"]').fadeOut();
+                }
+            });
+            $(document).on('keyup', '#find-player', function () {
+               let name = $(this).val().trim();
+               if(name.length > 0) {
+                   name = name.substring(0, name.length);
+                   // $('div[id^="player-name_"]').show();
+                   $('li[class^="idPlayer_"]').each(function (elem) {
+                       const idPlayer = $(this).attr('class').split('_')[1];
+                       const nameToCompare = $(`div[id="player-name_${idPlayer}"]`).text().trim().substring(0, name.length);
+                       const reg = new RegExp( '^' + nameToCompare + '(\\s*)', 'i');
+                       console.warn(reg);
+                       if(reg.test(name)){
+                           $(`li[class="idPlayer_${idPlayer}"]`).fadeIn();
+                       }else{
+                           $(this).fadeOut();
+                       }
+                   });
+               } else {
+                   $('li[class^="idPlayer_"]').fadeOut();
+               }
+            });
             $(document).on('click', 'li[class^="idPlayer_"]', function () {
                 const id = $(this).attr('class').split('_')[1];
                 let playerName = $(`#player-name_${id}`).text().trim();
@@ -141,6 +206,8 @@
                     playersTeam['team2'].push(team);
 
                 }
+                if(playersTeam.team1.length > 1 && playersTeam.team2.length > 1){
+                }
                 $(`.idPlayer_${id}`).hide(400);
             });
 
@@ -180,23 +247,23 @@
 
             $(document).on('click', '#validate-teams', function () {
                 // todo check if is ok
-
+                $('#choice-player-team').hide();
+                $('#wrapper-composition').show();
                 if(playersTeam.team1.length < 1 || playersTeam.team2.length < 1){
                     console.log("ERROR TEAM NUMBER");
                 }else{
                     console.log(playersTeam);
+
                     //todo manque la date du match
-                    $.ajax({
-                        url: "{{ route('store.match') }}",
+                    /*$.ajax({
                         data: {players: playersTeam},
                         type:'POST',
                         dataType: 'json'
                     })
                     .done( (data) => {
-                        let url = "{{ route('show.match', ":id")  }}";
                         url = url.replace(':id', data.idMatch);
                         window.location.assign(url);
-                    });
+                    });*/
                 }
             });
 

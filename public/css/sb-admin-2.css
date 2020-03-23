@@ -65,7 +65,7 @@ section {
 }
 
 body {
-  margin: 0;
+  margin: 0 !important;
   font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
@@ -73,6 +73,7 @@ body {
   color: #858796;
   text-align: left;
   background-color: #fff;
+  height: 100%;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -13253,6 +13254,11 @@ div > i.fa-trophy {
   color: #fff;
   font-size: large;
 }
+
+.divider {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 #table-of-vote {
     margin-top: 2rem;
 }
@@ -13670,6 +13676,65 @@ div#accordion div.card {
 border-radius: 0;
 }
 
+
+.infos-player h6 {
+  font-size: x-large;
+  color: #fff;
+  text-transform: uppercase
+}
+
+#palmares {
+  color: #fff;
+}
+
+#palmares h4 {
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #1b2272;
+}
+
+/*#list-player-group {
+  display: none;
+}*/
+
+li[class^="idPlayer_"]{
+  display: none;
+}
+
+#wrapper-composition {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: #ccc;
+  height: 100%;
+}
+
+.stade {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background: url(../images/bg_stade_composition.jpg) no-repeat top left;
+  background-size: 142%;
+  background-attachment: fixed;
+  background-position-x: center;
+  background-origin: unset;
+}
+
+#container-bottom{
+  position: absolute;
+  bottom: 119px !important;
+  background: #1b1e21;
+  color: white;
+  width: 100%;
+  z-index: 999999;
+  height: 50px;
+}
+
+
+/****************************** MEDIA QUERIES******************************/
+
 @media (max-width: 1600px) {
 .bg-list-players {
 background-position-y: -83rem;
@@ -13745,7 +13810,17 @@ line-height: 1.5;
 
 }
 
+#bottom-bar {
+  bottom: 0 !important;
+  height: 45px;
+  background: #0b0956;
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+}
 
+/*******************************PHONE TABLETTE  SMALL DEVICE************************************************/
 @media (max-width: 766px) {
 #nav-hats > div {
     padding: 0.6rem;
@@ -13771,6 +13846,16 @@ line-height: 1.5;
       overflow: hidden;
       top: 1rem;
       left: 0.9rem;
+    }
+
+    .wrapper-card-fut {
+      background-size: cover;
+      position: relative;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      margin: 0 auto;
+      margin-top: 1rem;
+      cursor: pointer;
     }
 
   .display-players img {
@@ -13829,6 +13914,23 @@ line-height: 1.5;
       margin: 1rem auto;
   }
 
+  .marg-top-fut-bg {
+    margin-top: .3rem;
+    color: #fff;
+    font-size: large;
+  }
+
+  .divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .infos-player .table td {
+    padding: 0.4rem;
+    vertical-align: top;
+    border-top: 1px solid #e3e6f030;
+    text-transform: uppercase;
+  }
 
   .divider-yellow {
     position: absolute;
@@ -13866,5 +13968,30 @@ line-height: 1.5;
     margin: .1rem;
     line-height: 1rem;
     font-size: xx-small !important;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 425px){
+  .wrapper-card-fut {
+    margin-top: 0;
+    margin-bottom: .3rem;
+  }
+
+  .bg-hat {
+    margin: 0 auto;
+  }
+
+  .infos-player .table td {
+    padding: .4rem;
+  }
+  .divider {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .infos-player h6 {
+    font-size: large;
+    color: #fff;
+    text-transform: uppercase
   }
 }

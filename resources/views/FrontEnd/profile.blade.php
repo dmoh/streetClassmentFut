@@ -132,9 +132,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div style="margin-top: 2rem; margin-bottom: 2rem" class="divider"></div>
+                    <div class="divider"></div>
                     <div  class="infos-player">
-                        <h6 style="font-size: x-large; color: #fff; text-transform: uppercase" class="text-center ">Mes stats du dernier match</h6>
+                        <h6 class="text-center ">Mes stats du dernier match</h6>
                         <input type="hidden" id="arrLabelCharJs" value="{{ implode(',', array_reverse($getLastRating->pluck('name')->toArray())) }}">
                         <input type="hidden" id="labelCharJs" value="{{ implode(',', array_reverse($getLastRating->pluck('assigned_rating')->toArray())) }}">
                         <div class="table-responsive">
@@ -163,6 +163,37 @@
                     </div>
                 </div>
             </div>
+            <div class="divider"></div>
+            <section id="palmares">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>MES PALMARES</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        FIRST PALMARES
+                    </div>
+                    <div class="col-md-2">
+                        FIRST PALMARES
+                    </div>
+                </div>
+            </section>
+            <!--<section id="palmares">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>MES OBJECTIFS</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+                        FIRST PALMARES
+                    </div>
+                </div>
+            </section>-->
             <div class="row">
                 <div class="col-md-3">
                 </div>
@@ -218,7 +249,7 @@
         var ctx = document.getElementById("myAreaChart");
         //ctx.style.backgroundColor = "rgba(0,0,0, 0.3)";
         var myLineChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                  labels: label, // todo mettre les dates des matchs
                 // labels: '', // todo mettre les dates des matchs

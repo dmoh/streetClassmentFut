@@ -25,6 +25,8 @@ class Palmares extends Migration
                     'best_goal',
 
                 ]);
+            $table->unsignedBigInteger('match_id');
+            $table->dateTime('date_palmares_assigned');
             $table->unsignedBigInteger('player_id');
             $table->string('url_video')->default(null);
             $table->timestamps();
