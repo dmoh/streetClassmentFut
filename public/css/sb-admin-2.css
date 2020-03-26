@@ -13724,12 +13724,17 @@ li[class^="idPlayer_"]{
 
 #container-bottom{
   position: absolute;
-  bottom: 119px !important;
-  background: #1b1e21;
+  bottom: 130px !important;
+  background: transparent;
   color: white;
   width: 100%;
   z-index: 999999;
   height: 50px;
+}
+
+#bottom-bar-display-team-right, #bottom-bar-display-team-left {
+  padding: 1.5rem;
+  background-color: #cccccc;
 }
 
 
@@ -13969,6 +13974,52 @@ line-height: 1.5;
     line-height: 1rem;
     font-size: xx-small !important;
   }
+
+   .card-fut-mobile .display-players {
+     display: inline-flex;
+     margin-right: 5px;
+     margin-bottom: 5rem;
+     width: 64px;
+     height: 83px;
+  }
+
+   .card-fut-mobile .display-players img {
+     position: absolute;
+     top: -0rem;
+     left: 0.09rem;
+     max-width: 46px;
+   }
+
+   #line-defense, #line-middle, #line-attaque {
+     display: flex !important;
+     flex-direction: row;
+     justify-content: space-evenly;
+   }
+
+  .card-fut-mobile .display-players > .wrapper-img-player {
+    width: 63px;
+    height: 45px;
+    position: absolute;
+    overflow: hidden;
+    top: 1rem;
+    left: 0.9rem;
+  }
+
+
+  .card-fut-mobile .display-players > div[id^=delete-team_] {
+    margin-top: 5.5rem;
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 1.4rem;
+  }
+  .card-fut-mobile .display-players > div.divider-yellow {
+    position: absolute;
+    margin-top: 7.2rem;
+    width: 89px;
+  }
+
+
 }
 
 @media (min-width: 350px) and (max-width: 425px){

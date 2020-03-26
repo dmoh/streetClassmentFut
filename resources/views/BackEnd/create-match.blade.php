@@ -89,12 +89,186 @@
                 <h5>tzerfdsfsd</h5>
             </div>
         </div>
+        <div id="line-attaque">
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+        </div>
+        <div id="line-middle">
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+        </div>
+        <div id="line-defense">
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
+            </div>
+        </div>
         <div id="container-bottom" style="display: flex; justify-content: space-between">
             <div style="" id="bottom-bar-display-team-left">
-                <h4>dfgdg</h4>
+                <h4>REM</h4>
             </div>
             <div style="" id="bottom-bar-display-team-right">
-                <h4>dfgdg</h4>
+                <h4>RES</h4>
             </div>
         </div>
     </div>
@@ -165,7 +339,6 @@
                 if(playerName.length > 3){
                     playerName = playerName.substring(0, 3);
                 }
-
                 const postePlayer = $(`#poste_player_${id}`).text().trim();
                 console.log(playersTeam);
                 const notePlayer =  $(`#note_player_${id}`).text().trim();
@@ -198,7 +371,6 @@
                 team = {playerid: id};
 
                 if(firstPlaceTeam.is(':visible')){
-
                     playersTeam['team1'].push(team);
                     displayerPlayer.append(cardHtml);
                 }else{
