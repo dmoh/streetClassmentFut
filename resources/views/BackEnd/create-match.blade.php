@@ -89,35 +89,7 @@
                 <h5>tzerfdsfsd</h5>
             </div>
         </div>
-        <div id="line-attaque">
-            <div class="card-fut-mobile">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
-                    </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
-                </div>
-            </div>
-            <div class="card-fut-mobile">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
-                    </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
-                </div>
-            </div>
+        <div style="margin-top: 4rem;" id="line-attaque">
             <div class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
@@ -162,7 +134,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div class="card-fut-mobile mar-top-4">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -176,7 +148,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div class="card-fut-mobile mar-top-4">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -190,7 +162,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div id="test-swap" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -220,7 +192,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -234,7 +206,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -263,12 +235,41 @@
                 </div>
             </div>
         </div>
-        <div id="container-bottom" style="display: flex; justify-content: space-between">
-            <div style="" id="bottom-bar-display-team-left">
-                <h4>REM</h4>
+        <div id="line-goal-keeper">
+            <div class="card-fut-mobile">
+                <div class="display-players">
+                    <div id="note-player">80</div>
+                    <div id="delete-team_">x</div>
+                    <div class="wrapper-img-player">
+                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    </div>
+                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div  class="infos-position-player">
+                    </div>
+                    <div class="infos-capacities-right"></div>
+                    <div class="divider-yellow"></div>
+                </div>
             </div>
-            <div style="" id="bottom-bar-display-team-right">
-                <h4>RES</h4>
+        </div>
+        <div id="container-bottom" style="">
+            <div style="" id="bottom-bar-display-team-left">
+            <h4>REMPLACANT(S)</h4>
+                <div id="line-remplacant">
+                     <div class="card-fut-mobile">
+                        <div class="display-players">
+                            <div id="note-player">80</div>
+                            <div id="delete-team_">x</div>
+                            <div class="wrapper-img-player">
+                                <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                            </div>
+                            <!--<div class="infos-players-card-fut"> playerName </div>-->
+                            <div  class="infos-position-player">
+                            </div>
+                            <div class="infos-capacities-right"></div>
+                            <div class="divider-yellow"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -280,12 +281,29 @@
     <div><i class="fa fa-copy"></i></div>
 </div>
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
-
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
     <script type="text/javascript">
         $(function () {
 
+            const swap = new Swappable('#line-middle', {
+                draggable: '#test-swap',
+            });
+            $('#container-bottom').on('click', function () {
+                console.log({thi: $(this)[0].style.bottom});
+                if(/180px/.test($(this)[0].style.bottom)) {
+                    $(this).animate({
+                        bottom: '0',
+                    }, 1000);
+                }else{
+                    $(this).animate({
+                        bottom: '180',
+                    }, 1000);
+                }
+
+
+
+            });
             const validateTeam = $('#validate-teams');
             const isMobile =  (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
