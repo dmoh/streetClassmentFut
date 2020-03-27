@@ -13710,7 +13710,7 @@ li[class^="idPlayer_"]{
   height: 100%;
 }
 
-.stade {
+#stade {
   position: relative;
   margin: 0 auto;
   width: 100%;
@@ -13737,6 +13737,15 @@ li[class^="idPlayer_"]{
   background-color: #cccccc;
 }
 
+[draggable] {
+  /*-moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+   Required to make elements draggable in old WebKit
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;*/
+}
 
 /****************************** MEDIA QUERIES******************************/
 

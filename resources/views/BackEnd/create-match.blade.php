@@ -83,14 +83,14 @@
     </div>
 </div>
 <div id="wrapper-composition" class="container-fluid">
-    <div class="stade">
+    <div id="stade">
         <div class="row">
             <div class="col-md-12">
                 <h5>tzerfdsfsd</h5>
             </div>
         </div>
         <div style="margin-top: 4rem;" id="line-attaque">
-            <div class="card-fut-mobile">
+            <div draggable="true" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -104,7 +104,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div draggable="true" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -120,7 +120,7 @@
             </div>
         </div>
         <div id="line-middle">
-            <div class="card-fut-mobile">
+            <div draggable="true" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -177,7 +177,7 @@
                 </div>
             </div>
         </div>
-        <div id="line-defense">
+        <div  id="line-defense">
             <div class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
@@ -192,7 +192,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile mar-top-2">
+            <div draggable="true" class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -282,27 +282,140 @@
 </div>
 @endsection
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
     <script type="text/javascript">
         $(function () {
 
-            const swap = new Swappable('#line-middle', {
-                draggable: '#test-swap',
+
+            // Sortable.mount(swap());
+            const att = document.getElementById('line-attaque');
+            const mid = document.getElementById('line-middle');
+            const def = document.getElementById('line-defense');
+            const rem = document.getElementById('line-remplacant');
+            const sortableAtt = Sortable.create(att, {
+                group: {
+                  name:'team',
+                  swap: true,
+                  swapClass: 'wrapper-card-fut'
+                },
+                animation: 300,
+                ghostClass: 'blue-background-class',
+                draggable: ".card-fut-mobile",
+                swapThreshold: 1,
+                swap: true,
+
             });
-            $('#container-bottom').on('click', function () {
-                console.log({thi: $(this)[0].style.bottom});
-                if(/180px/.test($(this)[0].style.bottom)) {
-                    $(this).animate({
-                        bottom: '0',
-                    }, 1000);
+            const sortableMid = Sortable.create(mid, {
+                group: {
+                  name:'team',
+                    swap: true,
+                    swapClass: 'wrapper-card-fut'
+                },
+                animation: 300,
+                ghostClass: 'blue-background-class',
+                draggable: ".card-fut-mobile",
+                swapThreshold: 1,
+                swap: true,
+            });
+            const sortableDef = Sortable.create(def, {
+                group: {
+                  name:'team',
+                    swap: true,
+                    swapClass: 'wrapper-card-fut'
+                },
+                animation: 300,
+                ghostClass: 'blue-background-class',
+                draggable: ".card-fut-mobile",
+                swapThreshold: 1,
+                swap: true,
+            });
+            const sortableRem = Sortable.create(rem, {
+                group: {
+                  name:'team',
+                    swap: true,
+                    swapClass: 'wrapper-card-fut'
+                },
+                animation: 300,
+                ghostClass: 'blue-background-class',
+                draggable: ".card-fut-mobile",
+                swapThreshold: 1,
+                swap: true,
+
+                onMove: function (event) {
+                    console.log(event);
+                    console.warn({eventId: event.to.id});
+                    if(/line-middle/.test(event.to.id)) {
+                       toggleRem($('#container-bottom'), true);
+                    }
+                }
+            });
+
+            function toggleRem(elem, drag) {
+                if(drag === true){
+                    if(/180px/.test(elem[0].style.bottom)) {
+                        elem.animate({
+                            bottom: '0',
+                        }, 1);
+                    }
                 }else{
-                    $(this).animate({
-                        bottom: '180',
-                    }, 1000);
+                    if(/180px/.test(elem[0].style.bottom)) {
+                        elem.animate({
+                            bottom: '0',
+                        }, 1);
+                    }else{
+                        elem.animate({
+                            bottom: '180',
+                        }, 1);
+                    }
                 }
 
+            }
 
 
+            /*const el = document.querySelector('.card-fut-mobile');
+
+            el.addEventListener("touchstart", handleStart, false);
+            /*el.addEventListener("touchend", handleEnd, false);
+            el.addEventListener("touchcancel", handleCancel, false);
+            el.addEventListener("touchleave", handleEnd, false);
+            el.addEventListener("touchmove", handleMove, false);
+
+            function handleStart(e) {
+                // Handle the start of the touch
+                this.style.opacity = '0.4';
+                console.warn('JE BOUGe', e);
+                this.style.opacity = '0.4';
+
+                dragSrcEl = this;
+
+               //  e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+            }
+
+            function handleMove(e) {
+                // Handle the start of the touch
+                this.style.opacity = '0.8';
+                console.warn({thisMove: this});
+                console.warn('jed fd fd', e);
+                // e.dataTransfer.effectAllowed = 'move';
+                // e.dataTransfer.setData('text/html', this.innerHTML);
+            }
+
+
+            function handleDragStart(e) {
+                  // this / e.target is the source node.
+            }
+
+            var cols = document.querySelectorAll('#line-defense .card-fut-mobile');
+            [].forEach.call(cols, function(col) {
+                col.addEventListener('dragstart', handleDragStart, false);
+                console.log(col);
+            });*/
+
+
+            $('#container-bottom').on('click', function () {
+                toggleRem($(this));
             });
             const validateTeam = $('#validate-teams');
             const isMobile =  (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
