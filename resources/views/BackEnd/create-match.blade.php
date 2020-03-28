@@ -82,6 +82,31 @@
             </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Composition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label for="compo">Composition</label>
+                    <select class="form-control" name="compo" id="compo">
+                        <option value="4-3-3">4-3-3</option>
+                        <option value="4-4-2">4-4-2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="wrapper-composition" class="container-fluid">
     <div id="stade">
         <div class="row">
@@ -89,7 +114,14 @@
                 <h5>tzerfdsfsd</h5>
             </div>
         </div>
-        <div style="margin-top: 4rem;" id="line-attaque">
+        <div class="row">
+            <div id="icon-soccer-field" data-toggle="modal" data-target="#exampleModal" style="display: flex;justify-content: flex-end; padding-right: 1rem;" class="col-md-12">
+                <div style="border: 2px solid #ccc; padding: .2rem;" class="pull-right">
+                    <img style="width: 50px" src="{{ asset('images/icon_soccer_field.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="line-attaque">
             <div draggable="true" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
@@ -134,7 +166,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile mar-top-4">
+            <div class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -148,7 +180,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile mar-top-4">
+            <div class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -178,7 +210,7 @@
             </div>
         </div>
         <div  id="line-defense">
-            <div class="card-fut-mobile">
+            <div id="def_1" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -192,7 +224,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div draggable="true" class="card-fut-mobile mar-top-2">
+            <div draggable="true" id="def_2" class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -206,7 +238,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile mar-top-2">
+            <div id="def_3" class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -220,7 +252,7 @@
                     <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div class="card-fut-mobile">
+            <div id="def_4" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
@@ -255,7 +287,7 @@
             <div style="" id="bottom-bar-display-team-left">
             <h4>REMPLACANT(S)</h4>
                 <div id="line-remplacant">
-                     <div class="card-fut-mobile">
+                     <div id="remp_1" class="card-fut-mobile">
                         <div class="display-players">
                             <div id="note-player">80</div>
                             <div id="delete-team_">x</div>
@@ -287,12 +319,47 @@
     <script type="text/javascript">
         $(function () {
 
-
             // Sortable.mount(swap());
+            const classNameToTest = new RegExp('mar-top-2') ;
+            const marTop2 = 'mar-top-2';
             const att = document.getElementById('line-attaque');
             const mid = document.getElementById('line-middle');
             const def = document.getElementById('line-defense');
             const rem = document.getElementById('line-remplacant');
+            const goal = document.getElementById('line-goal-keeper');
+            const lineMiddle = $('#line-middle');
+            const lineAttaque = $('#line-attaque');
+
+            $('#compo').change(function () {
+                const compo = $('#compo').val();
+                switch (compo) {
+                    case '4-3-3':
+                        changeCompo(compo);
+                        break;
+                    case '4-4-2':
+                        changeCompo(compo);
+                        break
+                }
+            });
+
+            function changeCompo(compo) {
+                if(compo === '4-3-3') {
+                    const nbLineMiddle = lineMiddle.children('.card-fut-mobile').length;
+                    const elemAdd = $('div#line-middle div.card-fut-mobile:nth-child(2)');
+                    if(nbLineMiddle === 4) {
+                        elemAdd.appendTo('#line-attaque');
+                        $('#line-attaque .card-fut-mobile:nth-child(1)').addClass(marTop2);
+                    }
+                } else if (compo === '4-4-2') {
+                    const nbPlayerLineAttaque = lineAttaque.children('.card-fut-mobile').length;
+                    if(nbPlayerLineAttaque === 3) {
+                        const elemDownLine = $('div#line-attaque div.card-fut-mobile:nth-child(2)');
+                        elemDownLine.insertAfter($('div#line-middle div.card-fut-mobile:nth-child(1)'));
+                        $('#line-middle div.card-fut-mobile:nth-child(2)').addClass(marTop2);
+                    }
+                }
+            }
+
             const sortableAtt = Sortable.create(att, {
                 group: {
                   name:'team',
@@ -317,6 +384,14 @@
                 draggable: ".card-fut-mobile",
                 swapThreshold: 1,
                 swap: true,
+                onEnd: function (event) {
+                    const checkClass = event.clone.className;
+                    console.warn({event: event});
+                    console.log(checkClass);
+                    if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
+                        event.clone.classList.add('mar-top-2');
+                    }
+                }
             });
             const sortableDef = Sortable.create(def, {
                 group: {
@@ -329,6 +404,8 @@
                 draggable: ".card-fut-mobile",
                 swapThreshold: 1,
                 swap: true,
+                onMove: function (event) {
+                }
             });
             const sortableRem = Sortable.create(rem, {
                 group: {
@@ -341,24 +418,52 @@
                 draggable: ".card-fut-mobile",
                 swapThreshold: 1,
                 swap: true,
-
                 onMove: function (event) {
-                    console.log(event);
-                    console.warn({eventId: event.to.id});
-                    if(/line-middle/.test(event.to.id)) {
-                       toggleRem($('#container-bottom'), true);
+                    if(event.from.id === 'line-remplacant') {
+                        toggleRem($('#container-bottom'), true);
+                    }
+                },
+                onEnd: function (event) {
+                    const checkClass = event.item.className;
+                    if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
+                        event.item.classList.add('mar-top-2');
                     }
                 }
             });
 
+            const sortableGoal = Sortable.create(goal, {
+                group: {
+                    name:'team',
+                    swap: true,
+                    swapClass: 'wrapper-card-fut'
+                },
+                animation: 300,
+                ghostClass: 'blue-background-class',
+                draggable: ".card-fut-mobile",
+                swapThreshold: 1,
+                swap: true,
+            });
+
+
+
+
+
+
             function toggleRem(elem, drag) {
                 if(drag === true){
                     if(/180px/.test(elem[0].style.bottom)) {
-                        elem.animate({
-                            bottom: '0',
-                        }, 1);
+                        const pr = new Promise(() => {
+                            elem.animate({
+                                bottom: '0',
+                            }, 10);
+                        });
                     }
-                }else{
+                } else if ( drag === 'up' ){
+                    elem.animate({
+                        bottom: '180',
+                    }, 1);
+                }
+                else{
                     if(/180px/.test(elem[0].style.bottom)) {
                         elem.animate({
                             bottom: '0',
