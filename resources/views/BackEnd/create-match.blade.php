@@ -70,7 +70,7 @@
                     </div>
                     <div id="first-team">
                         <div id="first-team-place" class="display-players-selected">
-                            <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">FIRST TEAM</h4>
+                            <h4 style="color: #fff; font-size: x-large; font-family: 'Anton', sans-serif; padding-bottom: 2rem" class="text-center">FIRST TEAM <b id="countTeam1"></b></h4>
                         </div>
                     </div>
                     <div id="second-team">
@@ -95,6 +95,7 @@
                 <div>
                     <label for="compo">Composition</label>
                     <select class="form-control" name="compo" id="compo">
+                        <option value="null">-Sélectionner-</option>
                         <option value="4-3-3">4-3-3</option>
                         <option value="4-4-2">4-4-2</option>
                     </select>
@@ -110,132 +111,146 @@
 <div id="wrapper-composition" class="container-fluid">
     <div id="stade">
         <div class="row">
-            <div class="col-md-12">
-                <h5>tzerfdsfsd</h5>
+          <div class="col-md-12">
+                <div id="top-bar-compo">
+                    <div style="display: flex">
+                        <span style="padding-left: 3px; color: #cccccc; font-family: Oswald, sans-serif; text-transform: uppercase">Dispositif <b style="font-size: small" id="bold-compo"></b></span>
+                    </div>
+                    <div id="icon-soccer-field" data-toggle="modal" data-target="#exampleModal" style="display: flex;justify-content: flex-end; padding-right: 1rem;" class="col-md-12">
+                        <div style="border: 2px solid #ccc; padding: .2rem;" class="pull-right">
+                            <img style="width: 30px" src="{{ asset('images/icon_soccer_field.png') }}" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div id="icon-soccer-field" data-toggle="modal" data-target="#exampleModal" style="display: flex;justify-content: flex-end; padding-right: 1rem;" class="col-md-12">
-                <div style="border: 2px solid #ccc; padding: .2rem;" class="pull-right">
-                    <img style="width: 50px" src="{{ asset('images/icon_soccer_field.png') }}" alt="">
-                </div>
-            </div>
         </div>
         <div id="line-attaque">
-            <div draggable="true" class="card-fut-mobile">
+           <!-- <div class="card-fut-mobile mr-5">
                 <div class="display-players">
                     <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    <div id="delete-team_">x
+                        <span class="position-player-field">
+                            AG
+                        </span>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div class="wrapper-img-player">
+                        <img src="{ asset("images/boulaye-photo.png") }}" alt="  playerName  ">
+                    </div>
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div draggable="true" class="card-fut-mobile">
+            <div class="link-player" style=></div>
+            <div class="card-fut-mobile">
                 <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                    <div id="note-player">77</div>
+                    <div id="delete-team_">x
+                        <span class="position-player-field">
+                            BU
+                        </span>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
+                    <div class="wrapper-img-player">
+                        <img src="{ asset("images/nadir-photo.png") }}" alt="  playerName  ">
+                    </div>
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
+            </div>-->
         </div>
-        <div id="line-middle">
-            <div draggable="true" class="card-fut-mobile">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+        <div class="" id="line-middle">
+                <!--<div class="card-fut-mobile margin-top-less-4">
+                    <div class="display-players">
+                        <div id="note-player">91</div>
+                        <div id="delete-team_">x
+                            <span class="position-player-field">
+                            MG
+                        </span>
+                        </div>
+                        <div class="wrapper-img-player">
+                            <img src="{ asset("images/bruno.png") }}" alt="  playerName  ">
+                        </div>
+                        <div  class="infos-position-player">
+                        </div>
+                        <div class="infos-capacities-right"></div>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
-            <div class="card-fut-mobile mar-top-2">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                <div class="card-fut-mobile mar-top-2">
+                    <div class="display-players">
+                        <div id="note-player">92</div>
+                        <div id="delete-team_">x
+                            <span class="position-player-field">
+                            MDC
+                        </span>
+                        </div>
+                        <div class="wrapper-img-player">
+                            <img src="{ asset("images/sofk.png") }}" alt="  playerName  ">
+                        </div>
+                        <div  class="infos-position-player">
+                        </div>
+                        <div class="infos-capacities-right"></div>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
-            <div class="card-fut-mobile mar-top-2">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                <div class="card-fut-mobile mar-top-2">
+                    <div class="display-players">
+                        <div id="note-player">81</div>
+                        <div id="delete-team_">x
+                            <span class="position-player-field">
+                            MDC
+                        </span>
+                        </div>
+                        <div class="wrapper-img-player">
+                            <img src="{ asset("images/sertan-photo.png") }}" alt="  playerName  ">
+                        </div>
+                        <div  class="infos-position-player">
+                        </div>
+                        <div class="infos-capacities-right"></div>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
-            <div id="test-swap" class="card-fut-mobile">
-                <div class="display-players">
-                    <div id="note-player">80</div>
-                    <div id="delete-team_">x</div>
-                    <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                <div id="test-swap" class="card-fut-mobile margin-top-less-4">
+                    <div class="display-players">
+                        <div id="note-player">80</div>
+                        <div id="delete-team_">x
+                            <span class="position-player-field">
+                            MD
+                        </span>
+                        </div>
+                        <div class="wrapper-img-player">
+                            <img src="{ asset("images/flo.png") }}" alt="  playerName  ">
+                        </div>
+                        <div  class="infos-position-player">
+                        </div>
+                        <div class="infos-capacities-right"></div>
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
-                    <div  class="infos-position-player">
-                    </div>
-                    <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
+                <div class="link-player-att-middle-right"></div>-->
             </div>
-        </div>
         <div  id="line-defense">
-            <div id="def_1" class="card-fut-mobile">
+            <!--<div id="def_1" class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
                     <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                        <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
             </div>
-            <div draggable="true" id="def_2" class="card-fut-mobile mar-top-2">
+            <div id="def_2" class="card-fut-mobile mar-top-2">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
                     <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                        <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
             </div>
             <div id="def_3" class="card-fut-mobile mar-top-2">
@@ -243,13 +258,11 @@
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
                     <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                        <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
             </div>
             <div id="def_4" class="card-fut-mobile">
@@ -257,31 +270,27 @@
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
                     <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                        <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div id="line-goal-keeper">
-            <div class="card-fut-mobile">
+           <!-- <div class="card-fut-mobile">
                 <div class="display-players">
                     <div id="note-player">80</div>
                     <div id="delete-team_">x</div>
                     <div class="wrapper-img-player">
-                        <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                        <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                     </div>
-                    <!--<div class="infos-players-card-fut"> playerName </div>-->
                     <div  class="infos-position-player">
                     </div>
                     <div class="infos-capacities-right"></div>
-                    <div class="divider-yellow"></div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div id="container-bottom" style="">
             <div style="" id="bottom-bar-display-team-left">
@@ -298,7 +307,6 @@
                             <div  class="infos-position-player">
                             </div>
                             <div class="infos-capacities-right"></div>
-                            <div class="divider-yellow"></div>
                         </div>
                     </div>
                 </div>
@@ -329,16 +337,52 @@
             const goal = document.getElementById('line-goal-keeper');
             const lineMiddle = $('#line-middle');
             const lineAttaque = $('#line-attaque');
+            const lineDefense = $('#line-defense');
+            const lineGoal = $('#line-goal-keeper');
+            const wrapperComposition = $('#wrapper-composition');
+            const selectorfirstCardMiddleLeft = $('div#line-middle div.card-fut-mobile:nth-child(1)');
+            const selectorfirstCardAttaqueLeft = $('div#line-attaque div.card-fut-mobile:nth-child(1)');
 
+
+            /*
+            * Mesure la distance entre deux div card-fut
+
+            setTimeout(() => {
+                console.warn('MESSURE 2', $('div#line-attaque div.card-fut-mobile:nth-child(3)')[0].offsetLeft);
+                const adjacent  = selectorfirstCardMiddleLeft[0].offsetTop - selectorfirstCardAttaqueLeft[0].offsetTop;
+                const oppose = selectorfirstCardAttaqueLeft[0].offsetLeft - selectorfirstCardMiddleLeft[0].offsetLeft;
+                const oposeCarre = oppose * oppose;
+                const adjacentCarre = adjacent * adjacent;
+                const widthLink = (Math.round(Math.sqrt(oposeCarre + adjacentCarre)) - 5);
+
+                $('.link-player-att-middle').css('width', widthLink + 'px');
+                function calcAngleDegrees(x, y) {
+                    return Math.round(((Math.atan2(y, x) * 180 / Math.PI) * 2) - 10);
+                }
+                $(`<style>.link-player-att-middle:after {transform: rotateZ(${calcAngleDegrees(oppose, adjacent)}deg) }</style>`).appendTo('.link-player-att-middle');
+            }, .001 );*/
+
+
+
+            function hideLink() {
+                $('div[class*=link-player]').fadeOut();
+            }
+
+            const compoBase = '4-4-2';
+            $('#bold-compo').text(compoBase);
             $('#compo').change(function () {
                 const compo = $('#compo').val();
-                switch (compo) {
-                    case '4-3-3':
-                        changeCompo(compo);
-                        break;
-                    case '4-4-2':
-                        changeCompo(compo);
-                        break
+                if(compo !== 'null') {
+                    switch (compo) {
+                        case '4-3-3':
+                            hideLink();
+                            changeCompo(compo);
+                            break;
+                        case '4-4-2':
+                            hideLink();
+                            changeCompo(compo);
+                            break
+                    }
                 }
             });
 
@@ -347,14 +391,16 @@
                     const nbLineMiddle = lineMiddle.children('.card-fut-mobile').length;
                     const elemAdd = $('div#line-middle div.card-fut-mobile:nth-child(2)');
                     if(nbLineMiddle === 4) {
+                        $('#bold-compo').text(compo);
                         elemAdd.appendTo('#line-attaque');
                         $('#line-attaque .card-fut-mobile:nth-child(1)').addClass(marTop2);
                     }
                 } else if (compo === '4-4-2') {
                     const nbPlayerLineAttaque = lineAttaque.children('.card-fut-mobile').length;
                     if(nbPlayerLineAttaque === 3) {
-                        const elemDownLine = $('div#line-attaque div.card-fut-mobile:nth-child(2)');
-                        elemDownLine.insertAfter($('div#line-middle div.card-fut-mobile:nth-child(1)'));
+                        $('#bold-compo').text(compo);
+                        const elemDownLine = $('div#line-attaque div.card-fut-mobile:nth-child(3)');
+                        elemDownLine.insertAfter(selectorfirstCardMiddleLeft);
                         $('#line-middle div.card-fut-mobile:nth-child(2)').addClass(marTop2);
                     }
                 }
@@ -430,7 +476,6 @@
                     }
                 }
             });
-
             const sortableGoal = Sortable.create(goal, {
                 group: {
                     name:'team',
@@ -540,8 +585,6 @@
             const secondSelect = $('.second-select');
             const firstPlaceTeam = $('#first-team');
 
-
-
             $(document).on('click', '#toggleShowListPlayer', function () {
                 if($(this).is(':checked')){
                     $('li[class^="idPlayer_"]').fadeIn();
@@ -569,6 +612,8 @@
                    $('li[class^="idPlayer_"]').fadeOut();
                }
             });
+            let countTeamPlayer1 = 0;
+            const countTeam1 = $('#countTeam1');
             $(document).on('click', 'li[class^="idPlayer_"]', function () {
                 const id = $(this).attr('class').split('_')[1];
                 let playerName = $(`#player-name_${id}`).text().trim();
@@ -576,13 +621,13 @@
                     playerName = playerName.substring(0, 3);
                 }
                 const postePlayer = $(`#poste_player_${id}`).text().trim();
-                console.log(playersTeam);
                 const notePlayer =  $(`#note_player_${id}`).text().trim();
                 const displayerPlayer = $('.display-players-selected');
                 const displayerPlayerTeam2 = $('.display-players-selected_2');
                 let photo = $(`#photo_${id}`).val().trim();
                 let renderPhoto = "{{ asset('images/:image') }}";
-                if(photo === ''){
+                console.warn(renderPhoto);
+                if(photo === '' || /.png|.jpg|.jpeg|.pdf|.gif/i.test(photo)){
                     photo = 'silhouette-ldc-yellow.png';
                 }
                 renderPhoto = renderPhoto.replace(':image', photo);
@@ -598,16 +643,24 @@
                     '<div class="infos-players-card-fut">'+ playerName +'</div>'+
                     '<div  class="infos-position-player">' +
                     '<span>'+ postePlayer +'</span>' +
-                    /* '<span>'+notePlayer+' DEF</span>' +
-                     '<span>'+notePlayer+' DEF</span>' + */
                     '</div>' +
                     '<div class="infos-capacities-right"></div>' +
                     '<div class="divider-yellow"></div>' +
                     '</div>';
-                team = {playerid: id};
+                const team = {
+                    playerid: id,
+                    notePlayer: notePlayer,
+                    photoPath: renderPhoto,
+                    playerName: playerName,
+                    postePlayer: postePlayer
+                };
+
+                console.log(team);
 
                 if(firstPlaceTeam.is(':visible')){
                     playersTeam['team1'].push(team);
+                    countTeamPlayer1++;
+                    countTeam1.empty().html(`( ${countTeamPlayer1} )`);
                     displayerPlayer.append(cardHtml);
                 }else{
                     displayerPlayerTeam2.append(cardHtml);
@@ -636,11 +689,40 @@
             });
 
 
+            function generatorCard(
+                marginClass,
+                notePlayer,
+                positionPlayer,
+                photoPath,
+                playerName
+            ) {
+                return `
+                <div class="card-fut-mobile ${marginClass}">
+                    <div class="display-players">
+                        <div id="note-player">${notePlayer}</div>
+                        <div id="delete-team_">x
+                            <span class="position-player-field">
+                                ${positionPlayer}
+                            </span>
+                        </div>
+                        <div class="wrapper-img-player">
+                            <img src="${photoPath}" alt="${playerName}">
+                        </div>
+                        <div  class="infos-position-player">
+                        </div>
+                        <div class="infos-capacities-right"></div>
+                    </div>
+                </div>`;
+            }
+
+
             $(document).on('click', 'div[id^="delete-team_"]', function () {
                 $(this).parent().fadeOut();
                 const id = $(this).attr('id').split('_')[1];
                 $(`.idPlayer_${id}`).show(400);
                 if(firstPlaceTeam.is(':visible')){
+                   countTeamPlayer1--;
+                   countTeam1.empty().append(`( ${countTeamPlayer1} )`);
                    playersTeam.team1 = playersTeam.team1.filter((elem) => {
                        return parseInt(elem.playerid) !== parseInt(id);
                    });
@@ -651,15 +733,153 @@
                 }
 
             });
-
-
             $(document).on('click', '#validate-teams', function () {
                 // todo check if is ok
                 $('#choice-player-team').hide();
-                $('#wrapper-composition').show();
+                //$('#wrapper-composition').show();
                 if(playersTeam.team1.length < 1 || playersTeam.team2.length < 1){
-                    console.log("ERROR TEAM NUMBER");
+                    alert("ERROR TEAM NUMBER");
                 }else{
+
+                    // todo attention aux categorie
+                    if(playersTeam.team1.length >= 11) {
+
+                        const arrPlayer = playersTeam.team1;
+
+                        for (let i = 0; i < arrPlayer.length ; i++) {
+
+                        }
+                        // compo 11
+                        const firstAttPlayer = generatorCard(
+                            'mr-5',
+                            arrPlayer[0].notePlayer,
+                            arrPlayer[0].postePlayer,
+                            arrPlayer[0].photoPath,
+                            arrPlayer[0].playerName,
+                        );
+                        const secondAttPlayer = generatorCard(
+                            '',
+                            arrPlayer[1].notePlayer,
+                            arrPlayer[1].postePlayer,
+                            arrPlayer[1].photoPath,
+                            arrPlayer[1].playerName,
+                        );
+                        const linkAttPlayer = `<div class="link-player" style=></div>`;
+                        lineAttaque.append(
+                            firstAttPlayer +
+                            linkAttPlayer +
+                            secondAttPlayer
+                        );
+
+                        const firstMidPlayer = generatorCard(
+                            'margin-top-less-4',
+                            arrPlayer[2].notePlayer,
+                            arrPlayer[2].postePlayer,
+                            arrPlayer[2].photoPath,
+                            arrPlayer[2].playerName,
+                        );
+                        const secondMidPlayer = generatorCard(
+                            'margin-top-2',
+                            arrPlayer[3].notePlayer,
+                            arrPlayer[3].postePlayer,
+                            arrPlayer[3].photoPath,
+                            arrPlayer[3].playerName,
+                        );
+                        const thirdMidPlayer = generatorCard(
+                            'margin-top-2',
+                            arrPlayer[4].notePlayer,
+                            arrPlayer[4].postePlayer,
+                            arrPlayer[4].photoPath,
+                            arrPlayer[4].playerName,
+                        );
+                        const fourthMidPlayer = generatorCard(
+                            'margin-top-less-4',
+                            arrPlayer[5].notePlayer,
+                            arrPlayer[5].postePlayer,
+                            arrPlayer[5].photoPath,
+                            arrPlayer[5].playerName,
+                        );
+                        const linkMidRight = `<div class="link-player-att-middle-right"></div>`;
+
+                        lineMiddle.append(
+                            [firstMidPlayer,
+                            secondMidPlayer,
+                            thirdMidPlayer,
+                            fourthMidPlayer,
+                            linkMidRight]
+                        );
+
+                        const firstDefPlayer = generatorCard(
+                            'margin-top-less-4',
+                            arrPlayer[6].notePlayer,
+                            arrPlayer[6].postePlayer,
+                            arrPlayer[6].photoPath,
+                            arrPlayer[6].playerName,
+                        );
+                        const secondDefPlayer = generatorCard(
+                            'margin-top-2',
+                            arrPlayer[7].notePlayer,
+                            arrPlayer[7].postePlayer,
+                            arrPlayer[7].photoPath,
+                            arrPlayer[7].playerName,
+                        );
+                        const thirdDefPlayer = generatorCard(
+                            'margin-top-2',
+                            arrPlayer[8].notePlayer,
+                            arrPlayer[8].postePlayer,
+                            arrPlayer[8].photoPath,
+                            arrPlayer[8].playerName,
+                        );
+                        const fourthDefPlayer = generatorCard(
+                            'margin-top-less-4',
+                            arrPlayer[9].notePlayer,
+                            arrPlayer[9].postePlayer,
+                            arrPlayer[9].photoPath,
+                            arrPlayer[9].playerName,
+                        );
+
+
+                        lineDefense.append(
+                            [firstDefPlayer,
+                            secondDefPlayer,
+                            thirdDefPlayer,
+                            fourthDefPlayer]
+                        );
+
+                        const goalPlayer = generatorCard(
+                            '',
+                            arrPlayer[10].notePlayer,
+                            arrPlayer[10].postePlayer,
+                            arrPlayer[10].photoPath,
+                            arrPlayer[10].playerName,
+                        );
+
+                        lineGoal.append(goalPlayer);
+
+
+                        //show wrapper-composition
+                        //setTimeout(() => wrapperComposition.fadeIn(), 1);
+
+                        console.warn({test: lineAttaque});
+
+
+                        setTimeout(() => {
+                            wrapperComposition.show();
+                        }, 10);
+
+
+                    }
+
+                    // u10&u11 u12&u13
+                    if(playersTeam.length >= 8 &&  playersTeam.length <= 10) {
+                        // compo 11
+                    }
+
+
+                    // u6&u7 u8&u9
+                    if(playersTeam.length > 3 && playersTeam.length <= 7) {
+
+                    }
                     console.log(playersTeam);
 
                     //todo manque la date du match
@@ -674,8 +894,6 @@
                     });*/
                 }
             });
-
-
            // $(document).on('click', '#pills-profile-tab', )
         });
     </script>

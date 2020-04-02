@@ -13525,24 +13525,23 @@ table[id^=listPlayer_] {
   background-blend-mode: difference;
 }
 
-
 .display-players {
   display: -webkit-inline-box;
   display: inline-flex;
   margin-right: 7px;
   margin-bottom: 5rem;
-  width: 140px;
-  height: 208px;
+  width: 95px;
+  height: 123px;
   position: relative;
-  background: url(/images/bg-fut-yelow.png?c76389b03bb473ee43bb7aed229eb9e7) top left no-repeat;
+  background: url(/images/fifa20-fut-yellow-bg.png) top left no-repeat;
   background-size: cover;
 }
 
 .display-players img {
   position: absolute;
-  top: 2rem;
-  left: 1rem;
-  max-width: 108px;
+  top: 1rem;
+  left: 1.7rem;
+  max-width: 54px;
 }
 
 .display-players .infos-capacities-left,
@@ -13701,6 +13700,7 @@ li[class^="idPlayer_"]{
 }
 
 #wrapper-composition {
+  display: none;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -13716,6 +13716,7 @@ li[class^="idPlayer_"]{
   width: 100%;
   height: 100%;
   background: url(../images/bg_stade_composition.jpg) no-repeat top left;
+ /* background: url(../images/bg_stade_composition.jpg) no-repeat top left;*/
   background-size: cover;
   background-attachment: fixed;
   background-position-x: center;
@@ -13746,6 +13747,34 @@ li[class^="idPlayer_"]{
   -khtml-user-drag: element;
   -webkit-user-drag: element;*/
 }
+
+
+#home {
+  background: url('../images/bg_home.jpg') no-repeat top left;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 25px;
+}
+
+#home .card-header {
+  background-color: white;
+  color: #d13636;
+  text-transform: uppercase;
+  border-radius: 0;
+  padding: .5rem;
+  font-family: Oswald, sans-serif;
+}
+
+#home .card-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+#home .card {
+  margin-bottom: 1rem;
+}
+
+
 
 /****************************** MEDIA QUERIES******************************/
 
@@ -13833,6 +13862,116 @@ line-height: 1.5;
   justify-content: space-around;
   align-items: center;
 }
+
+
+
+#line-defense, #line-middle, #line-attaque {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: -5rem;
+}
+
+#line-goal-keeper {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#line-attaque {
+  margin-top: 2rem;
+  justify-content: center;
+}
+#line-middle {
+}
+
+.margin-left-10 {
+  margin-left: 10rem;
+}
+.margin-top-less-4 {
+  margin-top: -4rem;
+}
+.margin-top-4 {
+  margin-top: 4rem;
+}
+
+#line-attaque > div.card-fut-mobile {
+
+}
+
+.wrapper-line-middle {
+  display: flex;
+  justify-content: center;
+}
+
+#stade {
+  /*background: url(../images/bg_stade.jpg) top no-repeat #46464673;*/
+  background: url(../images/bg_stade.jpg) top no-repeat #46464673;
+  background-blend-mode: difference;
+  background-size: cover;
+
+}
+/********************** Above 1200px bootstrap class xl ********************
+ */
+@media (min-width: 1200px) {
+
+  #stade .display-players {
+    margin-right: 7px;
+    margin-bottom: 5rem;
+    width: 85px;
+    height: 110px;
+  }
+
+  #stade .display-players img {
+    position: absolute;
+    top: 1rem;
+    left: 1.98rem;
+    max-width: 42px;
+  }
+
+  #stade .display-players #note-player {
+    margin-top: 0.9rem;
+    margin-left: 0.4rem;
+    padding-left: 0.25rem;
+    position: absolute;
+    font-size: 1.07rem;
+  }
+
+  #stade div[id^=delete-team_] {
+    position: absolute;
+    margin-top: 7rem;
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 2.1rem;
+    color: red;
+    border: 1px solid red;
+    border-radius: 22px;
+    cursor: pointer;
+    width: 17px;
+    height: 19px;
+    line-height: 14px;
+  }
+
+  #stade #line-middle {
+    margin-bottom: -1.2rem;
+  }
+
+  #line-attaque {
+  margin-bottom: -2.9rem;
+  }
+
+  #stade .position-player-field {
+    display: none;
+  }
+
+
+  #line-middle {
+    margin-left: 10rem;
+  }
+}
+
+
 
 /*******************************PHONE TABLETTE  SMALL DEVICE************************************************/
 @media (max-width: 766px) {
@@ -13990,6 +14129,7 @@ line-height: 1.5;
      margin-bottom: 0rem;
      width: 55px;
      height: 70px;
+     z-index: 5;
   }
 
    .card-fut-mobile .display-players img {
@@ -13999,22 +14139,7 @@ line-height: 1.5;
      max-width: 36px;
    }
 
-   #line-defense, #line-middle, #line-attaque {
-     display: flex !important;
-     flex-direction: row;
-     justify-content: space-evenly;
-     margin-bottom: -5rem;
-   }
 
-   #line-goal-keeper {
-       display: flex !important;
-       flex-direction: row;
-       justify-content: space-evenly;
-   }
-
-   #line-attaque {
-     margin-top: 2rem;
-   }
 
   .card-fut-mobile .display-players > .wrapper-img-player {
     width: 63px;
@@ -14041,11 +14166,83 @@ line-height: 1.5;
 
 
   .card-fut-mobile .display-players > div[id^=delete-team_] {
-    margin-top: 4.6rem;
+    /*background: url('../images/bg_stage_player.png') no-repeat top left;
+      margin-top: 4.6rem;
     font-size: larger;
     font-weight: 900;
     text-align: center;
-    margin-left: 1rem;
+    margin-left: 1rem;*/
+
+    background: url(../images/bg_stage_player.png) no-repeat top left;
+    background-size: contain;
+    background-position: bottom;
+    margin-top: 4rem;
+    font-size: larger;
+    font-weight: 900;
+    width: 43px;
+    height: 29px;
+    text-align: center;
+    margin-left: 0.39rem;
+    z-index: 0;
+    border: none;
+    color: black;
+    border-radius: 0;
+  }
+
+  .link-player {
+  position: absolute;
+    display: flex;
+    z-index: 0;
+    width: 145px;
+  }
+
+  .link-player-att-middle, .link-player-att-middle-right{
+    position: absolute;
+    display: flex;
+    z-index: 0;
+   /* width: 145px; */
+  }
+
+  .link-player-att-middle-right {
+    width: 160px;
+    right: 14px;
+    transform: rotateZ(53deg);
+  }
+  .link-player:after, .link-player-att-middle:after, .link-player-att-middle-right:after {
+    content: '';
+    width: 98%;
+    height: 4px;
+    margin-top: 5rem;
+    background-color: red;
+    z-index: 1;
+  }
+
+  .link-player-att-middle-right:after {
+    content: '';
+    width: 110px;
+    height: 4px;
+    margin-top: -1rem;
+    margin-left: 3rem;
+    background-color: #1fff1f;
+    z-index: 1;
+  }
+
+  .link-player-att-middle:after, .link-player-att-middle-right:after {
+    content: '';
+    width: 100%;
+    height: 4px;
+    padding-left: 18px;
+    margin-top: -1rem;
+    margin-left: 3rem;
+    background-color: #1fff1f;
+    z-index: 1;
+  }
+
+  span.position-player-field {
+    font-size: xx-small;
+    display: flow-root;
+    color: aqua;
+    padding-top: 1px;
   }
   .card-fut-mobile .display-players > div.divider-yellow {
     position: absolute;
@@ -14055,8 +14252,9 @@ line-height: 1.5;
 
 
   #wrapper-composition {
+      display: none;
       position: fixed;
-      top: -2px;
+      top: 55px;
       bottom: 0;
       right: 0;
       left: 0;
@@ -14065,6 +14263,15 @@ line-height: 1.5;
       height: 100%;
   }
 
+  #top-bar-compo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    height: 45px;
+    background-color: #4b4b4b;
+    border-bottom: 1px solid #ccc;
+  }
   #container-bottom {
       bottom: 0 ;
   }
@@ -14077,6 +14284,8 @@ line-height: 1.5;
 
   #line-remplacant {
   }
+
+
 
 }
 
