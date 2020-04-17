@@ -13,19 +13,18 @@ class CreateGroupPlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_player', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('role_id');
-
-
+            $table->unsignedBigInteger('user_id');
             //foreign key
             $table->foreign('player_id')
-                ->references('player_id')
+                ->references('id')
                 ->on('stats_players');
             $table->foreign('group_id')
-                ->references('group_id')
+                ->references('id')
                 ->on('groups');
             $table->foreign('role_id')
                 ->references('id')
@@ -44,6 +43,6 @@ class CreateGroupPlayerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_player');
+        Schema::dropIfExists('group_user');
     }
 }

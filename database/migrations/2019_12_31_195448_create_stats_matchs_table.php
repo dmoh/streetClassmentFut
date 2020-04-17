@@ -15,7 +15,7 @@ class CreateStatsMatchsTable extends Migration
     {
         Schema::create('stats_matchs', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
-            $table->dateTime('match_date');
+            $table->dateTime('date_match');
             $table->integer('goals');
             $table->integer('assists');
             $table->integer('rating'); // note du joueur
@@ -26,9 +26,12 @@ class CreateStatsMatchsTable extends Migration
             $table->unsignedBigInteger('match_id');
 
 
-            $table->foreign('player_id')->references('user_id')->on('stats_players')->onDelete('restrict');
-            $table->foreign('match_id')->references('id')->on('matchs')->onDelete('restrict');
-            $table->foreign('manager_user_id')->references('id')->on('users');
+            $table->foreign('player_id')->references('id')
+                ->on('group_stat_user')->onDelete('restrict');
+            $table->foreign('match_id')->references('id')
+                ->on('matchs')->onDelete('restrict');
+            $table->foreign('manager_user_id')->references('id')
+                ->on('group_stat_user');
 
             $table->timestamps();
         });

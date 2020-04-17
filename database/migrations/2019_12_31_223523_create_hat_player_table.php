@@ -17,7 +17,7 @@ class CreateHatPlayerTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('hat_id');
-            $table->foreign('player_id')->references('id')->on('stats_players');
+            $table->foreign('id')->references('id')->on('group_stat_user');
             $table->foreign('hat_id')->references('id')->on('hats');
             $table->timestamps();
         });

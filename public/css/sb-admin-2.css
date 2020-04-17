@@ -13460,12 +13460,12 @@ span i.fa {
 
 .divider-yellow {
   position: absolute;
-  margin-top: 15.7rem;
+  margin-top: 9.9rem;
   width: 140px;
   height: 9px;
-  background: url(/images/divider-yellow.png?41c8740e4ad23ff3d248a04719af0b2e) top left no-repeat;
+  background: url(/images/divider-yellow.png?41c8740…) top left no-repeat;
   background-size: 154%;
-  background-position-x: -2.2rem;
+  background-position-x: -3.2rem;
 }
 
 .color-white {
@@ -13533,17 +13533,21 @@ table[id^=listPlayer_] {
   width: 95px;
   height: 123px;
   position: relative;
-  background: url(/images/fifa20-fut-yellow-bg.png) top left no-repeat;
+  background: url(/images/bg-gold_mini.png) top left no-repeat;
   background-size: cover;
 }
 
 .display-players img {
   position: absolute;
-  top: 1rem;
-  left: 1.7rem;
-  max-width: 54px;
+  top: 1.6rem;
+  left: 2rem;
+  max-width: 65px;
 }
 
+.infos-players-card-fut {
+  margin-top: 5.8rem;
+  margin-left: 2rem;
+}
 .display-players .infos-capacities-left,
 .display-players.infos-capacities-right {
   display: inline-block;
@@ -13565,9 +13569,10 @@ div.info-players-card-fut {
 }
 
 div.infos-position-player {
-  margin-top: 9.2rem;
-  margin-left: 1rem;
+  margin-top: 2.2rem;
+  margin-left: -3.3rem;
   color: black;
+  font-size: small;
   font-weight: bolder;
 }
 
@@ -13595,25 +13600,25 @@ div.infos-position-player {
 }
 
 #note-player {
-  margin-top: 2.9rem;
-  margin-left: 0.7rem;
+  margin-top: 0.9rem;
+  margin-left: 0.rem;
   padding-left: 0.25rem;
   position: absolute;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   width: 34px;
   color: black;
   height: 34px;
-  background: #ffca04;
+  /* background: #ffca04; */
   border-radius: 20px;
 }
 
 div[id^=delete-team_] {
   position: absolute;
-  margin-top: 13.4rem;
+  margin-top: 7.9rem;
   font-size: larger;
   font-weight: 900;
   text-align: center;
-  margin-left: 3.6rem;
+  margin-left: 2.2rem;
   color: red;
   border: 1px solid red;
   border-radius: 22px;
@@ -13621,8 +13626,6 @@ div[id^=delete-team_] {
   width: 26px;
   height: 27px;
   line-height: 21px;
-  /* margin-top: 3px; */
-  padding-top: -4px;
 }
 
 .form-group {
@@ -13710,6 +13713,11 @@ li[class^="idPlayer_"]{
   height: 100%;
 }
 
+#wrapper-composition.container-fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
 #stade {
   position: relative;
   margin: 0 auto;
@@ -13725,16 +13733,25 @@ li[class^="idPlayer_"]{
 
 #container-bottom{
   position: absolute;
+  display: block;
   /*bottom: 130px !important;*/
   background: transparent;
   color: white;
   width: 100%;
   z-index: 999999;
-  height: 50px;
+  /*height: 20px;*/
+  border-top: 1px solid #fff;
+
+}
+#bottom-bar-display-team-left h4 {
+  font-family: 'Oswald', sans-serif;
+  color: #282828;
+  cursor: pointer;
 }
 
+
 #bottom-bar-display-team-right, #bottom-bar-display-team-left {
-  padding: 1.5rem;
+  padding: .5rem;
   background-color: #cccccc;
 }
 
@@ -13748,6 +13765,9 @@ li[class^="idPlayer_"]{
   -webkit-user-drag: element;*/
 }
 
+#title-substitute {
+  text-transform: uppercase;
+}
 
 #home {
   background: url('../images/bg_home.jpg') no-repeat top left;
@@ -13774,8 +13794,69 @@ li[class^="idPlayer_"]{
   margin-bottom: 1rem;
 }
 
+#line-remplacant {
+  display: flex;
+}
+
+.wallpaper-foot {
+  padding: 2rem;
+  margin: 0;
+  background: url("../images/bg_home.jpg") no-repeat top left;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.switch-list .display-players {
+  cursor: pointer;
+}
+
+.switch-list div.infos-capacities-right {
+  display: inline-block;
+  position: absolute;
+  bottom: 1.4rem;
+  font-size: smaller;
+  /* text-align: center; */
+  color: #0b0019;
+  left: 1.6rem;
+  font-family: anton, 'sans-serif';
+}
 
 
+.switch-list div.infos-position-player {
+  margin-top: 2.2rem;
+  margin-left: 0.3rem;
+  color: black;
+  position: absolute;
+  font-size: x-small;
+  font-weight: bolder;
+}
+
+.switch-list #note-player {
+  margin-top: 2.9rem;
+}
+
+.switch-list div[id^="delete-team"] {
+  display: none;
+}
+
+#players-selected-area div[id^="delete-team"] {
+  display: block;
+}
+
+
+.error {
+    margin-top: 5px;
+
+    font-size: small;
+    font-style: italic;
+    color: #b51515;
+}
+
+.area-select-players h4 {
+  color: #292929;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
 /****************************** MEDIA QUERIES******************************/
 
 @media (max-width: 1600px) {
@@ -13911,6 +13992,44 @@ line-height: 1.5;
   background-size: cover;
 
 }
+.selectTeam a {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: initial;
+  font-family: anton;
+}
+
+.title-capacities-player{
+  font-size: large;
+  font-family: oswald, sans-serif;
+  font-weight: 700;
+  color: #545454;
+}
+
+.players-capacities-number {
+  font-size: large;
+  margin-top: -0.5rem;
+}
+
+#showplayer {
+  background: url("../images/bg_right_players.png") no-repeat top left;
+  background-position: right;
+}
+.rowTablePlayerTeam {
+  border-bottom: 1px solid #eaeaea;
+  width: 100%;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  display: flex;
+  height: 135px;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+
+
+.rowTablePlayerTeam:hover {
+  background-color: aqua;
+}
 /********************** Above 1200px bootstrap class xl ********************
  */
 @media (min-width: 1200px) {
@@ -13967,7 +14086,7 @@ line-height: 1.5;
 
 
   #line-middle {
-    margin-left: 10rem;
+    /*margin-left: 10rem;*/
   }
 }
 
@@ -14273,7 +14392,7 @@ line-height: 1.5;
     border-bottom: 1px solid #ccc;
   }
   #container-bottom {
-      bottom: 0 ;
+      /*bottom: 2rem;*/
   }
 
   #bottom-bar-display-team-left {

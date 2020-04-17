@@ -37,6 +37,14 @@ Route::middleware ('auth')->group(function (){
 
    Route::get('/matchs', 'MatchController@index')->name('matchs.list');
 
+   //TEAM
+    Route::prefix('team')->group(function (){
+       Route::get('/create', 'TeamController@create')->name('create.team');
+       Route::post('/store', 'TeamController@store')->name('store.team');
+       Route::get('/show/{id}', 'TeamController@show')->where('id', '[0-9]+')->name('show.team');
+       Route::post('/checkNameTeam', 'TeamController@checkNameTeam')->name('checkNameTeam');
+    });
+
 });
 
 

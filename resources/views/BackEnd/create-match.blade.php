@@ -116,6 +116,14 @@
                     <div style="display: flex">
                         <span style="padding-left: 3px; color: #cccccc; font-family: Oswald, sans-serif; text-transform: uppercase">Dispositif <b style="font-size: small" id="bold-compo"></b></span>
                     </div>
+                    <div>
+                        <button class="btn btn-outline-warning" id="backSelectPlayers">
+                            Retour aux choix des joueurs
+                        </button>
+                        <button id="validate-composition" class="btn btn-outline-primary" id="backSelectPlayers">
+                            VALIDER LA COMPO
+                        </button>
+                    </div>
                     <div id="icon-soccer-field" data-toggle="modal" data-target="#exampleModal" style="display: flex;justify-content: flex-end; padding-right: 1rem;" class="col-md-12">
                         <div style="border: 2px solid #ccc; padding: .2rem;" class="pull-right">
                             <img style="width: 30px" src="{{ asset('images/icon_soccer_field.png') }}" alt="">
@@ -294,21 +302,20 @@
         </div>
         <div id="container-bottom" style="">
             <div style="" id="bottom-bar-display-team-left">
-            <h4>REMPLACANT(S)</h4>
+            <h4 id="title-substitute">remplaçant(s)</h4>
                 <div id="line-remplacant">
-                     <div id="remp_1" class="card-fut-mobile">
+                     <!--<div id="remp_1" class="card-fut-mobile">
                         <div class="display-players">
                             <div id="note-player">80</div>
                             <div id="delete-team_">x</div>
                             <div class="wrapper-img-player">
-                                <img src="{{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
+                                <img src="{ asset("images/silhouette-ldc-yellow.png") }}" alt="  playerName  ">
                             </div>
-                            <!--<div class="infos-players-card-fut"> playerName </div>-->
                             <div  class="infos-position-player">
                             </div>
                             <div class="infos-capacities-right"></div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -322,11 +329,8 @@
 </div>
 @endsection
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-
     <script type="text/javascript">
         $(function () {
-
             // Sortable.mount(swap());
             const classNameToTest = new RegExp('mar-top-2') ;
             const marTop2 = 'mar-top-2';
@@ -342,7 +346,9 @@
             const wrapperComposition = $('#wrapper-composition');
             const selectorfirstCardMiddleLeft = $('div#line-middle div.card-fut-mobile:nth-child(1)');
             const selectorfirstCardAttaqueLeft = $('div#line-attaque div.card-fut-mobile:nth-child(1)');
-
+            const choicePlayerTeam = $('#choice-player-team');
+            const lineRemplacant = $('#line-remplacant');
+            const containerBottom = $('#container-bottom');
 
             /*
             * Mesure la distance entre deux div card-fut
@@ -406,123 +412,146 @@
                 }
             }
 
-            const sortableAtt = Sortable.create(att, {
-                group: {
-                  name:'team',
-                  swap: true,
-                  swapClass: 'wrapper-card-fut'
-                },
-                animation: 300,
-                ghostClass: 'blue-background-class',
-                draggable: ".card-fut-mobile",
-                swapThreshold: 1,
-                swap: true,
 
-            });
-            const sortableMid = Sortable.create(mid, {
-                group: {
-                  name:'team',
+            let heightBase = 0;
+            let heightContainerCard = 0;
+
+            function initDraggable() {
+                const sortableAtt = Sortable.create(att, {
+                    group: {
+                        name:'team',
+                        swap: true,
+                        swapClass: 'wrapper-card-fut'
+                    },
+                    animation: 300,
+                    ghostClass: 'blue-background-class',
+                    draggable: ".card-fut-mobile",
+                    swapThreshold: 1,
                     swap: true,
-                    swapClass: 'wrapper-card-fut'
-                },
-                animation: 300,
-                ghostClass: 'blue-background-class',
-                draggable: ".card-fut-mobile",
-                swapThreshold: 1,
-                swap: true,
-                onEnd: function (event) {
-                    const checkClass = event.clone.className;
-                    console.warn({event: event});
-                    console.log(checkClass);
-                    if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
-                        event.clone.classList.add('mar-top-2');
+
+                });
+                const sortableMid = Sortable.create(mid, {
+                    group: {
+                        name:'team',
+                        swap: true,
+                        swapClass: 'wrapper-card-fut'
+                    },
+                    animation: 300,
+                    ghostClass: 'blue-background-class',
+                    draggable: ".card-fut-mobile",
+                    swapThreshold: 1,
+                    swap: true,
+                    onEnd: function (event) {
+                        const checkClass = event.clone.className;
+                        const itemCurrent = event.item;
+                        const swapItem = event.swapItem;
+                        console.warn({event: event});
+                        console.log(checkClass);
+                        if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
+                            event.clone.classList.add('mar-top-2');
+                        }
                     }
-                }
-            });
-            const sortableDef = Sortable.create(def, {
-                group: {
-                  name:'team',
+                });
+                const sortableDef = Sortable.create(def, {
+                    group: {
+                        name:'team',
+                        swap: true,
+                        swapClass: 'wrapper-card-fut'
+                    },
+                    animation: 300,
+                    ghostClass: 'blue-background-class',
+                    draggable: ".card-fut-mobile",
+                    swapThreshold: 1,
                     swap: true,
-                    swapClass: 'wrapper-card-fut'
-                },
-                animation: 300,
-                ghostClass: 'blue-background-class',
-                draggable: ".card-fut-mobile",
-                swapThreshold: 1,
-                swap: true,
-                onMove: function (event) {
-                }
-            });
-            const sortableRem = Sortable.create(rem, {
-                group: {
-                  name:'team',
-                    swap: true,
-                    swapClass: 'wrapper-card-fut'
-                },
-                animation: 300,
-                ghostClass: 'blue-background-class',
-                draggable: ".card-fut-mobile",
-                swapThreshold: 1,
-                swap: true,
-                onMove: function (event) {
-                    if(event.from.id === 'line-remplacant') {
-                        toggleRem($('#container-bottom'), true);
+                    onMove: function (event) {
                     }
-                },
-                onEnd: function (event) {
-                    const checkClass = event.item.className;
-                    if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
-                        event.item.classList.add('mar-top-2');
-                    }
-                }
-            });
-            const sortableGoal = Sortable.create(goal, {
-                group: {
-                    name:'team',
+                });
+                const sortableRem = Sortable.create(rem, {
+                    group: {
+                        name:'team',
+                        swap: true,
+                        swapClass: 'wrapper-card-fut'
+                    },
+                    animation: 300,
+                    ghostClass: 'blue-background-class',
+                    draggable: ".card-fut-mobile",
+                    swapThreshold: 1,
                     swap: true,
-                    swapClass: 'wrapper-card-fut'
-                },
-                animation: 300,
-                ghostClass: 'blue-background-class',
-                draggable: ".card-fut-mobile",
-                swapThreshold: 1,
-                swap: true,
-            });
-
-
-
-
-
-
+                    onMove: function (event) {
+                        if(event.from.id === 'line-remplacant') {
+                            toggleRem(containerBottom, true);
+                        }
+                    },
+                    onEnd: function (event) {
+                        const checkClass = event.item.className;
+                        if(!classNameToTest.test(checkClass) && classNameToTest.test(event.swapItem.className)) {
+                            event.item.classList.add('mar-top-2');
+                        }
+                    }
+                });
+                const sortableGoal = Sortable.create(goal, {
+                    group: {
+                        name:'team',
+                        swap: true,
+                        swapClass: 'wrapper-card-fut'
+                    },
+                    animation: 300,
+                    ghostClass: 'blue-background-class',
+                    draggable: ".card-fut-mobile",
+                    swapThreshold: 1,
+                    swap: true,
+                });
+            }
             function toggleRem(elem, drag) {
+                const heightContainerBottom = $('#bottom-bar-display-team-left').outerHeight();
+                const titleSub = $('#title-substitute');
+                const heightH4Title = titleSub.outerHeight(true);
+                const padHeightTitle = titleSub.offset().top;
                 if(drag === true){
-                    if(/180px/.test(elem[0].style.bottom)) {
-                        const pr = new Promise(() => {
-                            elem.animate({
-                                bottom: '0',
-                            }, 10);
-                        });
-                    }
-                } else if ( drag === 'up' ){
-                    elem.animate({
-                        bottom: '180',
-                    }, 1);
-                }
-                else{
-                    if(/180px/.test(elem[0].style.bottom)) {
+                    const t = heightContainerCard + 'px';
+                    if(elem[0].style.bottom === t ) {
                         elem.animate({
-                            bottom: '0',
+                            bottom: '0px',
+                            height: heightBase,
+                        }, 1);
+                    }
+                } else if (drag === 'up' ){
+                    elem.animate({
+                        bottom: heightContainerBottom,
+                    }, 1);
+                } else if (drag === 'init') {
+                    setTimeout(() => {
+                        const heightContainerBottom = document.getElementById('bottom-bar-display-team-left').offsetHeight;
+                        const titleSub = $('#title-substitute');
+                        const heightH4Title = titleSub.outerHeight(true);
+                        const padHeightTitle = titleSub.outerHeight(true);
+                        heightContainerCard = heightContainerBottom;
+                        heightBase = padHeightTitle + 8;
+                        const h = heightH4Title + 7;
+                        elem.animate({
+                            height: padHeightTitle + 8,
+                            bottom: 0
+                        });
+
+                        setTimeout(() => {
+                            initDraggable();
+                        }, 200);
+                    }, 2000);
+                } else {
+                    if(elem[0].style.bottom === '0px' || elem[0].style.bottom === 0 ) {
+                        elem.animate({
+                            bottom: heightContainerBottom,
+                            height: '0px'
                         }, 1);
                     }else{
                         elem.animate({
-                            bottom: '180',
-                        }, 1);
+                            height: heightBase,
+                            bottom: '0px'
+                        }, 200);
                     }
                 }
 
             }
-
-
             /*const el = document.querySelector('.card-fut-mobile');
 
             el.addEventListener("touchstart", handleStart, false);
@@ -562,16 +591,13 @@
                 col.addEventListener('dragstart', handleDragStart, false);
                 console.log(col);
             });*/
-
-
-            $('#container-bottom').on('click', function () {
+            containerBottom.on('click', function () {
                 toggleRem($(this));
             });
             const validateTeam = $('#validate-teams');
             const isMobile =  (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
             if(isMobile) {
-
             }
 
             const group = {groupId: "{{ session('groupId') }}", groupName: "{{ session('groupName') }}"};
@@ -626,13 +652,10 @@
                 const displayerPlayerTeam2 = $('.display-players-selected_2');
                 let photo = $(`#photo_${id}`).val().trim();
                 let renderPhoto = "{{ asset('images/:image') }}";
-                console.warn(renderPhoto);
                 if(photo === '' || /.png|.jpg|.jpeg|.pdf|.gif/i.test(photo)){
                     photo = 'silhouette-ldc-yellow.png';
                 }
                 renderPhoto = renderPhoto.replace(':image', photo);
-
-
                 const cardHtml =
                     '<div class="display-players">' +
                       '<div id="note-player">'+ notePlayer +'</div>'+
@@ -654,9 +677,6 @@
                     playerName: playerName,
                     postePlayer: postePlayer
                 };
-
-                console.log(team);
-
                 if(firstPlaceTeam.is(':visible')){
                     playersTeam['team1'].push(team);
                     countTeamPlayer1++;
@@ -733,6 +753,13 @@
                 }
 
             });
+
+            $(document).on('click', '#backSelectPlayers', function () {
+                wrapperComposition.fadeOut(600);
+                choicePlayerTeam.fadeIn();
+
+            });
+
             $(document).on('click', '#validate-teams', function () {
                 // todo check if is ok
                 $('#choice-player-team').hide();
@@ -741,14 +768,14 @@
                     alert("ERROR TEAM NUMBER");
                 }else{
 
+                    console.warn({playerTeam: playersTeam.team1});
                     // todo attention aux categorie
                     if(playersTeam.team1.length >= 11) {
-
                         const arrPlayer = playersTeam.team1;
-
-                        for (let i = 0; i < arrPlayer.length ; i++) {
-
-                        }
+                        lineAttaque.empty();
+                        lineMiddle.empty();
+                        lineDefense.empty();
+                        lineGoal.empty();
                         // compo 11
                         const firstAttPlayer = generatorCard(
                             'mr-5',
@@ -764,10 +791,10 @@
                             arrPlayer[1].photoPath,
                             arrPlayer[1].playerName,
                         );
-                        const linkAttPlayer = `<div class="link-player" style=></div>`;
+                        // const linkAttPlayer = `<div class="link-player" style=></div>`;
                         lineAttaque.append(
                             firstAttPlayer +
-                            linkAttPlayer +
+                          //  linkAttPlayer +
                             secondAttPlayer
                         );
 
@@ -805,8 +832,8 @@
                             [firstMidPlayer,
                             secondMidPlayer,
                             thirdMidPlayer,
-                            fourthMidPlayer,
-                            linkMidRight]
+                            fourthMidPlayer]
+                           // linkMidRight]
                         );
 
                         const firstDefPlayer = generatorCard(
@@ -855,13 +882,26 @@
                         );
 
                         lineGoal.append(goalPlayer);
+                        if(typeof arrPlayer[11] !== "undefined") {
 
-
-                        //show wrapper-composition
-                        //setTimeout(() => wrapperComposition.fadeIn(), 1);
-
-                        console.warn({test: lineAttaque});
-
+                           const substituePlayers = arrPlayer.splice(11, arrPlayer.length);
+                           let players = '';
+                            for (let i = 0; i < substituePlayers.length; i++) {
+                                players += generatorCard(
+                                    '',
+                                    substituePlayers[i].notePlayer,
+                                    substituePlayers[i].postePlayer,
+                                    substituePlayers[i].photoPath,
+                                    substituePlayers[i].playerName,
+                                )
+                            }
+                            lineRemplacant.empty().append(players);
+                            // containerBottom.css('bottom', toggleRem(containerBottom, 'init'));
+                            toggleRem(containerBottom, 'init');
+                            containerBottom.show();
+                        } else {
+                          containerBottom.hide();
+                        }
 
                         setTimeout(() => {
                             wrapperComposition.show();
@@ -882,19 +922,25 @@
                     }
                     console.log(playersTeam);
 
-                    //todo manque la date du match
-                    /*$.ajax({
-                        data: {players: playersTeam},
-                        type:'POST',
-                        dataType: 'json'
-                    })
-                    .done( (data) => {
-                        url = url.replace(':id', data.idMatch);
-                        window.location.assign(url);
-                    });*/
+
                 }
             });
-           // $(document).on('click', '#pills-profile-tab', )
+
+
+            $(document).on('click', '#validate-composition', function () {
+                //todo manque la date du match
+                $.ajax({
+                    url: "{{ route('store.match') }}",
+                    data: {players: playersTeam},
+                    type:'POST',
+                    dataType: 'json'
+                })
+                .done( (data) => {
+                    let pathMatch = '{{ route('show.match', ':id') }}';
+                    pathMatch = pathMatch.replace(':id', data.idMatch);
+                    window.location.assign(pathMatch);
+                });
+            });
         });
     </script>
 @endsection

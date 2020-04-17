@@ -14,25 +14,21 @@ class Palmares extends Migration
     public function up()
     {
         //
-        Schema::create('palmares_player', function (Blueprint $table) {
+        Schema::create('palmares', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date_palmares')->default(now());
-            $table->enum('palmares_name',
-                [
-                    'man_of_match',
-                    'top_player',
-                    'top_goal',
-                    'best_goal',
-
-                ]);
+            $table->string('palmares_name');
             $table->unsignedBigInteger('match_id');
             $table->dateTime('date_palmares_assigned');
             $table->unsignedBigInteger('player_id');
+            $table->unsignedBigInteger('attributed_by_user_id');
             $table->string('url_video')->default(null);
             $table->timestamps();
 
             //foreign key
-            $table->foreign('player_id')->references('player_id')->on('stats_players');
+            $table->foreign('player_id')->references('id')->on('group_stat_user');
+            $table->foreign('attributed_by_user_id')->references('id')->on('group_stat_user');
+            $table->foreign('match_id')->references('id')->on('matchs');
         });
 
     }
@@ -44,6 +40,6 @@ class Palmares extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('palmares');
     }
 }

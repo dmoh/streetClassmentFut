@@ -117,9 +117,8 @@
         </main>
     </div>
     <!-- Scripts -->
-
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="{{ asset('js/sb-admin-2.js') }}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
     <script type="text/javascript">
         $(function() {

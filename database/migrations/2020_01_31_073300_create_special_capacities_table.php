@@ -20,8 +20,8 @@ class CreateSpecialCapacitiesTable extends Migration
             $table->dateTime('date_mention')->default(now());
             //foreign key
             $table->foreign('player_id')
-                    ->references('player_id')
-                    ->on('stats_players');
+                    ->references('id')
+                    ->on('group_stat_user');
             $table->timestamps();
         });
     }

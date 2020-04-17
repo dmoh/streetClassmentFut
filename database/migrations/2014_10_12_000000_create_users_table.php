@@ -28,7 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('url_img')->nullable();
             $table->boolean('can_vote')->default('0');
             $table->boolean('locked')->default('0');
-            $table->dateTime('expire')->nullable();
+            $table->boolean('freeze')->default('0');
+            $table->boolean('expire')->nullable();
             $table->unsignedBigInteger('player_stat_id')->default(0);
             $table->foreign('player_stat_id')->references('user_id')->on('stats_players');
             $table->timestamps();

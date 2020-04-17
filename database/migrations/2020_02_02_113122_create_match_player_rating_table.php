@@ -18,13 +18,9 @@ class CreateMatchPlayerRatingTable extends Migration
             $table->unsignedBigInteger('match_id');
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('rating');
-
-
             //foreign key
             $table->foreign('match_id')->references('id')->on('matchs');
-            $table->foreign('player_id')->references('player_id')->on('stats_players');
-
-
+            $table->foreign('player_id')->references('id')->on('group_stat_user');
             $table->timestamps();
         });
     }

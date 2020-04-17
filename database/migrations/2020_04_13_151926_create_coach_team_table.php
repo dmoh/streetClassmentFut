@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserPhotoTable extends Migration
+class CreateCoachTeamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateUserPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_photo', function (Blueprint $table) {
+        Schema::create('coach_team', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('url_photo');
+            $table->unsignedBigInteger('coach_id');
+            $table->unsignedBigInteger('team_id');
+
+            $table->foreign('coach_id')->references('id')
+                ->on('group_user');
+            $table->foreign('team_id')->references('id')
+                ->on('teams');
+
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict')
-            ;
         });
     }
 
@@ -30,6 +34,6 @@ class CreateUserPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_photo');
+        Schema::dropIfExists('coach_team');
     }
 }

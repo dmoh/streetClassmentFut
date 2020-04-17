@@ -45,9 +45,6 @@ class MatchController extends Controller
                 ->limit(5)
                 ->get()
             ;
-
-
-
             $playersMatchWithStats = DB::table('stats_matchs')
                 ->join('match_players', 'match_players.match_id', '=','stats_matchs.match_id')
                 ->join('match_player_rating', 'match_player_rating.match_id', '=','stats_matchs.match_id')
@@ -70,16 +67,10 @@ class MatchController extends Controller
                 ->orderBy('stats_matchs.match_id', 'desc')
                 ->get()
             ;
-
-
             $playerRating = DB::table('match_player_rating')
                 ->whereIn('match_id', $matchs->pluck('id')->toArray())
                 ->orderByDesc('match_id')
                 ->get();
-
-
-
-
             return view('FrontEnd/matchs-list', compact('matchs', 'playersMatch', 'playerRating'));
         }
         abort(503);
@@ -101,8 +92,6 @@ class MatchController extends Controller
             ->orderBy('stats_players.user_id', 'desc')
             ->get()
         ;
-
-
         return view('BackEnd/create-match', compact('players'));
     }
 
@@ -115,13 +104,14 @@ class MatchController extends Controller
     public function store(Request $request)
     {
         //
-
         if($request->ajax()){
             $players = $request->get('players');
-             $newMatchId = DB::table('matchs')
+            $compoTeam1 = $request->get('compoTeam1');
+            $compoTeam2 = $request->get('compoTeam2');
+            $newMatchId = DB::table('matchs')
                ->insertGetId(['match_date'=> now()]);
 
-             $allPlayers = [];
+            $allPlayers = [];
             foreach ($players as $teams) {
                 foreach ($teams as $player) {
                     $allPlayers[] = [
@@ -132,15 +122,10 @@ class MatchController extends Controller
                     ];
                 }
             }
-
             DB::table('match_players')
                 ->insert($allPlayers);
-
             return response()->json(['idMatch' => $newMatchId]);
-
-
         }
-
     }
 
 

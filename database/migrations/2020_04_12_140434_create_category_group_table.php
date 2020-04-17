@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserPhotoTable extends Migration
+class CreateCategoryGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_photo', function (Blueprint $table) {
+        Schema::create('category_group', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('url_photo');
+
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('group_id');
+            $table->unsignedBigInteger('create_by_user_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict')
-            ;
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_photo');
+        Schema::dropIfExists('category_group');
     }
 }

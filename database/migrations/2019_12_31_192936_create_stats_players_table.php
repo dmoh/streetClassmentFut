@@ -30,7 +30,7 @@ class CreateStatsPlayersTable extends Migration
             $table->integer('physique')->nullable();
             $table->boolean('legend')->default(false);
             $table->string('skill')->nullable(); //point fort
-            $table->enum('strong_foot', ['left', 'right'])->default('right'); //Passe décisive
+            $table->enum('strong_foot', ['left', 'right'])->default('right');
 
 
             $table->unsignedBigInteger('user_id'); //foreign key
@@ -38,7 +38,7 @@ class CreateStatsPlayersTable extends Migration
             $table->unsignedBigInteger('stats_player_id'); //foreign key
 
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('player_id')->references('id')->on('group_stat_user');
             $table->foreign('player_id')->references('player_id')->on('stats_matchs');
             $table->foreign('stats_player_id')->references('player_id')->on('match_players');
 
