@@ -14012,7 +14012,7 @@ line-height: 1.5;
 }
 
 #showplayer {
-  background: url("../images/bg_right_players.png") no-repeat top left;
+  background: url("../images/bg_black_yellow.jpg") no-repeat top left;
   background-position: right;
 }
 .rowTablePlayerTeam {
@@ -14026,6 +14026,9 @@ line-height: 1.5;
   cursor: pointer;
 }
 
+.active-row-player {
+  background-color: aqua;
+}
 
 .rowTablePlayerTeam:hover {
   background-color: aqua;

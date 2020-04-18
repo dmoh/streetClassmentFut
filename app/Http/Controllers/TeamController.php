@@ -126,6 +126,8 @@ class TeamController extends Controller
     {
         //
 
+
+        $teamName = DB::table('teams')->where('id', $id)->get();
         $players = DB::table('group_user')
             ->join('stats_players', 'stats_players.id', '=', 'group_user.id')
             ->join('users', 'users.id', '=', 'group_user.user_id')
@@ -135,7 +137,8 @@ class TeamController extends Controller
             ->get()
             ;
 
-        return view('team/show', compact('players'));
+
+        return view('team/show', compact('players', 'teamName'));
 
     }
 

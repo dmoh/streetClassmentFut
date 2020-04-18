@@ -12,8 +12,11 @@
             @endif
         </div>
         @if(!isset($hidePoste))
-            <div  class="infos-position-player">
-                {{ strtoupper($player->position) }}
+            <div>
+                <div style="position: absolute; width: 100%; color: black; font-size: small; font-weight: bolder; text-align: center;"
+                     class="infos-position-left-player">
+                    {{ strtoupper($player->position) }}
+                </div>
             </div>
         @endif
         @if(!isset($hideName))
