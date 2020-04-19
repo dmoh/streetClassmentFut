@@ -13857,6 +13857,10 @@ li[class^="idPlayer_"]{
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
 }
+
+.bg-home{
+  background: url('../images/bg_home.jpg') no-repeat top left; background-size: cover; background-attachment: fixed;
+}
 /****************************** MEDIA QUERIES******************************/
 
 @media (max-width: 1600px) {
@@ -14032,6 +14036,65 @@ line-height: 1.5;
 
 .rowTablePlayerTeam:hover {
   background-color: aqua;
+}
+
+.matchs-resume {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: x-large;
+  font-family: OSWALD;
+}
+
+div[class$="number-capacity"]{
+  font-size: larger;
+  margin-top: -.6rem;
+  font-family: Oswald;
+}
+.display-category-top {
+  text-transform: uppercase;
+  font-size: large;
+  color: white;
+  font-family: oswald;
+  margin-right: 1rem;
+}
+#display-name-coach-top {
+  text-transform: uppercase;
+  font-size: large;
+  font-family: OSWALD, 'sans-serif';
+
+}
+
+.nav-top-team{
+  margin-top: .6rem;
+  display: flex;
+  justify-content: center;
+  padding: .4rem;
+  margin-bottom: .6rem;
+  background: #36363654;
+  color: white;
+  font-family: oswald;
+  text-transform: uppercase;
+  cursor: pointer;
+
+}
+
+.active-nav-top{
+  background-color: #2bd8d899;
+  color: #000;
+  border-bottom: 4px solid #62ffff;
+}
+
+span i.fa {
+  font-size: 1.3rem;
+  color: #ededed;
+}
+
+.display-flex-columns{
+  display: flex; flex-direction: column;
+}
+
+.border-top-for-first-row {
+  border-top: 1px solid #eaeaea;
 }
 /********************** Above 1200px bootstrap class xl ********************
  */
@@ -14434,4 +14497,6 @@ line-height: 1.5;
     color: #fff;
     text-transform: uppercase
   }
+
+
 }

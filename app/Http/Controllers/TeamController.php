@@ -6,7 +6,9 @@ use App\Repositories\CategoriesRepository;
 use App\Repositories\CoachRepository;
 use App\Repositories\GroupPlayerRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class TeamController extends Controller
 {
@@ -124,10 +126,41 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        // TODO GET INFO DU SITE FFF DISCTRICT EXEMPLE
 
+        /*$arr =[];
+        $imIn = false;
+        $request = file('https://hautesavoie-paysdegex.fff.fr/competitions/?id=363428&poule=1&phase=1&type=ch&tab=ranking');
+        foreach ($request as $item) {
+            $item = rtrim(trim($item),"\n");
+            if(preg_match('/<table class="ranking-tab">/', $item)){
+                $imIn = true;
 
-        $teamName = DB::table('teams')->where('id', $id)->get();
+            }
+            if($imIn == true){
+                $arr[] = $item;
+            }
+            if(preg_match('/<\/table>/', $item)){
+                $imIn = false;
+            }
+        }*/
+        $userId = Auth::user()->getAuthIdentifier();
+        $teamInfo = DB::table('teams')
+                    ->join('coach_team', 'coach_team.team_id', '=', 'teams.id')
+                    ->join('users', 'users.id', '=', 'coach_team.coach_id')
+                    ->join('category_team', 'category_team.id', '=', 'teams.id')
+                    ->leftJoin('categories', 'categories.id', '=', 'category_team.category_id')
+                    ->where('coach_team.coach_id', 10)
+                    ->where('teams.id', $id)
+                    ->select(
+                        'teams.*',
+                        'users.name as coach_name',
+                        'coach_team.*',
+                        'categories.name as category_name'
+                    )
+                    ->get()
+        ;
+
         $players = DB::table('group_user')
             ->join('stats_players', 'stats_players.id', '=', 'group_user.id')
             ->join('users', 'users.id', '=', 'group_user.user_id')
@@ -138,7 +171,7 @@ class TeamController extends Controller
             ;
 
 
-        return view('team/show', compact('players', 'teamName'));
+        return view('team/show', compact('players', 'teamInfo'));
 
     }
 
@@ -174,5 +207,50 @@ class TeamController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function deletePlayerTeam(Request $request) {
+        if($request->ajax()) {
+            $rowIdTeamToDelete = $request->request->get('rowIdTeamTodelete');
+            $delete = DB::table('player_team')
+                ->delete('id', 32213) // todo actionner la possibilité de delete player
+                // ->delete('id', $rowIdTeamToDelete)
+            ;
+            return response()->json(['ok' => 'success']);
+        }
+    }
+
+    public function findPlayerName(Request $request) {
+        if($request->ajax()){
+            $datas = $request->request;
+            $teamId = $datas->get('teamId');
+            $groupId = $datas->get('groupId');
+            $playerName = $datas->get('playerName');
+
+            $playersAvailable = DB::table('group_user')
+                            ->join('groups', 'groups.id', '=', 'group_user.group_id')
+                            ->join('users', 'users.id', '=', 'group_user.user_id')
+                            ->leftJoin('stats_players', 'stats_players.id',  '=', 'group_user.id')
+                            // ->join('group_team', 'group_team.group_id', '=', 'group_user.group_id')
+                            //->join('player_team', 'player_team.team_id', '=', 'group_team.team_id')
+                           // ->where('groups.id', $groupId)
+                            ->where('groups.id', 2)
+                           // ->where('player_team.team_id', '!=', $teamId)
+                           ->where('users.name', 'LIKE', '%'.$playerName.'%')
+                           ->orWhere('users.surname', 'LIKE', '%'.$playerName.'%')
+                            ->select(
+                                'group_user.id as gu_id',
+                                'group_user.user_id as real_user_id',
+                                'stats_players.*',
+                                'users.name',
+                                'users.surname',
+                                'stats_players.id as stat_player_real_id'
+                            )
+                           ->get();
+
+
+            return response()->json(['players' => $playersAvailable]);
+        }
     }
 }

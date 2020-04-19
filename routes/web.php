@@ -43,6 +43,8 @@ Route::middleware ('auth')->group(function (){
        Route::post('/store', 'TeamController@store')->name('store.team');
        Route::get('/show/{id}', 'TeamController@show')->where('id', '[0-9]+')->name('show.team');
        Route::post('/checkNameTeam', 'TeamController@checkNameTeam')->name('checkNameTeam');
+       Route::post('/delete-player', 'TeamController@deletePlayerTeam')->name('deletePlayerTeam');
+       Route::post('/find-player-by-name', 'TeamController@findPlayerName')->name('findPlayerName');
     });
 
 });
