@@ -1,5 +1,5 @@
 <div class="card-fut-mobile">
-    <div id="player_{{ $player->user_id }}" class="display-players">
+    <div id="@if(!isset($changeIdPlayer))player_{{ $player->user_id }}@else player_{{ $player->stat_real_player_id }} @endif" class="display-players">
         <div style=" @isset($dispositionTeam) margin-top: 2rem; @endisset "id="note-player">{{ $player->current_rating ? $player->current_rating : 'N/N'  }}</div>
         @if(!isset($noDeleteButton))
             <div @isset($showAge) style="margin-top: 9.2rem" @endisset id="delete-team_">x</div>

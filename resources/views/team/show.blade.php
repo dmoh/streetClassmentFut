@@ -127,8 +127,9 @@
                         </div>
                     </div>
                     <div class="matchs-resume">
-                        <div class="text-center">
-                            <h4 style="font-family: Anton, sans-serif; font-size: x-large" >MATCHS</h4>
+                        <div style="padding: 1rem; margin: .5rem; background: #ffffff75;" class="text-center">
+                            <h4 style="font-family: Anton, sans-serif;font-size: x-large;padding-bottom: 0;margin-bottom: 0;" >MATCHS</h4>
+                            <button style="display: none" id="prepare-next-match" class="btn btn-primary">Préparer prochain match</button>
                         </div>
                         <div style="margin-bottom: .1rem" class="table-responsive">
                             <table style="text-align: center" width="100%" class="table">
@@ -164,20 +165,50 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="display: flex" class="">
+                                    <div>Envergure</div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                            <div class="col-md-6">
+                                <div style="width: 100%;height: 400px;">
+                                    <canvas id="myAreaChart" ></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="list-player-team" style="grid-area: listPlayer; display: flex; flex-direction: column;    border-top: 1px solid #ccc;padding-top: 0.3rem;">
                     <div class="row">
                         <div class="col-auto col-md-12">
-                            <h1 style="font-family: Anton, sans-serif;" class="text-center">MES JOUEURS</h1>
-                            <h4 class="text-center"><button style="display: none" id="addNewPlayerTeam" class="btn btn-primary">Intégrer un joueur</button></h4>
+                            <div style="padding: 1rem; margin: .5rem; background: #ffffff75;" class="text-center">
+                                <h4 style="font-family: Anton, sans-serif;font-size: x-large;padding-bottom: 0;margin-bottom: 0;" class="text-center">MES JOUEURS</h4>
+                            </div>
+                            <h6 class="text-center"><button style="display: none" id="addNewPlayerTeam" class="btn btn-primary">Intégrer un joueur</button></h6>
                         </div>
                     </div>
 
                     <div class="row">
                         <div id="listing-left-players" style="margin-right: 0" class="col-md-8">
                             @foreach($players as $player)
-                                <div id="rowPlayerId_{{$player->id}}" class="rowTablePlayerTeam @if($loop->first) active-row-player border-top-for-first-row @endif  " style="">
+                                <div id="rowPlayerId_{{$player->stat_real_player_id}}" class="rowTablePlayerTeam @if($loop->first) active-row-player border-top-for-first-row @endif  " style="">
                                     <div id="infos">
                                         <input type="hidden" class="position-player" value="{{$player->position}}">
                                         <input type="hidden" class="current-rating-player" value="{{$player->current_rating}}">
@@ -189,6 +220,7 @@
                                      'hideName' => true,
                                      'showIconSkill' => true,
                                      'dispositionTeam' => true,
+                                     'changeIdPlayer' => true
                                     ])
                                     <div style="width: 100%;display: flex;flex-direction:column;padding: .5rem;" class="stats">
                                         <div style=" font-size: x-large; font-family: oswald, sans-serif; padding-bottom: .1rem;" class="player-name">{{strtoupper($player->name)}}
@@ -231,13 +263,13 @@
                                 @foreach($players as $player)
                                     <div style="position: absolute;color: red;margin-left: 1rem;margin-top: 1rem;width: 30px;height: 30px;" class="deletePlayerOfTeam">
                             <span>
-                                <input type="hidden" id="update-change-input-team-player" value="{{ $player->id }}">
+                                <span style="display: none"  id="update-change-input-team-player">{{ $player->stat_real_player_id }}</span>
                                 <i id="update-change-team-player" style="color: #14e414; cursor:pointer;" title="Modifier" class="fa fa-user-circle"></i>
                             </span>
                                     </div>
                                     <div style="position: absolute;color: red;right: 1rem;margin-top: 1rem;width: 30px;height: 30px;" class="deletePlayerOfTeam">
                             <span>
-                                <input type="hidden" id="delete-change-input-team-player" value="{{ $player->id }}">
+                                <span style="display: none"  id="delete-change-input-team-player">{{ $player->stat_real_player_id }}</span>
                                 <i id="delete-change-team-player" style="color: red; cursor:pointer;" title="Supprimer" class="fa fa-times-circle"></i>
                             </span>
                                     </div>
@@ -326,19 +358,7 @@
                         <h6 style=" padding: 1rem; font-size: x-large; text-transform: uppercase; font-family: 'oswald';" class="text-center">évolution des matchs</h6>
                     </div>
                 </div>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <div style="width: 100%;height: 400px;">
-                            <canvas id="myAreaChart" ></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="newPlayer">Ajouter un joueur à cette équipe</label>
-                        <input type="text" class="form-control" placeholder="Nom du joueur">
-                    </div>
-                </div>
+
             </div>
         </section>
     </div>
@@ -348,14 +368,24 @@
     <script>
         $(function () {
             $('#addNewPlayerTeam').hide();
+            const teamId = $(`#team-info-id`).val();
+            const groupId = '{{ session("groupId")}}';
+            const sectionListPlayer = $(`#list-player-team`);
+            const sectionMatch = $(`.matchs-resume`);
+            const graphMatch = $(`#graph-matchs`);
+            const btnAddNewPlayerTeam = $('#addNewPlayerTeam');
+            const btnPrepareNextMatch = $('#prepare-next-match');
+
+
+
             function removeClassActiveRowPlayer(){
                 $(`#list-player-team`).find('div[class*="active-row-player"]')
                     .removeClass('active-row-player');
             }
             function showProfilPlayerSelected(rowSelected, playerId){
                 const infosPlayer = `div#infos`;
-                $(`#update-change-input-team-player`).val(playerId);
-                $(`#delete-change-input-team-player`).val(playerId);
+                $(`#update-change-input-team-player`).text(`${playerId}`);
+                $(`#delete-change-input-team-player`).text(`${playerId}`);
                 const notePlayer = rowSelected.find('div#note-player').text();
                 $('#current-rating').empty().text(notePlayer);
                 const namePlayer = rowSelected.find('div.player-name').text();
@@ -406,6 +436,7 @@
             $(document).on('click', 'i[id*="-change-team-player"]', function () {
                const idSelected = $(this).attr('id');
                const idPlayerSelected = $(this).attr('id').split('_')[1];
+               console.warn({this: $(this)});
                if(/update/.test(idSelected)){
 
                }else{
@@ -416,12 +447,14 @@
             });
 
             $(document).on('click', '#yes-delete', function () {
-                const idToDelete = $(`#delete-change-input-team-player`).val();
+                const idToDelete = $(`#delete-change-input-team-player`).text();
                 $.ajax({
                     url: "{{ route('deletePlayerTeam') }}",
                     type: 'POST',
                     data: {
-                        rowIdTeamToDelete: idToDelete
+                        rowIdTeamToDelete: idToDelete,
+                        teamId: teamId,
+                        groupId: groupId
                     },
                     dataType: 'json',
                     success: function (data) {
@@ -454,23 +487,23 @@
 
                    $(this).addClass('active-nav-top');
                    const idNav = $(this).attr('id');
-                   const sectionListPlayer = $(`#list-player-team`);
-                   const sectionMatch = $(`.matchs-resume`);
-                   const graphMatch = $(`#graph-matchs`);
-                   const btnAddNewPlayerTeam = $('#addNewPlayerTeam');
+
                    switch (idNav){
                        case 'recap-nav-team':
                            sectionListPlayer.fadeIn();
                            sectionMatch.fadeIn();
                            graphMatch.fadeIn();
                            btnAddNewPlayerTeam.fadeOut();
+                           btnPrepareNextMatch.fadeOut();
                            break;
                        case 'matchs-nav-team':
                            sectionMatch.fadeIn();
                            graphMatch.fadeIn();
                            sectionListPlayer.fadeOut();
+                           btnPrepareNextMatch.fadeIn();
                            break;
                        case 'joueurs-nav-team':
+                           btnPrepareNextMatch.fadeOut();
                            sectionListPlayer.fadeIn();
                            btnAddNewPlayerTeam.fadeIn();
                            sectionMatch.fadeOut();
@@ -494,12 +527,11 @@
                if(namePlayer.length > 2 && /[0-9a-zA-Z.\-_ ]/.test(namePlayer)){
                    showProfilPlayerSelected(responsePlayerAvailable);
                    namePlayer.trim();
-                   const teamId = $(`#team-info-id`).val();
                    $.ajax({
                       url: '{{ route('findPlayerName') }}',
                       data: {
                           teamId: teamId,
-                          groupId: '{{ session("groupId")}}',
+                          groupId: groupId,
                           playerName: namePlayer
                       },
                       type: 'POST',
@@ -550,14 +582,21 @@
                const arrayPlayer = addPlayers.filter((elem) => {
                   return  elem.playerId === playerId
                });
-               const item = arrayPlayer[0].infos;
+               let item = arrayPlayer[0].infos;
                removeClassActiveRowPlayer();
                $(`div[id^='rowPlayerId_']`).each(function () {
                        if($(this).hasClass('border-top-for-first-row')){
                            $(this).removeClass('border-top-for-first-row');
                        }
                 });
-               const rowPlayerHtml = `<div id="rowPlayerId_${item.stat_player_real_id}" class="rowTablePlayerTeam  active-row-player " style="">
+               $.ajax({
+                  url: '{{ route('addPlayerTeam') }}',
+                  type: 'POST',
+                  data:{teamId: $('#team-info-id').val(), addStatPlayerId: playerId, groupId: groupId},
+                  dataType: 'json',
+                  success: function(data){
+                      if(data.ok){
+                          const rowPlayerHtml = `<div id="rowPlayerId_${item.stat_player_real_id}" class="rowTablePlayerTeam  active-row-player " style="">
                                     <div id="infos">
                                         <input type="hidden" class="position-player" value="${item.position}">
                                         <input type="hidden" class="current-rating-player" value="${item.current_rating}">
@@ -615,10 +654,13 @@
                                         <span><i style="font-size: .9rem;color: #5d5d5d;" class="fa fa-chevron-right"></i></span>
                                     </div>
                                 </div>`;
-                $(`#listing-left-players`).prepend(rowPlayerHtml);
-                const newRow = $(`#rowPlayerId_${item.stat_player_real_id}`);
-                newRow.addClass('border-top-for-first-row');
-                showProfilPlayerSelected(newRow, playerId);
+                          $(`#listing-left-players`).prepend(rowPlayerHtml);
+                          const newRow = $(`#rowPlayerId_${item.stat_player_real_id}`);
+                          newRow.addClass('border-top-for-first-row');
+                          showProfilPlayerSelected(newRow, playerId);
+                      }
+                  }
+               });
             });
         });
     </script>
@@ -636,7 +678,7 @@
         var ctx = document.getElementById("myAreaChart");
         //ctx.style.backgroundColor = "rgba(0,0,0, 0.3)";
         var myLineChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 // labels: label, // todo mettre les dates des matchs
                 labels: [2,8,3,4,10,6,3,8,2,1], // todo mettre les dates des matchs

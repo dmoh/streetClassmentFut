@@ -166,6 +166,14 @@ class TeamController extends Controller
             ->join('users', 'users.id', '=', 'group_user.user_id')
             ->leftJoin('uploads', 'uploads.user_id', '=', 'group_user.user_id')
             ->join('player_team', 'player_team.player_id', '=', 'group_user.player_id')
+            ->select(
+                'stats_players.*',
+                'stats_players.id as stat_real_player_id',
+                'users.name',
+                'users.surname',
+                'uploads.*',
+                'player_team.id as line_table_player_team.id'
+            )
             ->where('player_team.team_id', $id)
             ->get()
             ;
@@ -212,9 +220,13 @@ class TeamController extends Controller
 
     public function deletePlayerTeam(Request $request) {
         if($request->ajax()) {
-            $rowIdTeamToDelete = $request->request->get('rowIdTeamTodelete');
-            $delete = DB::table('player_team')
-                ->delete('id', 32213) // todo actionner la possibilité de delete player
+            $rowIdTeamToDelete = $request->request->get('rowIdTeamToDelete');
+            $teamId = $request->request->get('teamId');
+            $groupId = $request->request->get('groupId');
+            DB::table('player_team')
+                ->where('player_id','=', $rowIdTeamToDelete)
+               ->where('team_id', '=', $teamId )
+                ->delete()
                 // ->delete('id', $rowIdTeamToDelete)
             ;
             return response()->json(['ok' => 'success']);
@@ -227,7 +239,6 @@ class TeamController extends Controller
             $teamId = $datas->get('teamId');
             $groupId = $datas->get('groupId');
             $playerName = $datas->get('playerName');
-
             $playersAvailable = DB::table('group_user')
                             ->join('groups', 'groups.id', '=', 'group_user.group_id')
                             ->join('users', 'users.id', '=', 'group_user.user_id')
@@ -248,9 +259,21 @@ class TeamController extends Controller
                                 'stats_players.id as stat_player_real_id'
                             )
                            ->get();
-
-
             return response()->json(['players' => $playersAvailable]);
+        }
+    }
+
+
+    public function addPlayerTeam(Request $request) {
+        if($request->ajax()){
+          $newPlayer = $request->request;
+          $newRowPlayerId=  DB::table('player_team')
+                ->insertGetId([
+                    'player_id' => $newPlayer->get('addStatPlayerId'),
+                    'team_id' => $newPlayer->get('teamId')
+                    ])
+          ;
+          return response()->json(['ok' => $newRowPlayerId]);
         }
     }
 }

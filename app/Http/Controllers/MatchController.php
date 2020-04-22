@@ -31,7 +31,6 @@ class MatchController extends Controller
     {
         if(Auth::id()){
             // $matchs = Matchs::with('statsPlayer')->get();
-
             //todo ranger dans un repository
             $matchs = DB::table('matchs')
                 ->join('match_players', 'match_players.match_id', '=', 'matchs.id')
@@ -84,10 +83,11 @@ class MatchController extends Controller
     public function create(Request $request)
     {
         $players = DB::table('stats_players')
-            ->join('users', 'users.id', '=', 'stats_players.user_id')
-            ->join('group_player', 'group_player.player_id', '=', 'stats_players.user_id')
-            ->leftJoin('uploads', 'uploads.user_id', '=', 'stats_players.user_id')
-            ->where('group_player.group_id', '=', session('groupId'))
+            ->join('group_user', 'group_user.id', '=', 'stats_players.id')
+            ->join('users', 'users.id', '=', 'group_user.user_id')
+            ->leftJoin('uploads', 'uploads.user_id', '=', 'group_user.user_id')
+           // ->where('group_user.group_id', '=', session('groupId'))
+            ->where('group_user.group_id', '=', 2)
             ->select('users.*', 'stats_players.*', 'uploads.filename', 'uploads.original_name')
             ->orderBy('stats_players.user_id', 'desc')
             ->get()

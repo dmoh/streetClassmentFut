@@ -1,50 +1,162 @@
 /*************************** CUSTOM STYLE **********************************/
 
 .bg-list-players {
-  background: url('../images/bg_complete.png') top left no-repeat #0b0956;
+  background: url(/images/bg_complete.png) top left no-repeat #0b0956;
   background-size: cover;
   background-position-y: -133rem;
   top: 0;
   bottom: 0;
-  padding-bottom: 3rem
+  padding-bottom: 3rem;
 }
 
-.wrapper-card-fut{
-  background: url('../images/bg-fut-ldc-new.png') top left no-repeat;
+.wrapper-card-fut {
+  background: url(/images/bg-fut-ldc-2.png) top left no-repeat;
   background-size: cover;
   position: relative;
-  width: 260px;
+  width: 255px;
   height: 386px;
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 5rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
-.name-fut h5{
+
+.wrapper-card-fut-gold {
+  background: url(/images/bg-card-gold.png) top left no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 255px;
+  height: 386px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.infos-left-fut-gold {
+  position: absolute;
+  color: #8b7114;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  left: 3.6rem;
+  font-size: 2.2rem;
+  top: 4rem;
+  font-family: Oswald, sans-serif;
+}
+
+.img-user-fut-gold {
+  position: absolute;
+  /* max-width: 140px; */
+  overflow: hidden;
+  max-height: 160px;
+}
+
+.name-fut-gold h5 {
+  text-align: center;
+  color: #8b7113;
+  text-transform: uppercase;
+  position: absolute;
+  width: 77%;
+  /* background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%); */
+  padding-top: 16px;
+  margin: 9rem auto;
+  margin-left: 2rem;
+  padding-bottom: 6px;
+  font-family: Oswald, sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+}
+
+
+.infos-capacities-left-gold, .infos-capacities-right-gold {
+  display: inline-block;
+  margin-top: 12.3rem;
+  color: #6c580e;
+  font-size: 1.1rem;
+  line-height: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.infos-capacities-left-gold span,
+.infos-capacities-right-gold span {
+  display: block;
+  line-height: 1.3rem;
+}
+
+
+
+.wrapper-card-fut-legend {
+  background: url(/images/bg-legend.png) top left no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 255px;
+  height: 386px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+.name-fut h5 {
   text-align: center;
   color: #b2fff0;
   text-transform: uppercase;
   position: absolute;
   width: 77%;
-  background: linear-gradient(10deg, rgb(32, 41, 102), rgba(255,0,0,0) 70.71%);
+  background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%);
   padding-top: 7px;
   margin: 9rem auto;
   margin-left: 2rem;
-  padding-bottom: 7px;
+  padding-bottom: 6px;
+  font-family: Oswald, sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
 }
 
 .infos-left-fut {
   position: absolute;
   color: #a7ffee;
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
-  left: 3.2rem;
-  font-size: 2.3rem;
-  top: 5rem;
+  left: 3.6rem;
+  font-size: 2.6rem;
+  top: 4rem;
+  font-family: Oswald, sans-serif;
 }
 
-.infos-capacities-left, .infos-capacities-right {
+
+.infos-left-fut-legend {
+  position: absolute;
+  color: #d69d12;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  left: 3rem;
+  font-size: 2.6rem;
+  top: 4rem;
+  font-family: Oswald, sans-serif;
+}
+
+.infos-left-fut-legend p:last-child {
+  font-size: 1.4rem;
+  margin-top: -2rem;
+  text-align-last: center;
+}
+
+
+
+
+.infos-capacities-left,
+.infos-capacities-right {
   display: inline-block;
   margin-top: 12.3rem;
   color: #a7ffee;
@@ -52,19 +164,75 @@
   line-height: 0;
   padding: 0;
   margin-bottom: 0;
-  text-align: center;
+}
 
+
+
+.infos-capacities-left-legend, .infos-capacities-right-legend {
+  display: inline-block;
+  margin-top: 12.3rem;
+  font-family: 'Oswald' sans-serif;
+  font-weight: 300;
+  color: #b78813;
+  font-size: 1.1rem;
+  line-height: 0;
+  padding: 0;
+  margin-bottom: 0;
 }
+
 .infos-capacities-left {
-  width: 57%;
 }
-.infos-capacities-left span, .infos-capacities-right span {
+
+.infos-capacities-left span,
+.infos-capacities-right span {
   display: block;
-  line-height: 1.5rem;
+  line-height: 1.3rem;
+}
+
+.img-small-left {
+  background: url('../images/small-match-display-bg.png') top left no-repeat;
+  background-size: contain;
+  height: 149px;
+  display: inline-block;
+  width: 129px;
+}
+
+.alignement-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
+}
+.info-note-player {
+  margin-top: 2.5rem;
+  font-size: x-large;
+  color: white;
+  margin-bottom: -9px;
+  margin-left: .7rem;
+}
+
+.info-poste-player {
+  color: white;
+  font-size: larger;
+  margin-left: .7rem;
+  text-transform: uppercase;
 }
 
 .img-user-fut {
   position: absolute;
+  /* max-width: 140px; */
+  overflow: hidden;
+  max-height: 148px;
+}
+.margin-right-6 {
+  margin-right: 6px;
+}
+.no-player{
+  font-size: 3rem;
+  font-family: Oswald, sans-serif;
+  color: white;
+  margin-top: 7rem;
+  margin-bottom: 8rem;
 }
 .img-user-fut img {
   top: 7px;
@@ -73,18 +241,114 @@
   width: 149px;
 }
 
-.marg-top-fut-bg{
-  margin-top: 5rem;
+.img-user-fut-gold img{
+  /*top: 7px;
+  margin-top: 0.5rem;
+  margin-left: 4.7rem;
+  width: 149px;*/
+
+  top: 7px;
+  margin-top: 0.8rem;
+  margin-left: 5.2rem;
+  width: 141px;
+}
+
+.couple-stat-note > div:last-child{
+  font-size: larger;
+  margin-top: -9px;
+}
+div > i.fa-trophy {
+  font-size: 60px;
+  margin-top: -17px;
+  margin-left: 6px;
+  z-index: 10;
+}
+.marg-top-fut-bg {
+  margin-top: 3rem;
   color: #fff;
   font-size: large;
 }
+
+.divider {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+#table-of-vote {
+  margin-top: 2rem;
+}
+#nav-hats {
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: xx-large;
+
+  font-family: 'Anton', sans-serif;
+}
+
+.active-hat {
+  background: #b60fcb;
+  color: white;
+}
+
+#nav-hats > div {
+  padding: 2rem;
+  cursor: pointer;
+}
+#title-top-match {
+  padding: 1rem;
+  background: #587eee;
+  margin-top: 1rem;
+  border-radius: 5px;
+  color: #fff;
+  font-size: xx-large;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: 'Oswald', sans-serif;
+}
+#score-match{
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+}
+#versus-team{
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 5rem;
+}
+#validate-teams{
+  font-family: 'Shadows Into Light', cursive;
+  color: #fff;
+  background-color: #bd4e4e;
+  border-color: #ffffff6e;
+  font-size: xx-large;
+}
+.wrapper-score{
+  border-radius: 5px;
+  background: #2c2cba;
+  color: #fff;
+  padding: 0.5rem 2rem;
+}
+
+ul.navbar-nav > li a {
+  font-size: large;
+  color: rgb(11, 14, 90);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: italic;
+  font-family: 'Anton', sans-serif;
+}
+.navbar-light.navbar-nav.nav-link{
+  color: rgb(11, 14, 90);
+
+}
+
 
 .infos-player .table {
   width: 100%;
   margin-bottom: 1rem;
   color: #ffffff;
 }
-
+div[id^="player-name_"] {
+  font-family: 'Oswald', sans-serif;
+}
 .infos-player .table td {
   padding: 0.75rem;
   vertical-align: top;
@@ -108,7 +372,7 @@
   border-bottom: 1px solid #e3e6f0;
 }
 
-span i.fa{
+span i.fa {
   font-size: 2rem;
   color: #31eb31;
   line-height: 1px;
@@ -116,19 +380,22 @@ span i.fa{
 }
 
 .bg-hat {
-  background: url(../images/bg-fut-ldc-new.png) top left no-repeat;
+  background: url(/images/bg-fut-ldc-new.png?5caaa51bb7d5ee99e3490014cfb53ccc) top left no-repeat;
   background-size: contain;
   background-position-y: 7px;
   width: 90px;
   height: 150px;
-  margin: 5rem auto;
+  margin: 6rem auto;
   margin-bottom: 1rem;
 }
 
 .position-num-hat h6 {
   line-height: 6rem;
-  font-size: 1rem;
-  padding-left: 5px;
+  font-size: 1.4rem;
+  /* padding-left: 14px; */
+  text-align: center;
+  font-family: Anton, sans-serif;
+
 }
 
 .num-hat h6 {
@@ -136,6 +403,8 @@ span i.fa{
   text-align: center;
   /* top: -7px; */
   line-height: 1px;
+  font-family: Anton, sans-serif;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
 }
 
 .rest-infos {
@@ -151,8 +420,8 @@ span i.fa{
   text-align: center;
 }
 
-
-.info-sigle, .man-of-match {
+.info-sigle,
+.man-of-match {
   text-align: center;
   color: #fff;
 }
@@ -168,23 +437,22 @@ span i.fa{
   border-top: 1px solid #e3e6f0;
 }
 
-
-.title-table h6{
+.title-table h6 {
   font-size: 2rem;
 }
 
 .margin-b-2 {
-  margin-bottom:  2rem;
+  margin-bottom: 2rem;
 }
-
-
 
 .border-bottom-table {
   border-bottom: 1px solid #3e4e9a;
 }
+
 .border-left-table {
   border-left: 1px solid #3e4e9a;
 }
+
 .border-right-table {
   border-right: 1px solid #3e4e9a;
 }
@@ -192,7 +460,7 @@ span i.fa{
 .divider-blue {
   width: 99%;
   height: 6px;
-  background: url(../images/divider-blue.png) top left no-repeat;
+  background: url(/images/divider-blue.png?55ea3b9ba52b49fc316a4cc34c794a0c) top left no-repeat;
   background-position-x: -86px;
   margin-top: 6rem;
 }
@@ -200,19 +468,18 @@ span i.fa{
 .divider {
   width: 100%;
   height: 9px;
-  background: url(../images/divider.png) top left no-repeat;
+  background: url(/images/divider.png) top left no-repeat;
   background-position-x: center;
 }
 
-
 .divider-yellow {
   position: absolute;
-  margin-top: 15.7rem;
+  margin-top: 9.9rem;
   width: 140px;
   height: 9px;
-  background: url(../images/divider-yellow.png) top left no-repeat;
+  background: url(/images/divider-yellow.png) top left no-repeat;
   background-size: 154%;
-  background-position-x: -2.2rem;
+  background-position-x: -3.2rem;
 }
 
 .color-white {
@@ -222,6 +489,7 @@ span i.fa{
 .font-xx-large {
   font-size: xx-large;
 }
+
 .marg-top {
   margin-top: 2rem;
 }
@@ -230,7 +498,7 @@ main.py-4 {
   padding-top: 0 !important;
 }
 
-table[id^="listPlayer_"] {
+table[id^=listPlayer_] {
   text-align: center;
 }
 
@@ -257,32 +525,45 @@ table[id^="listPlayer_"] {
 }
 
 .bg-dark-fut {
-  background: url(../images/bg-yellow.png) top left no-repeat #040404;
+  background: url(/images/bg-yellow.png?92ccb4eb3184a340e0697cee80c75a00) top left no-repeat #040404;
   background-size: cover;
   background-position-y: -7rem;
   top: 0;
   bottom: 0;
   padding-bottom: 3rem;
 }
+#first-team-place, #second-team-place {
+  padding: 1rem;
+  background: url(../images/bg_stade.jpg) top no-repeat #46464673;
+  background-size: cover;
+  background-blend-mode: difference;
+}
 
 .display-players {
+  display: -webkit-inline-box;
   display: inline-flex;
   margin-right: 7px;
   margin-bottom: 5rem;
-  width: 140px;
-  height: 208px;
+  width: 95px;
+  height: 123px;
   position: relative;
-  background: url(../images/bg-fut-yelow.png) top left no-repeat;
+  background: url(/images/bg-gold_mini.png) top left no-repeat;
   background-size: cover;
 }
-.display-players img{
-  position: absolute;
-  top: 2rem;
-  left: 1rem;
-  max-width: 108px;
 
+.display-players img {
+  position: absolute;
+  top: 1.6rem;
+  left: 2rem;
+  max-width: 65px;
 }
-.display-players .infos-capacities-left, .display-players.infos-capacities-right {
+
+.infos-players-card-fut {
+  margin-top: 5.8rem;
+  margin-left: 2rem;
+}
+.display-players .infos-capacities-left,
+.display-players.infos-capacities-right {
   display: inline-block;
   margin-top: 12.3rem;
   color: #a7ffee;
@@ -291,33 +572,37 @@ table[id^="listPlayer_"] {
   padding: 0;
   margin-bottom: 0;
   text-align: center;
-
 }
 
 div.info-players-card-fut {
   margin-top: 9.2rem;
   text-transform: uppercase;
   color: black;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   font-weight: bold;
 }
+
 div.infos-position-player {
-  margin-top: 9.2rem;
-  margin-left: 1rem;
+  margin-top: 2.2rem;
+  margin-left: -3.3rem;
   color: black;
+  font-size: small;
   font-weight: bolder;
 }
 
 .tab-team-switch {
+  display: -webkit-box;
   display: flex;
   justify-content: space-around;
 }
 
-.tab-team-switch .first-select, .tab-team-switch .second-select{
+.tab-team-switch .first-select,
+.tab-team-switch .second-select {
   margin: 20px;
 }
 
-.first-select, .second-select {
+.first-select,
+.second-select {
   padding: 20px;
   background: #cccccc;
   cursor: pointer;
@@ -328,26 +613,26 @@ div.infos-position-player {
   background: #ccb359;
 }
 
-#note-player{
-  margin-top: 2.9rem;
-  margin-left: 0.7rem;
+#note-player {
+  margin-top: 0.9rem;
+  margin-left: 0.rem;
   padding-left: 0.25rem;
   position: absolute;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   width: 34px;
   color: black;
   height: 34px;
-  background: #ffca04;
+  /* background: #ffca04; */
   border-radius: 20px;
 }
 
-div[id^='delete-team_'] {
+div[id^=delete-team_] {
   position: absolute;
-  margin-top: 13.4rem;
+  margin-top: 7.9rem;
   font-size: larger;
   font-weight: 900;
   text-align: center;
-  margin-left: 3.6rem;
+  margin-left: 2.2rem;
   color: red;
   border: 1px solid red;
   border-radius: 22px;
@@ -355,35 +640,875 @@ div[id^='delete-team_'] {
   width: 26px;
   height: 27px;
   line-height: 21px;
-  /* margin-top: 3px; */
-  padding-top: -4px;
 }
 
-
+.form-group {
+  color: #fff;
+}
 
 #my-dropzone {
   border: 2px dashed #0087F7;
   border-radius: 5px;
-  .message {
-    font-family: "Segoe UI Light", "Arial", serif;
-    font-weight: 600;
-    color: #0087F7;
-    @include font-size(1.5em);
-    letter-spacing: 0.05em;
-  }
 }
+
+#my-dropzone .message {
+  font-family: "Segoe UI Light", "Arial", serif;
+  font-weight: 600;
+  color: #0087F7;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+}
+
 a.dz-remove {
   text-decoration: none !important;
-  &:hover {
+}
+
+a.dz-remove:hover {
+  color: red;
+  font-size: 1rem !important;
+}
+
+
+#display-player-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+div#accordion div.card {
+  font-size: larger;
+  font-family: 'Oswald', sans-serif;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: none;
+  margin: .2rem;
+  border-radius: 0;
+}
+
+
+.infos-player h6 {
+  font-size: x-large;
+  color: #fff;
+  text-transform: uppercase
+}
+
+#palmares {
+  color: #fff;
+}
+
+#palmares h4 {
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #1b2272;
+}
+
+/*#list-player-group {
+  display: none;
+}*/
+
+li[class^="idPlayer_"]{
+  display: none;
+}
+
+#wrapper-composition {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: #ccc;
+  height: 100%;
+}
+
+#wrapper-composition.container-fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+#stade {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background: url(../images/bg_stade_composition.jpg) no-repeat top left;
+  /* background: url(../images/bg_stade_composition.jpg) no-repeat top left;*/
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-x: center;
+  background-origin: unset;
+}
+
+#container-bottom{
+  position: absolute;
+  display: block;
+  /*bottom: 130px !important;*/
+  background: transparent;
+  color: white;
+  width: 100%;
+  z-index: 999999;
+  /*height: 20px;*/
+  border-top: 1px solid #fff;
+
+}
+#bottom-bar-display-team-left h4 {
+  font-family: 'Oswald', sans-serif;
+  color: #282828;
+  cursor: pointer;
+}
+
+
+#bottom-bar-display-team-right, #bottom-bar-display-team-left {
+  padding: .5rem;
+  background-color: #cccccc;
+}
+
+[draggable] {
+  /*-moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+   Required to make elements draggable in old WebKit
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;*/
+}
+
+#title-substitute {
+  text-transform: uppercase;
+}
+
+#home {
+  background: url('../images/bg_home.jpg') no-repeat top left;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 25px;
+}
+
+#home .card-header {
+  background-color: white;
+  color: #d13636;
+  text-transform: uppercase;
+  border-radius: 0;
+  padding: .5rem;
+  font-family: Oswald, sans-serif;
+}
+
+#home .card-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+#home .card {
+  margin-bottom: 1rem;
+}
+
+#line-remplacant {
+  display: flex;
+}
+
+.wallpaper-foot {
+  padding: 2rem;
+  margin: 0;
+  background: url("../images/bg_home.jpg") no-repeat top left;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.switch-list .display-players {
+  cursor: pointer;
+}
+
+.switch-list div.infos-capacities-right {
+  display: inline-block;
+  position: absolute;
+  bottom: 1.4rem;
+  font-size: smaller;
+  /* text-align: center; */
+  color: #0b0019;
+  left: 1.6rem;
+  font-family: anton, 'sans-serif';
+}
+
+
+.switch-list div.infos-position-player {
+  margin-top: 2.2rem;
+  margin-left: 0.3rem;
+  color: black;
+  position: absolute;
+  font-size: x-small;
+  font-weight: bolder;
+}
+
+.switch-list #note-player {
+  margin-top: 2.9rem;
+}
+
+.switch-list div[id^="delete-team"] {
+  display: none;
+}
+
+#players-selected-area div[id^="delete-team"] {
+  display: block;
+}
+
+
+.error {
+  margin-top: 5px;
+
+  font-size: small;
+  font-style: italic;
+  color: #b51515;
+}
+
+.area-select-players h4 {
+  color: #292929;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+.bg-home{
+  background: url('../images/bg_home.jpg') no-repeat top left; background-size: cover; background-attachment: fixed;
+}
+/****************************** MEDIA QUERIES******************************/
+
+@media (max-width: 1600px) {
+  .bg-list-players {
+    background-position-y: -83rem;
+  }
+}
+
+@media (max-width: 839px) {
+  #nav-hats {
+    font-size: larger;
+  }
+}
+@media (min-width: 767px) and (max-width: 991px) {
+  #nav-hats {
+    font-size: larger;
+  }
+
+  #nav-hats > div {
+    padding: 0.6rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .wrapper-card-fut {
+    background-size: contain;
+    width: 218px;
+    height: 382px;
+    padding-top: 0rem;
+    padding-bottom: 3rem;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+
+  .infos-left-fut {
+    font-weight: 600;
+    left: 2.5rem;
+    font-size: 2.6rem;
+    top: 5rem;
+    font-family: Oswald, sans-serif;
+  }
+
+  .img-user-fut img {
+    top: 7px;
+    margin-top: 2rem;
+    margin-left: 4.7rem;
+    width: 126px;
+  }
+
+
+  .name-fut h5 {
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    width: 77%;
+    background: linear-gradient(10deg, #202966, rgba(255, 0, 0, 0) 70.71%);
+    padding-top: 18px;
+    margin: 9rem auto;
+    margin-left: 2rem;
+    padding-bottom: 6px;
+    font-family: Oswald, sans-serif;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+  }
+
+  .br-theme-bars-square .br-widget a {
+    display: block;
+    width: 23px;
+    height: 23px;
+    margin: 1px;
+    line-height: 1.5;
+  }
+
+}
+
+#bottom-bar {
+  bottom: 0 !important;
+  height: 45px;
+  background: #0b0956;
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+
+#line-defense, #line-middle, #line-attaque {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: -5rem;
+}
+
+#line-goal-keeper {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#line-attaque {
+  margin-top: 2rem;
+  justify-content: center;
+}
+#line-middle {
+}
+
+.margin-left-10 {
+  margin-left: 10rem;
+}
+.margin-top-less-4 {
+  margin-top: -4rem;
+}
+.margin-top-4 {
+  margin-top: 4rem;
+}
+
+#line-attaque > div.card-fut-mobile {
+
+}
+
+.wrapper-line-middle {
+  display: flex;
+  justify-content: center;
+}
+
+#stade {
+  /*background: url(../images/bg_stade.jpg) top no-repeat #46464673;*/
+  background: url(../images/bg_stade.jpg) top no-repeat #46464673;
+  background-blend-mode: difference;
+  background-size: cover;
+
+}
+.selectTeam a {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: initial;
+  font-family: anton;
+}
+
+.title-capacities-player{
+  font-size: large;
+  font-family: oswald, sans-serif;
+  font-weight: 700;
+  color: #545454;
+}
+
+.players-capacities-number {
+  font-size: large;
+  margin-top: -0.5rem;
+}
+
+#showplayer {
+  background: url("../images/bg_black_yellow.jpg") no-repeat top left;
+  background-position: right;
+}
+.rowTablePlayerTeam {
+  border-bottom: 1px solid #eaeaea;
+  width: 100%;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  display: flex;
+  height: 135px;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+
+.active-row-player {
+  background-color: aqua;
+}
+
+.rowTablePlayerTeam:hover {
+  background-color: aqua;
+}
+
+.matchs-resume {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: x-large;
+  font-family: OSWALD;
+}
+
+div[class$="number-capacity"]{
+  font-size: larger;
+  margin-top: -.6rem;
+  font-family: Oswald;
+}
+.display-category-top {
+  text-transform: uppercase;
+  font-size: large;
+  color: white;
+  font-family: oswald;
+  margin-right: 1rem;
+}
+#display-name-coach-top {
+  text-transform: uppercase;
+  font-size: large;
+  font-family: OSWALD, 'sans-serif';
+
+}
+
+.nav-top-team{
+  margin-top: .6rem;
+  display: flex;
+  justify-content: center;
+  padding: .4rem;
+  margin-bottom: .6rem;
+  background: #36363654;
+  color: white;
+  font-family: oswald;
+  text-transform: uppercase;
+  cursor: pointer;
+
+}
+
+.active-nav-top{
+  background-color: #2bd8d899;
+  color: #000;
+  border-bottom: 4px solid #62ffff;
+}
+
+span i.fa {
+  font-size: 1.3rem;
+  color: #ededed;
+}
+
+.display-flex-columns{
+  display: flex; flex-direction: column;
+}
+
+.border-top-for-first-row {
+  border-top: 1px solid #eaeaea;
+}
+/********************** Above 1200px bootstrap class xl ********************
+ */
+@media (min-width: 1200px) {
+
+  #stade .display-players {
+    margin-right: 7px;
+    margin-bottom: 5rem;
+    width: 85px;
+    height: 110px;
+  }
+
+  #stade .display-players img {
+    position: absolute;
+    top: 1rem;
+    left: 1.98rem;
+    max-width: 42px;
+  }
+
+  #stade .display-players #note-player {
+    margin-top: 0.9rem;
+    margin-left: 0.4rem;
+    padding-left: 0.25rem;
+    position: absolute;
+    font-size: 1.07rem;
+  }
+
+  #stade div[id^=delete-team_] {
+    position: absolute;
+    margin-top: 7rem;
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 2.1rem;
     color: red;
-    font-size: 1rem !important;
+    border: 1px solid red;
+    border-radius: 22px;
+    cursor: pointer;
+    width: 17px;
+    height: 19px;
+    line-height: 14px;
+  }
+
+  #stade #line-middle {
+    margin-bottom: -1.2rem;
+  }
+
+  #line-attaque {
+    margin-bottom: -2.9rem;
+  }
+
+  #stade .position-player-field {
+    display: none;
+  }
+
+
+  #line-middle {
+    /*margin-left: 10rem;*/
   }
 }
 
 
 
-@media (max-width: 1600px) {
-  .bg-list-players{
-    background-position-y: -83rem;
+/*******************************PHONE TABLETTE  SMALL DEVICE************************************************/
+@media (max-width: 766px) {
+  #nav-hats > div {
+    padding: 0.6rem;
+    cursor: pointer;
+    font-size: 0.5rem;
+  }
+
+  .display-players {
+    display: -webkit-inline-box;
+    display: inline-flex;
+    margin-right: 5px;
+    margin-bottom: 5rem;
+    width: 80px;
+    height: 100px;
+    position: relative;
+    background: url("/images/bg-gold_mini.png") top left no-repeat;
+    background-size: cover;
+  }
+  .wrapper-img-player {
+    width: 64px;
+    height: 59px;
+    position: absolute;
+    overflow: hidden;
+    top: 1rem;
+    left: 0.9rem;
+  }
+
+  .wrapper-card-fut {
+    background-size: cover;
+    position: relative;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .display-players img {
+    position: absolute;
+    top: -0rem;
+    left: 0.09rem;
+    max-width: 65px;
+  }
+
+
+  .infos-players-card-fut {
+    margin-top: 4.7rem;
+    position: absolute;
+    text-transform: uppercase;
+    color: black;
+    font-family: 'Oswald', sans-serif;
+    font-size: .7rem;
+    margin-left: 2.2rem;
+    font-weight: bold;
+
+  }
+
+  div.infos-position-player {
+    position: absolute;
+    margin-top: 2.2rem;
+    margin-left: .25rem;
+    font-family: Oswald, sans-serif;
+  }
+
+
+  #first-team-place, #second-team-place {
+    padding: .1rem;
+    background: #46464673;
+  }
+
+  div[id^=delete-team_] {
+    position: absolute;
+    margin-top: 6.8rem;
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 1.7rem;
+    color: red;
+    border: 1px solid red;
+    border-radius: 22px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    line-height: 16px;
+    /* margin-top: 3px; */
+    padding-top: -4px;
+  }
+
+
+  .bg-hat {
+    margin: 1rem auto;
+  }
+
+  .marg-top-fut-bg {
+    margin-top: .3rem;
+    color: #fff;
+    font-size: large;
+  }
+
+  .divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .infos-player .table td {
+    padding: 0.4rem;
+    vertical-align: top;
+    border-top: 1px solid #e3e6f030;
+    text-transform: uppercase;
+  }
+
+  .divider-yellow {
+    position: absolute;
+    margin-top: 8.7rem;
+    width: 96px;
+    height: 9px;
+    background: url("/images/divider-yellow.png") top left no-repeat;
+    background-size: 154%;
+    background-position-x: -2.2rem;
+  }
+  #note-player {
+    margin-top: .9rem;
+    margin-left: 0;
+    padding-left: 0.15rem;
+    position: absolute;
+    font-size: .7rem;
+    width: auto;
+    color: black;
+    height: 34px;
+    background: none;
+    border-radius: 0;
+  }
+
+  .table-responsive {
+    font-size: smaller;
+  }
+
+  h6{
+    font-size: .8rem;
+  }
+  .br-theme-bars-square .br-widget a {
+    display: block;
+    width: 19px;
+    height: 19px;
+    margin: .1rem;
+    line-height: 1rem;
+    font-size: xx-small !important;
+  }
+
+  .card-fut-mobile .display-players {
+    display: inline-flex;
+    margin-right: 0px;
+    margin-bottom: 0rem;
+    width: 55px;
+    height: 70px;
+    z-index: 5;
+  }
+
+  .card-fut-mobile .display-players img {
+    position: absolute;
+    top: -0rem;
+    left: 0.09rem;
+    max-width: 36px;
+  }
+
+
+
+  .card-fut-mobile .display-players > .wrapper-img-player {
+    width: 63px;
+    height: 35px;
+    position: absolute;
+    overflow: hidden;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .mar-top-2 {
+    margin-top: 1rem;
+  }
+  .mar-top-less-2 {
+    margin-top: -2rem;
+  }
+
+  .mar-top-4 {
+    margin-top: 4rem;
+  }
+  .mar-top-less-4 {
+    margin-top: -4rem;
+  }
+
+
+  .card-fut-mobile .display-players > div[id^=delete-team_] {
+    /*background: url('../images/bg_stage_player.png') no-repeat top left;
+      margin-top: 4.6rem;
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 1rem;*/
+
+    background: url('../images/bg_stage_player.png') no-repeat top left;
+    background-size: contain;
+    background-position: bottom;
+    margin-top: 4rem;
+    font-size: larger;
+    font-weight: 900;
+    width: 43px;
+    height: 29px;
+    text-align: center;
+    margin-left: 0.39rem;
+    z-index: 0;
+    border: none;
+    color: black;
+    border-radius: 0;
+  }
+
+  .link-player {
+    position: absolute;
+    display: flex;
+    z-index: 0;
+    width: 145px;
+  }
+
+  .link-player-att-middle, .link-player-att-middle-right{
+    position: absolute;
+    display: flex;
+    z-index: 0;
+    /* width: 145px; */
+  }
+
+  .link-player-att-middle-right {
+    width: 160px;
+    right: 14px;
+    transform: rotateZ(53deg);
+  }
+  .link-player:after, .link-player-att-middle:after, .link-player-att-middle-right:after {
+    content: '';
+    width: 98%;
+    height: 4px;
+    margin-top: 5rem;
+    background-color: red;
+    z-index: 1;
+  }
+
+  .link-player-att-middle-right:after {
+    content: '';
+    width: 110px;
+    height: 4px;
+    margin-top: -1rem;
+    margin-left: 3rem;
+    background-color: #1fff1f;
+    z-index: 1;
+  }
+
+  .link-player-att-middle:after, .link-player-att-middle-right:after {
+    content: '';
+    width: 100%;
+    height: 4px;
+    padding-left: 18px;
+    margin-top: -1rem;
+    margin-left: 3rem;
+    background-color: #1fff1f;
+    z-index: 1;
+  }
+
+  span.position-player-field {
+    font-size: xx-small;
+    display: flow-root;
+    color: aqua;
+    padding-top: 1px;
+  }
+  .card-fut-mobile .display-players > div.divider-yellow {
+    position: absolute;
+    margin-top: 6.2rem;
+    width: 85px;
+  }
+
+
+  #wrapper-composition {
+    display: none;
+    position: fixed;
+    top: 55px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    height: 100%;
+  }
+
+  #top-bar-compo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    height: 45px;
+    background-color: #4b4b4b;
+    border-bottom: 1px solid #ccc;
+  }
+  #container-bottom {
+    /*bottom: 2rem;*/
+  }
+
+  #bottom-bar-display-team-left {
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+  }
+
+  #line-remplacant {
+  }
+
+
+
+}
+
+@media (min-width: 350px) and (max-width: 425px){
+  .wrapper-card-fut {
+    margin-top: 0;
+    margin-bottom: .3rem;
+  }
+
+  .bg-hat {
+    margin: 0 auto;
+  }
+
+  .infos-player .table td {
+    padding: .4rem;
+  }
+  .divider {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .infos-player h6 {
+    font-size: large;
+    color: #fff;
+    text-transform: uppercase
   }
 }

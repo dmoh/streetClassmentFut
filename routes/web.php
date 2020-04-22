@@ -45,12 +45,13 @@ Route::middleware ('auth')->group(function (){
        Route::post('/checkNameTeam', 'TeamController@checkNameTeam')->name('checkNameTeam');
        Route::post('/delete-player', 'TeamController@deletePlayerTeam')->name('deletePlayerTeam');
        Route::post('/find-player-by-name', 'TeamController@findPlayerName')->name('findPlayerName');
+       Route::post('/add-player', 'TeamController@addPlayerTeam')->name('addPlayerTeam');
     });
 
 });
 
 
-Route::middleware(['auth', 'auth.access'])->group(function (){
+Route::middleware(['auth'])->group(function (){
     Route::prefix('users-management')->group(function (){
        Route::get('/', 'UserController@index')->name('index.users');
        Route::get('/add-user', 'UserController@create')->name('create.user');
